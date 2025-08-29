@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "./components/ThemeProvider";
+import { ThemeProvider } from "./components/layout/ThemeProvider";
 import { router } from "./routes";
 
 function App() {

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
-import RootLayout from "./layout/RootLayout";
+import RootLayout from "./components/layout/RootLayout";
 
-const Home = lazy(() => import("@/screens/Home"));
-const NotFound = lazy(() => import("@/screens/NotFound"));
+const Home = lazy(() => import("@/pages/Home"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 export const router = createBrowserRouter([
   {

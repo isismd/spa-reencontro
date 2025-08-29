@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
-import Header from "@/components/Header";
-import PageFallback from "@/components/PageFallback";
+import Header from "@/components/layout/Header";
+import PageFallback from "@/components/feedback/PageFallback";
 
 export default function RootLayout() {
   return (
