@@ -14,6 +14,12 @@ import { Separator } from "@/components/ui/separator";
 import { FunnelPlus, FunnelX, Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import type { PessoasFiltro, Sexo } from "@/interfaces/IPessoas";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Props = {
   value: PessoasFiltro;
@@ -69,26 +75,44 @@ export default function Filters({ value, onChange }: Props) {
           onChange={(e) => setSearchText(e.target.value)}
           className="flex-1"
         />
-        <Button
-          variant="default"
-          size="icon"
-          onClick={applySearch}
-          title="Pesquisar"
-        >
-          <Search className="h-5 w-5" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setOpenAdv((v) => !v)}
-          title="Filtros avançados"
-        >
-          {openAdv ? (
-            <FunnelX className="h-5 w-5" />
-          ) : (
-            <FunnelPlus className="h-5 w-5" />
-          )}
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="default"
+                size="icon"
+                onClick={applySearch}
+                aria-label="Pesquisar"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Pesquisar</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setOpenAdv((v) => !v)}
+                aria-label="Filtros avançados"
+              >
+                {openAdv ? (
+                  <FunnelX className="h-5 w-5" />
+                ) : (
+                  <FunnelPlus className="h-5 w-5" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Filtros avançados</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <Collapsible open={openAdv} onOpenChange={setOpenAdv}>

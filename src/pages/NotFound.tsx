@@ -1,5 +1,7 @@
 import React from "react";
 import NotFoundImg from "@/assets/404.png";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => {
   return (
@@ -9,10 +11,12 @@ const NotFound: React.FC = () => {
         alt="Página não encontrada"
         className="mb-6 max-w-sm"
       />
-      <h1 className="text-2xl font-bold">404 - Página não encontrada</h1>
       <p className="text-muted-foreground mt-2">
         A página que você está procurando não existe.
       </p>
+      <Button variant="outline" className="mt-4">
+        <Link to="/">Voltar para Página Inicial</Link>
+      </Button>
     </div>
   );
 };
