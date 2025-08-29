@@ -12,23 +12,13 @@ type HeaderProps = {
 export default function Header({
   title = "Pessoas Desaparecidas",
   subtitle = "Governo do Estado de Mato Grosso",
-  emergencia = "190",
 }: HeaderProps) {
   const { setTheme } = useTheme();
 
-  // alterna light <-> dark (simples)
   const toggle = () => {
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "light" : "dark");
   };
-
-  // se quiser ciclar entre light -> dark -> system, use isso no lugar:
-  // const cycle = () => {
-  //   const current = document.documentElement.getAttribute("data-theme") as "light" | "dark" | null;
-  //   // se não tiver data-theme, considere "light"
-  //   const next = current === "light" ? "dark" : current === "dark" ? "system" : "light";
-  //   setTheme(next);
-  // };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-2 border-primary bg-background backdrop-blur shadow-md">
