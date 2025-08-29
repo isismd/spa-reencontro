@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ImageOff } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Check, ImageOff, TriangleAlert } from "lucide-react";
 
 interface PessoaCardProps {
   p: PessoaDTO;
@@ -12,8 +12,8 @@ export default function PessoaCard({ p }: PessoaCardProps) {
   const [loaded, setLoaded] = useState(false);
   const [err, setErr] = useState(false);
 
-  const fotoUrl = p.urlFoto || "/vite.svg";
-  const nome = p.nome || "Sem Nome";
+  const fotoUrl = p.urlFoto ?? "";
+  const nome = p.nome ?? "Sem Nome";
   const sexoIdade = `${p.sexo} • ${p.idade} anos`;
   const localDesaparecimento =
     p.ultimaOcorrencia?.localDesaparecimentoConcat ?? "—";
@@ -23,10 +23,22 @@ export default function PessoaCard({ p }: PessoaCardProps) {
   return (
     <Card className="flex flex-col p-0 overflow-hidden gap-2">
       <div className="relative w-full h-80 bg-muted">
-        {!loaded && (
-          <Skeleton className="absolute inset-0 h-full w-full rounded-none" />
-        )}
-
+        <div className="absolute top-2 right-2">
+          {p.ultimaOcorrencia?.dataLocalizacao ? (
+            <Badge
+              variant="secondary"
+              className="bg-green-500 text-white dark:bg-green-600"
+            >
+              <Check />
+              Localizado
+            </Badge>
+          ) : (
+            <Badge variant="destructive" className="dark:bg-red-500">
+              <TriangleAlert />
+              Desaparecido
+            </Badge>
+          )}
+        </div>
         {hasFoto ? (
           <img
             src={fotoUrl}
