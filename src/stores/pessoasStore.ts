@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { PessoaDTO, PessoasFiltro } from "@/interfaces/Pessoas";
-import { listarPessoas } from "@/services/pessoasService";
+import type { PessoaDTO, PessoasFiltro } from "@/interfaces/IPessoas";
+import { getPessoas } from "@/services/pessoasService";
 
 type State = {
   itens: PessoaDTO[];
@@ -10,63 +10,65 @@ type State = {
   perPage: number;
   loading: boolean;
   error?: string;
-
   filtros: PessoasFiltro;
-
   setPage: (page: number) => void;
   setPerPage: (perPage: number) => void;
-  setFiltros: (patch: Partial<State["filtros"]>) => void;
+  setFiltros: (patch: Partial<PessoasFiltro>) => void;
   fetch: () => Promise<void>;
   reset: () => void;
 };
 
-export const usePessoasStore = create<State>((set, get) => ({
+const INITIAL_FILTROS: PessoasFiltro = {
+  faixaIdadeInicial: 0,
+  faixaIdadeFinal: 0,
+};
+
+const INITIAL_STATE: Omit<
+  State,
+  "setPage" | "setPerPage" | "setFiltros" | "fetch" | "reset"
+> = {
   itens: [],
   total: 0,
   totalPages: 0,
   page: 0,
   perPage: 12,
   loading: false,
-  filtros: { faixaIdadeInicial: 0, faixaIdadeFinal: 0 },
+  error: undefined,
+  filtros: { ...INITIAL_FILTROS },
+};
 
-  setPage: (page) => set({ page }),
-  setPerPage: (perPage) => set({ perPage }),
+export const usePessoasStore = create<State>((set, get) => ({
+  ...INITIAL_STATE,
+
+  setPage: (page) => set((state) => ({ ...state, page })),
+  setPerPage: (perPage) => set((state) => ({ ...state, perPage })),
   setFiltros: (patch) =>
-    set((s) => ({ filtros: { ...s.filtros, ...patch }, page: 0 })),
+    set((state) => ({ filtros: { ...state.filtros, ...patch }, page: 0 })),
 
   fetch: async () => {
     const { page, perPage, filtros } = get();
-    set({ loading: true, error: undefined });
+    set((state) => ({ ...state, loading: true, error: undefined }));
     try {
-      const resp = await listarPessoas({
-        faixaIdadeInicial: filtros.faixaIdadeInicial,
-        faixaIdadeFinal: filtros.faixaIdadeFinal,
-        sexo: filtros.sexo,
-        vivo: filtros.vivo,
-        nome: filtros.nome,
+      const resp = await getPessoas({
+        ...filtros,
         pagina: page,
         porPagina: perPage,
       });
-
-      set({
+      set((state) => ({
+        ...state,
         itens: resp.content,
         total: resp.totalElements,
         totalPages: resp.totalPages,
         loading: false,
-      });
+      }));
     } catch (e: any) {
-      set({ loading: false, error: e?.message ?? "Erro ao carregar pessoas" });
+      set((state) => ({
+        ...state,
+        loading: false,
+        error: e?.message ?? "Erro ao carregar pessoas",
+      }));
     }
   },
 
-  reset: () =>
-    set({
-      itens: [],
-      total: 0,
-      totalPages: 0,
-      page: 0,
-      perPage: 12,
-      filtros: { faixaIdadeInicial: 0, faixaIdadeFinal: 0 },
-      error: undefined,
-    }),
+  reset: () => set({ ...INITIAL_STATE }),
 }));

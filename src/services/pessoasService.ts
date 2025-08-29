@@ -1,21 +1,21 @@
 import { httpGet } from "./api";
+
 import type {
   PageResponse,
   PessoaDTO,
   PessoasFiltro,
-} from "@/interfaces/Pessoas";
+} from "@/interfaces/IPessoas";
 
-const PATH = "/v1/pessoas/aberto/filtro";
+const BASE_PATH = "/v1/pessoas/aberto";
 
-export async function listarPessoas(filtro: PessoasFiltro) {
-  const query = {
-    faixaIdadeInicial: filtro.faixaIdadeInicial ?? 0,
-    faixaIdadeFinal: filtro.faixaIdadeFinal ?? 0,
-    pagina: filtro.pagina ?? 0,
-    porPagina: filtro.porPagina ?? 10,
-    sexo: filtro.sexo,
-    vivo: filtro.vivo,
-    nome: filtro.nome,
-  };
-  return httpGet<PageResponse<PessoaDTO>>(PATH, query);
+export async function getPessoas(filtro: PessoasFiltro) {
+  return httpGet<PageResponse<PessoaDTO>>(`${BASE_PATH}/filtro`, filtro);
+}
+
+export async function getPessoaById(id: string) {
+  return httpGet<PessoaDTO>(`/v1/pessoas/${id}`);
+}
+
+export async function getEstatistico(params?: Record<string, any>) {
+  return httpGet<any>(`${BASE_PATH}/estatistico`, params);
 }

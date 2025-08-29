@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { PessoaDTO } from "@/interfaces/Pessoas";
+import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ImageOff } from "lucide-react";
