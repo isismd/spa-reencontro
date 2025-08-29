@@ -22,7 +22,7 @@ export default function PessoaCard({ p }: PessoaCardProps) {
 
   return (
     <Card className="flex flex-col p-0 overflow-hidden gap-2">
-      <div className="relative w-full h-80 bg-muted">
+      <div className="relative w-full h-70 sm:h-80 bg-muted">
         <div className="absolute top-2 right-2">
           {p.ultimaOcorrencia?.dataLocalizacao ? (
             <Badge

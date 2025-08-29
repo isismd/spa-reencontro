@@ -24,11 +24,11 @@ export default function Header({
     <header className="sticky top-0 z-50 w-full border-b-2 border-primary bg-background backdrop-blur shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-background text-primary ring-1 ring-indigo-200">
-            <UserRoundSearch className="h-7 w-7" aria-hidden />
+          <div className="flex w-10 h-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-background text-primary ring-1 ring-indigo-200">
+            <UserRoundSearch className="h-5 w-5 md:h-7 md:w-7" aria-hidden />
           </div>
           <div className="leading-tight">
-            <h1 className="text-xl font-semibold">{title}</h1>
+            <h1 className="md:text-xl text-base font-semibold">{title}</h1>
             <h3 className="text-sm text-gray-500">{subtitle}</h3>
           </div>
         </Link>
