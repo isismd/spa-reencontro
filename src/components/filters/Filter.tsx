@@ -12,7 +12,7 @@ import {
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
 import { FunnelPlus, FunnelX, Search } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import type { PessoasFiltro, Sexo } from "@/interfaces/IPessoas";
 import {
   Tooltip,
@@ -27,12 +27,12 @@ type Props = {
 };
 
 const IDADE_MAX = 130;
+const DEFAULT_RANGE: [number, number] = [0, IDADE_MAX];
 
 export default function Filters({ value, onChange }: Props) {
   const [openAdv, setOpenAdv] = useState(false);
   const [searchText, setSearchText] = useState(value.nome ?? "");
-
-  const idadeRange: [number, number] = useMemo(() => [0, IDADE_MAX], []);
+  const [range, setRange] = useState<[number, number]>(DEFAULT_RANGE);
 
   function update<K extends keyof PessoasFiltro>(
     key: K,
@@ -46,15 +46,17 @@ export default function Filters({ value, onChange }: Props) {
   }
 
   function applyAdvanced() {
+    const [min, max] = range;
     onChange({
       ...value,
-      faixaIdadeInicial: idadeRange[0] > 0 ? idadeRange[0] : undefined,
-      faixaIdadeFinal: idadeRange[1] < IDADE_MAX ? idadeRange[1] : undefined,
+      faixaIdadeInicial: min > 0 ? min : undefined,
+      faixaIdadeFinal: max < IDADE_MAX ? max : undefined,
       pagina: 0,
     });
   }
 
   function clearAdvanced() {
+    setRange(DEFAULT_RANGE);
     onChange({
       ...value,
       status: undefined,
@@ -78,18 +80,11 @@ export default function Filters({ value, onChange }: Props) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                variant="default"
-                size="icon"
-                onClick={applySearch}
-                aria-label="Pesquisar"
-              >
+              <Button variant="default" size="icon" onClick={applySearch}>
                 <Search className="h-5 w-5" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
-              <p>Pesquisar</p>
-            </TooltipContent>
+            <TooltipContent>Pesquisar</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
@@ -99,7 +94,6 @@ export default function Filters({ value, onChange }: Props) {
                 variant="outline"
                 size="icon"
                 onClick={() => setOpenAdv((v) => !v)}
-                aria-label="Filtros avançados"
               >
                 {openAdv ? (
                   <FunnelX className="h-5 w-5" />
@@ -108,9 +102,7 @@ export default function Filters({ value, onChange }: Props) {
                 )}
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
-              <p>Filtros avançados</p>
-            </TooltipContent>
+            <TooltipContent>Filtros avançados</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
@@ -177,21 +169,15 @@ export default function Filters({ value, onChange }: Props) {
             <div>
               <Label className="mb-2 block">Faixa de idade</Label>
               <div className="mb-2 flex justify-between text-sm opacity-80">
-                <span>{idadeRange[0]} anos</span>
-                <span>{idadeRange[1]} anos</span>
+                <span>{range[0]} anos</span>
+                <span>{range[1]} anos</span>
               </div>
               <Slider
-                value={idadeRange}
+                value={range}
                 min={0}
                 max={IDADE_MAX}
                 step={1}
-                onValueChange={([min, max]) =>
-                  onChange({
-                    ...value,
-                    faixaIdadeInicial: min === 0 ? undefined : min,
-                    faixaIdadeFinal: max === IDADE_MAX ? undefined : max,
-                  })
-                }
+                onValueChange={([min, max]) => setRange([min, max])}
               />
             </div>
           </div>
