@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Moon, Sun, UserRoundSearch } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { Button } from "../ui/button";
 import { useTheme } from "./ThemeProvider";
 
@@ -10,8 +10,8 @@ type HeaderProps = {
 };
 
 export default function Header({
-  title = "Portal Pessoas Desaparecidas",
-  subtitle = "Ajude a encontrar quem precisa",
+  title = "Reencontro",
+  subtitle = "Sistema de busca de pessoas desaparecidas",
 }: HeaderProps) {
   const { setTheme } = useTheme();
 
@@ -21,15 +21,17 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-2 border-primary bg-background backdrop-blur shadow-md">
+    <header className="sticky top-0 z-50 w-full bg-background backdrop-blur shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
-          <div className="flex w-10 h-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-background text-primary ring-1 ring-indigo-200">
-            <UserRoundSearch className="h-5 w-5 md:h-7 md:w-7" aria-hidden />
+          <div className="flex w-10 h-10 md:h-12 md:w-12 items-center justify-center">
+            <img src="/icon.png" />
           </div>
           <div className="leading-tight">
             <h1 className="md:text-xl text-base font-semibold">{title}</h1>
-            <h3 className="text-sm text-gray-500">{subtitle}</h3>
+            <h3 className="text-sm text-gray-500 dark:text-gray-400">
+              {subtitle}
+            </h3>
           </div>
         </Link>
 

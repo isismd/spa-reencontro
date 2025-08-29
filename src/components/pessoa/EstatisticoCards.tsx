@@ -21,9 +21,9 @@ export default function EstatisticoCards({
   const number = "text-2xl font-bold leading-none mt-1";
 
   return (
-    <div className="mb-6 grid gap-4 sm:grid-cols-3">
+    <div className="mb-6 grid gap-4 grid-cols-3">
       <Card className={base}>
-        <CardContent className="flex items-center gap-4 p-5">
+        <CardContent className="flex flex-col sm:flex-row text-center sm:text-left items-center gap-4 p-5">
           <div
             className={`${chip} bg-red-50 text-red-600 ring-1 ring-red-100 dark:bg-red-500/10 dark:text-red-300 dark:ring-red-900/40`}
           >
@@ -43,7 +43,7 @@ export default function EstatisticoCards({
       </Card>
 
       <Card className={base}>
-        <CardContent className="flex items-center gap-4 p-5">
+        <CardContent className="flex flex-col sm:flex-row text-center sm:text-left items-center gap-4 p-5">
           <div
             className={`${chip} bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-900/40`}
           >
@@ -65,7 +65,7 @@ export default function EstatisticoCards({
       </Card>
 
       <Card className={base}>
-        <CardContent className="flex items-center gap-4 p-5">
+        <CardContent className="flex flex-col sm:flex-row text-center sm:text-left items-center gap-4 p-5">
           <div
             className={`${chip} bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:ring-indigo-900/40`}
           >

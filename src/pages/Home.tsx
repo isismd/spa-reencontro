@@ -49,7 +49,13 @@ export default function Home() {
       <h1 className="text-xl my-0 font-semibold">
         Sua ajuda pode fazer a diferença.
       </h1>
-      <h2> Consulte, compartilhe e contribua com informações.</h2>
+      <h2 className="mb-0 text-gray-600 dark:text-gray-400">
+        Use nossa plataforma para consultar registros de pessoas desaparecidas
+        ou já localizadas.
+      </h2>
+      <h2 className="mt-0 text-gray-600 dark:text-gray-400">
+        Qualquer informação pode fazer a diferença na vida de uma família.
+      </h2>
 
       <Filters value={filtros} onChange={handleChangeFilters} />
 
