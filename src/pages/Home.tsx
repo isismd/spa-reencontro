@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import EstatisticoCards from "@/components/pessoa/EstatisticoCards";
 import PessoaGrid from "@/components/pessoa/PessoaGrid";
 import PaginationControls from "@/components/pagination/PaginationControls";
 import { usePessoasStore } from "@/stores/pessoasStore";
 import Filters from "@/components/filters/Filter";
 import type { PessoasFiltro } from "@/interfaces/IPessoas";
+import Hero from "@/components/layout/Hero";
 
 export default function Home() {
   const {
@@ -20,14 +20,16 @@ export default function Home() {
     filtros,
     setFiltros,
     estatistico,
-    loadingEstatistico,
     fetchEstatistico,
   } = usePessoasStore();
 
   useEffect(() => {
     fetch();
-    fetchEstatistico();
   }, [fetch, filtros, page, perPage]);
+
+  useEffect(() => {
+    fetchEstatistico();
+  }, []);
 
   function handleChangeFilters(next: PessoasFiltro) {
     setPage(1);
@@ -36,25 +38,16 @@ export default function Home() {
 
   return (
     <section className="space-y-6">
-      <EstatisticoCards
-        loading={loadingEstatistico}
+      <Hero
         desaparecidos={estatistico?.quantPessoasDesaparecidas ?? 0}
         encontrados={estatistico?.quantPessoasEncontradas ?? 0}
-        total={
-          (estatistico?.quantPessoasDesaparecidas ?? 0) +
-          (estatistico?.quantPessoasEncontradas ?? 0)
-        }
       />
 
-      <h1 className="text-xl my-0 font-semibold">
-        Sua ajuda pode fazer a diferença.
+      <h1 className="text-lg font-semibold my-0">
+        Juntos podemos Reencontrar.
       </h1>
-      <h2 className="mb-0 text-gray-600 dark:text-gray-400">
-        Use nossa plataforma para consultar registros de pessoas desaparecidas
-        ou já localizadas.
-      </h2>
-      <h2 className="mt-0 text-gray-600 dark:text-gray-400">
-        Qualquer informação pode fazer a diferença na vida de uma família.
+      <h2 className="text-sm md:text-base text-muted-foreground">
+        Cada detalhe conta. Utilize os filtros para refinar a pesquisa.
       </h2>
 
       <Filters value={filtros} onChange={handleChangeFilters} />
