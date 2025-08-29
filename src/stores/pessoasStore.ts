@@ -41,7 +41,12 @@ export const usePessoasStore = create<State>((set, get) => ({
   ...INITIAL_STATE,
 
   setPage: (page) => set((state) => ({ ...state, page })),
-  setPerPage: (perPage) => set((state) => ({ ...state, perPage })),
+
+  setPerPage: (perPage) =>
+    set((state) =>
+      state.perPage === perPage ? state : { ...state, perPage, page: 0 },
+    ),
+
   setFiltros: (patch) =>
     set((state) => ({ filtros: { ...state.filtros, ...patch }, page: 0 })),
 

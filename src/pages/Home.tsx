@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { usePessoasStore } from "@/stores/pessoasStore";
+import { useEffect } from "react";
 import PessoaGrid from "@/components/pessoa/PessoaGrid";
 import PaginationControls from "@/components/pagination/PaginationControls";
+import { usePessoasStore } from "@/stores/pessoasStore";
+import Filters from "@/components/filters/Filter";
+import type { PessoasFiltro } from "@/interfaces/IPessoas";
 
 export default function Home() {
   const {
@@ -20,64 +14,43 @@ export default function Home() {
     page,
     perPage,
     setPage,
+    setPerPage,
     totalPages,
-    setFiltros,
     filtros,
+    setFiltros,
   } = usePessoasStore();
-
-  const [search, setSearch] = useState(filtros.nome ?? "");
-  const [status, setStatus] = useState<"DESAPARECIDO" | "LOCALIZADO" | "ALL">(
-    filtros.status ?? "ALL",
-  );
-
-  useEffect(() => {
-    setFiltros({ nome: search, status: status === "ALL" ? undefined : status });
-  }, [search, status, setFiltros]);
 
   useEffect(() => {
     fetch();
   }, [fetch, filtros, page, perPage]);
 
+  function handleChangeFilters(next: PessoasFiltro) {
+    setPage(1);
+    setFiltros(next);
+  }
+
   return (
-    <div>
-      <section className="space-y-6">
-        <div className="w-full mb-4 flex gap-4">
-          <Input
-            placeholder="Buscar por nome..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+    <section className="space-y-6">
+      <Filters value={filtros} onChange={handleChangeFilters} />
 
-          <Select
-            value={status}
-            onValueChange={(value) =>
-              setStatus(value as "DESAPARECIDO" | "LOCALIZADO" | "ALL")
-            }
-          >
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="Filtrar status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ALL">Todos</SelectItem>
-              <SelectItem value="DESAPARECIDO">Desaparecido</SelectItem>
-              <SelectItem value="LOCALIZADO">Localizado</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <PessoaGrid
+        items={itens}
+        loading={loading}
+        error={error}
+        onRetry={fetch}
+      />
 
-        <PessoaGrid
-          items={itens}
-          loading={loading}
-          error={error}
-          onRetry={fetch}
-        />
-
-        <PaginationControls
-          page={page}
-          totalPages={totalPages}
-          onChange={setPage}
-        />
-      </section>
-    </div>
+      <PaginationControls
+        page={page}
+        totalPages={totalPages}
+        onChange={setPage}
+        perPage={perPage}
+        perPageOptions={[12, 24, 36, 48, 60]}
+        onPerPageChange={(n) => {
+          setPerPage(n);
+          setPage(0);
+        }}
+      />
+    </section>
   );
 }
