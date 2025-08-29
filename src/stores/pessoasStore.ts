@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { PessoaDTO, PessoasFiltro } from "@/interfaces/IPessoas";
-import { getPessoas } from "@/services/pessoasService";
+import { getPessoas, getEstatistico } from "@/services/pessoasService";
 
 type State = {
   itens: PessoaDTO[];
@@ -16,6 +16,12 @@ type State = {
   setFiltros: (patch: Partial<PessoasFiltro>) => void;
   fetch: () => Promise<void>;
   reset: () => void;
+  estatistico: {
+    quantPessoasDesaparecidas: number;
+    quantPessoasEncontradas: number;
+  } | null;
+  loadingEstatistico: boolean;
+  fetchEstatistico: () => Promise<void>;
 };
 
 const INITIAL_FILTROS: PessoasFiltro = {
@@ -25,7 +31,12 @@ const INITIAL_FILTROS: PessoasFiltro = {
 
 const INITIAL_STATE: Omit<
   State,
-  "setPage" | "setPerPage" | "setFiltros" | "fetch" | "reset"
+  | "setPage"
+  | "setPerPage"
+  | "setFiltros"
+  | "fetch"
+  | "reset"
+  | "fetchEstatistico"
 > = {
   itens: [],
   total: 0,
@@ -35,6 +46,8 @@ const INITIAL_STATE: Omit<
   loading: false,
   error: undefined,
   filtros: { ...INITIAL_FILTROS },
+  estatistico: null,
+  loadingEstatistico: false,
 };
 
 export const usePessoasStore = create<State>((set, get) => ({
@@ -72,6 +85,20 @@ export const usePessoasStore = create<State>((set, get) => ({
         loading: false,
         error: e?.message ?? "Erro ao carregar pessoas",
       }));
+    }
+  },
+
+  fetchEstatistico: async () => {
+    set((state) => ({ ...state, loadingEstatistico: true }));
+    try {
+      const resp = await getEstatistico();
+      set((state) => ({
+        ...state,
+        estatistico: resp,
+        loadingEstatistico: false,
+      }));
+    } catch (e: any) {
+      set((state) => ({ ...state, loadingEstatistico: false }));
     }
   },
 

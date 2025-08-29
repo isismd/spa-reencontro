@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import EstatisticoCards from "@/components/pessoa/EstatisticoCards";
 import PessoaGrid from "@/components/pessoa/PessoaGrid";
 import PaginationControls from "@/components/pagination/PaginationControls";
 import { usePessoasStore } from "@/stores/pessoasStore";
@@ -18,10 +19,14 @@ export default function Home() {
     totalPages,
     filtros,
     setFiltros,
+    estatistico,
+    loadingEstatistico,
+    fetchEstatistico,
   } = usePessoasStore();
 
   useEffect(() => {
     fetch();
+    fetchEstatistico();
   }, [fetch, filtros, page, perPage]);
 
   function handleChangeFilters(next: PessoasFiltro) {
@@ -31,6 +36,21 @@ export default function Home() {
 
   return (
     <section className="space-y-6">
+      <EstatisticoCards
+        loading={loadingEstatistico}
+        desaparecidos={estatistico?.quantPessoasDesaparecidas ?? 0}
+        encontrados={estatistico?.quantPessoasEncontradas ?? 0}
+        total={
+          (estatistico?.quantPessoasDesaparecidas ?? 0) +
+          (estatistico?.quantPessoasEncontradas ?? 0)
+        }
+      />
+
+      <h1 className="text-xl my-0 font-semibold">
+        Sua ajuda pode fazer a diferença.
+      </h1>
+      <h2> Consulte, compartilhe e contribua com informações.</h2>
+
       <Filters value={filtros} onChange={handleChangeFilters} />
 
       <PessoaGrid

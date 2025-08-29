@@ -10,8 +10,8 @@ type HeaderProps = {
 };
 
 export default function Header({
-  title = "Sistema de Pessoas Desaparecidas",
-  subtitle = "Consulte registros e ajude com informações",
+  title = "Portal Pessoas Desaparecidas",
+  subtitle = "Ajude a encontrar quem precisa",
 }: HeaderProps) {
   const { setTheme } = useTheme();
 
