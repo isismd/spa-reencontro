@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
-  Mail,
   Info,
   Database,
   HeartHandshake,
@@ -112,7 +111,6 @@ export default function SobrePage() {
             href="mailto:contato.isisdaron@gmail.com"
             className="inline-flex items-center gap-2 underline underline-offset-4"
           >
-            <Mail className="size-4" />
             contato.isisdaron@gmail.com
           </a>
         </div>

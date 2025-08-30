@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default function RootLayout() {
   return (
@@ -11,6 +12,7 @@ export default function RootLayout() {
           <Outlet />
         </Suspense>
       </main>
+      <Footer />
     </div>
   );
 }
