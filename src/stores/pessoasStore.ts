@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import type { PessoaDTO, PessoasFiltro } from "@/interfaces/IPessoas";
-import { getPessoas, getEstatistico } from "@/services/pessoasService";
+import {
+  getPessoas,
+  getEstatistico,
+  getPessoaById,
+} from "@/services/pessoasService";
 
 type State = {
   itens: PessoaDTO[];
@@ -16,12 +20,17 @@ type State = {
   setFiltros: (patch: Partial<PessoasFiltro>) => void;
   fetch: () => Promise<void>;
   reset: () => void;
+
   estatistico: {
     quantPessoasDesaparecidas: number;
     quantPessoasEncontradas: number;
   } | null;
   loadingEstatistico: boolean;
   fetchEstatistico: () => Promise<void>;
+
+  pessoaSelecionada: PessoaDTO | null;
+  loadingById: boolean;
+  fetchById: (id: number) => Promise<void>;
 };
 
 const INITIAL_FILTROS: PessoasFiltro = {
@@ -37,6 +46,7 @@ const INITIAL_STATE: Omit<
   | "fetch"
   | "reset"
   | "fetchEstatistico"
+  | "fetchById"
 > = {
   itens: [],
   total: 0,
@@ -48,6 +58,8 @@ const INITIAL_STATE: Omit<
   filtros: { ...INITIAL_FILTROS },
   estatistico: null,
   loadingEstatistico: false,
+  pessoaSelecionada: null,
+  loadingById: false,
 };
 
 export const usePessoasStore = create<State>((set, get) => ({
@@ -65,40 +77,44 @@ export const usePessoasStore = create<State>((set, get) => ({
 
   fetch: async () => {
     const { page, perPage, filtros } = get();
-    set((state) => ({ ...state, loading: true, error: undefined }));
+    set({ loading: true, error: undefined });
     try {
       const resp = await getPessoas({
         ...filtros,
         pagina: page,
         porPagina: perPage,
       });
-      set((state) => ({
-        ...state,
+      set({
         itens: resp.content,
         total: resp.totalElements,
         totalPages: resp.totalPages,
         loading: false,
-      }));
+      });
     } catch (e: any) {
-      set((state) => ({
-        ...state,
-        loading: false,
-        error: e?.message ?? "Erro ao carregar pessoas",
-      }));
+      set({ loading: false, error: e?.message ?? "Erro ao carregar pessoas" });
     }
   },
 
   fetchEstatistico: async () => {
-    set((state) => ({ ...state, loadingEstatistico: true }));
+    set({ loadingEstatistico: true });
     try {
       const resp = await getEstatistico();
-      set((state) => ({
-        ...state,
-        estatistico: resp,
-        loadingEstatistico: false,
-      }));
+      set({ estatistico: resp, loadingEstatistico: false });
+    } catch {
+      set({ loadingEstatistico: false });
+    }
+  },
+
+  fetchById: async (id: number) => {
+    set({ loadingById: true, pessoaSelecionada: null });
+    try {
+      const pessoa = await getPessoaById(id);
+      set({ pessoaSelecionada: pessoa, loadingById: false });
     } catch (e: any) {
-      set((state) => ({ ...state, loadingEstatistico: false }));
+      set({
+        loadingById: false,
+        error: e?.message ?? "Erro ao carregar pessoa",
+      });
     }
   },
 

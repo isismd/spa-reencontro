@@ -12,7 +12,7 @@ export async function getPessoas(filtro: PessoasFiltro) {
   return httpGet<PageResponse<PessoaDTO>>(`${BASE_PATH}/filtro`, filtro);
 }
 
-export async function getPessoaById(id: string) {
+export async function getPessoaById(id: number) {
   return httpGet<PessoaDTO>(`/v1/pessoas/${id}`);
 }
 
