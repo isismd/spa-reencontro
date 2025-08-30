@@ -19,10 +19,18 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 🔗 API oficial: [Swagger Abitus](https://abitus-api.geia.vip/swagger-ui/index.html)
 
+## 🧭 Sumário
+
+- [👩‍💼 Dados de Inscrição](#-dados-de-inscrição)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🧱 Stack](#-stack)
+- [⚙️ Como Rodar Localmente](#️-como-rodar-localmente)
+- [🎨 Identidade Visual](#-identidade-visual)
+- [🗂️ Estrutura de Pastas](#️-estrutura-de-pastas)
 
 ---
 
-## 👩‍💼 Dados de Inscrição
+<h2 id="dados-de-inscricao">👩‍💼 Dados de Inscrição</h2>
 
 - **Nome:** Isis Milena Daron  
 - **Telefone:** (65) 98119-0823  
@@ -30,7 +38,7 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 ---
 
-## ✨ Funcionalidades
+<h2 id="funcionalidades">✨ Funcionalidades</h2>
 
 - 📋 **Cards** com foto, dados principais e **status** (Desaparecida / Localizada).
 - 🔎 **Busca e filtros** (nome, sexo, faixa etária, status).
@@ -43,7 +51,7 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 ---
 
-## 🧱 Stack
+<h2 id="stack">🧱 Stack</h2>
 
 - **React 19** + **Vite 7**
 - **TypeScript 5**
@@ -52,7 +60,7 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 - **Lucide React** (ícones)
 - **ESLint + Prettier** (padrões de código)
 
-## ⚙️ Como Rodar Localmente
+<h2 id="como-rodar-localmente">⚙️ Como Rodar Localmente</h2>
 
 ### Pré-requisitos
 - Node.js 20+
@@ -68,7 +76,7 @@ npm run dev
 ```
 Acesse em: http://localhost:5173
 
-## 🎨 Identidade Visual
+<h2 id="identidade-visual">🎨 Identidade Visual</h2>
 
 O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
 
@@ -83,7 +91,7 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
 
 Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
-## 🗂️ Estrutura de Pastas
+<h2 id="estrutura-de-pastas">🗂️ Estrutura de Pastas</h2>
 
 A estrutura foi organizada de forma simples e clara, separando os componentes em pastas específicas (como detalhes, filtros, layout, ocorrências, etc.), deixando as páginas (Home, Detalhes, Sobre, NotFound) em pages/, os serviços de API em services/ e o estado global em stores/; além disso, há pastas auxiliares como hooks/, interfaces/ e lib/ para manter o código bem dividido e fácil de manter.
 
