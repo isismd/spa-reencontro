@@ -1,6 +1,7 @@
 import PessoaCard from "@/components/pessoa/PessoaCard";
 import PessoaSkeleton from "@/components/pessoa/PessoaSkeleton";
 import EmptyState from "@/components/feedback/EmptyState";
+import { Button } from "../ui/button";
 
 type Props<T> = {
   items: T[];
@@ -20,16 +21,16 @@ export default function PessoaGrid<T extends { id: number | string }>({
   if (error) {
     return (
       <EmptyState
-        title="Erro ao carregar"
-        subtitle={error}
+        title="Erro ao carregar os dados"
         action={
           onRetry ? (
-            <button
+            <Button
+              variant="outline"
               onClick={onRetry}
               className="rounded-md border px-3 py-1 text-sm hover:bg-muted"
             >
               Tentar novamente
-            </button>
+            </Button>
           ) : null
         }
       />

@@ -5,8 +5,8 @@ type EmptyStateProps = {
 };
 
 export default function EmptyState({
-  title = "Nada por aqui",
-  subtitle = "Tente ajustar os filtros ou a página.",
+  title = "Nenhum resultado encontrado",
+  subtitle = "Não encontramos nada por aqui. Tente alterar os filtros ou revisar sua busca.",
   action,
 }: EmptyStateProps) {
   return (

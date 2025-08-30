@@ -26,7 +26,7 @@ export default function DetalhesInfoPessoal({
   ];
 
   return (
-    <Card className="gap-0">
+    <Card className="gap-0 py-2">
       <CardContent className="p-0">
         <dl className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x">
           {rows.map(({ label, value }, i) => (

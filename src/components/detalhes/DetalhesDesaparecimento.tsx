@@ -37,13 +37,7 @@ export default function DetalhesDesaparecimento({
   onAbrirMaps,
 }: DetalhesDesaparecimentoProps) {
   return (
-    <Card
-      className={
-        !isLocalizado
-          ? "border-destructive/30 bg-destructive/5"
-          : "border-emerald-300/40 bg-emerald-50/40 dark:bg-emerald-500/5"
-      }
-    >
+    <Card>
       <CardHeader className="gap-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base">

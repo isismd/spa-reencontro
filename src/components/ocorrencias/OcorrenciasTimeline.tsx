@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
+import { useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,28 +7,25 @@ import { Separator } from "@/components/ui/separator";
 import { Calendar, Clock, FileDown, Info, Paperclip } from "lucide-react";
 import { formatDate, formatTime } from "@/lib/utils";
 
+import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
+
 type Props = {
-  ocoId?: number | null;
+  informacoes: InformacaoDesaparecidoDTO[];
+  loading?: boolean;
+  error?: string;
   className?: string;
 };
 
-export default function OcorrenciasTimeline({ ocoId, className }: Props) {
-  const { informacoes, loading, error, setOcorrenciaId, fetch, reset } =
-    useOcorrenciaStore();
-
+export default function OcorrenciasTimeline({
+  informacoes,
+  loading,
+  error,
+  className,
+}: Props) {
   const [mostrarTodos, setMostrarTodos] = useState(false);
 
-  useEffect(() => {
-    if (ocoId) {
-      setOcorrenciaId(ocoId);
-      fetch();
-    } else {
-      reset();
-    }
-  }, [ocoId]);
-
   const itens = useMemo(() => {
-    return [...informacoes].sort((a, b) => {
+    return [...(informacoes ?? [])].sort((a, b) => {
       const da = new Date(a.data).getTime();
       const db = new Date(b.data).getTime();
       return db - da;

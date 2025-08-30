@@ -147,7 +147,7 @@ export default function Filters({ value, onChange }: Props) {
             </div>
 
             <div>
-              <Label className="mb-2 block">Vivo</Label>
+              <Label className="mb-2 block">Condição</Label>
               <Select
                 value={
                   typeof value.vivo === "boolean" ? String(value.vivo) : ""
@@ -160,8 +160,8 @@ export default function Filters({ value, onChange }: Props) {
                   <SelectValue placeholder="Selecionar…" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="true">Sim</SelectItem>
-                  <SelectItem value="false">Não</SelectItem>
+                  <SelectItem value="true">Vivo</SelectItem>
+                  <SelectItem value="false">Óbito</SelectItem>
                 </SelectContent>
               </Select>
             </div>
