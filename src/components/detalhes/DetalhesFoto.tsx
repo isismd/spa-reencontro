@@ -23,7 +23,7 @@ export default function DetalhesFoto({
           className="block aspect-[3/4] w-full object-cover"
           loading="lazy"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
         <div className="absolute inset-x-4 bottom-4">
           <div
             className={`rounded-lg px-4 py-2 text-center text-sm text-white shadow-sm backdrop-blur ${isLocalizado ? "bg-emerald-600/90" : "bg-destructive/90"}`}
