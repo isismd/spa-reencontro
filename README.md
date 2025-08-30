@@ -43,7 +43,7 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 ---
 
-## 🧱 Stack & Principais libs
+## 🧱 Stack
 
 - **React 19** + **Vite 7**
 - **TypeScript 5**
@@ -67,6 +67,21 @@ npm install
 npm run dev
 ```
 Acesse em: http://localhost:5173
+
+## 🎨 Identidade Visual
+
+O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
+
+- **Paleta de cores**: tons mais fortes de **vermelho** foram escolhidos para reforçar a identidade do projeto “Reencontro”.  
+  O vermelho funciona como um chamado de atenção, remetendo à urgência da causa (pessoas desaparecidas) e à importância de agir rápido.  
+  Para contraste e legibilidade, foram aplicados tons neutros (cinza, branco e preto) no fundo e na tipografia.
+
+- **Componentes de UI**: a interface utiliza [**shadcn/ui**](https://ui.shadcn.com/), que fornece componentes modernos, acessíveis e reutilizáveis, estilizados diretamente com **Tailwind CSS**.  
+  Isso garante consistência visual, responsividade e rapidez no desenvolvimento.
+
+- **Foco em acessibilidade**: a interface adota textos claros, contraste adequado, responsividade em múltiplos dispositivos e elementos de feedback (skeleton loaders, toasts), favorecendo a inclusão.
+
+Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
 ## 🗂️ Estrutura de Pastas
 
