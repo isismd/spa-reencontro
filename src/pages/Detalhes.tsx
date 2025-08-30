@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { usePessoasStore } from "@/stores/pessoasStore";
 import { Separator } from "@/components/ui/separator";
 import DetalhesHeader from "@/components/detalhes/DetalhesHeader";
+import DetalhesSkeleton from "@/components/detalhes/DetalhesSkeleton";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import DetalhesFoto from "@/components/detalhes/DetalhesFoto";
@@ -68,6 +69,9 @@ export default function Detalhes() {
     toast.info("Funcionalidade de adicionar informações não implementada.");
   }
 
+  if (loadingById) {
+    return <DetalhesSkeleton />;
+  }
   return (
     <section className="mx-auto w-full max-w-6xl space-y-6 p-4 sm:p-6">
       <Button onClick={() => navigate("/")} className="mb-4" variant="link">
@@ -75,7 +79,6 @@ export default function Detalhes() {
         Voltar para a página inicial
       </Button>
       <DetalhesHeader
-        loading={loadingById}
         nome={p?.nome}
         id={p?.id}
         dtDesaparecimento={p?.ultimaOcorrencia?.dtDesaparecimento}
@@ -88,24 +91,18 @@ export default function Detalhes() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="space-y-6">
           <DetalhesFoto
-            loading={loadingById}
             foto={foto}
             isLocalizado={isLocalizado}
             dias={dias}
             dataLocalizacao={p?.ultimaOcorrencia?.dataLocalizacao}
           />
-          <DetalhesInfoPessoal
-            loading={loadingById}
-            idade={p?.idade}
-            sexo={p?.sexo}
-          />
+          <DetalhesInfoPessoal idade={p?.idade} sexo={p?.sexo} />
           {isLocalizado ? null : (
             <AdicionarInformacoesCTA onAddInfo={handleAddInfo} />
           )}
         </div>
         <div className="space-y-6 lg:col-span-2">
           <DetalhesDesaparecimento
-            loading={loadingById}
             ocoId={p?.ultimaOcorrencia?.ocoId}
             dtDesaparecimento={p?.ultimaOcorrencia?.dtDesaparecimento}
             localDesaparecimento={
@@ -114,7 +111,7 @@ export default function Detalhes() {
             horarioDesaparecimento={p?.ultimaOcorrencia?.dtDesaparecimento}
             observacoes={p?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao?.trim()}
             vestimentas={p?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.vestimentasDesaparecido?.trim()}
-            isDesaparecido={!isLocalizado}
+            isLocalizado={isLocalizado}
             dataLocalizacao={p?.ultimaOcorrencia?.dataLocalizacao}
             encontradoVivo={p?.ultimaOcorrencia?.encontradoVivo}
             onAbrirMaps={

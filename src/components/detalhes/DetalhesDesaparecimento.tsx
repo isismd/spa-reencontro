@@ -1,4 +1,3 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,28 +12,26 @@ import {
 import { formatDate, formatTime, notInformed } from "@/lib/utils";
 
 interface DetalhesDesaparecimentoProps {
-  loading: boolean;
   ocoId?: number;
   dtDesaparecimento?: string;
   localDesaparecimento?: string;
   horarioDesaparecimento?: string;
   observacoes?: string;
   vestimentas?: string;
-  isDesaparecido: boolean;
+  isLocalizado: boolean;
   dataLocalizacao?: string;
   encontradoVivo?: boolean | null;
   onAbrirMaps?: () => void;
 }
 
 export default function DetalhesDesaparecimento({
-  loading,
   ocoId,
   dtDesaparecimento,
   localDesaparecimento,
   horarioDesaparecimento,
   observacoes,
   vestimentas,
-  isDesaparecido,
+  isLocalizado,
   dataLocalizacao,
   encontradoVivo,
   onAbrirMaps,
@@ -42,7 +39,7 @@ export default function DetalhesDesaparecimento({
   return (
     <Card
       className={
-        isDesaparecido
+        !isLocalizado
           ? "border-destructive/30 bg-destructive/5"
           : "border-emerald-300/40 bg-emerald-50/40 dark:bg-emerald-500/5"
       }
@@ -63,24 +60,16 @@ export default function DetalhesDesaparecimento({
             <Calendar className="size-4" />
             Data do Desaparecimento
           </div>
-          {loading ? (
-            <Skeleton className="mt-1 h-5 w-28" />
-          ) : (
-            <p className="mt-1 font-medium">{formatDate(dtDesaparecimento)}</p>
-          )}
+          <p className="mt-1 font-medium">{formatDate(dtDesaparecimento)}</p>
         </div>
         <div className="rounded-lg border bg-background/60 p-3">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="size-4" />
             Horário
           </div>
-          {loading ? (
-            <Skeleton className="mt-1 h-5 w-24" />
-          ) : (
-            <p className="mt-1 font-medium">
-              {formatTime(horarioDesaparecimento)}
-            </p>
-          )}
+          <p className="mt-1 font-medium">
+            {formatTime(horarioDesaparecimento)}
+          </p>
         </div>
         <div className="rounded-lg border bg-background/60 p-3 sm:col-span-2">
           <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
@@ -88,7 +77,7 @@ export default function DetalhesDesaparecimento({
               <MapPin className="size-4 inline mr-2" />
               Local
             </div>
-            {!loading && localDesaparecimento && onAbrirMaps && (
+            {localDesaparecimento && onAbrirMaps && (
               <Button
                 variant="outline"
                 size="sm"
@@ -101,37 +90,23 @@ export default function DetalhesDesaparecimento({
               </Button>
             )}
           </div>
-          {loading ? (
-            <Skeleton className="mt-1 h-5 w-3/4" />
-          ) : (
-            <p className="mt-1 font-medium">
-              {notInformed(localDesaparecimento)}
-            </p>
-          )}
+          <p className="mt-1 font-medium">
+            {notInformed(localDesaparecimento)}
+          </p>
         </div>
         <div className="rounded-lg border bg-background/60 p-3">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Info className="size-4" /> Observações
           </div>
-
-          {loading ? (
-            <Skeleton className="mt-1 h-5 w-5/6" />
-          ) : (
-            <p className="mt-1 font-medium">{notInformed(observacoes)}</p>
-          )}
+          <p className="mt-1 font-medium">{notInformed(observacoes)}</p>
         </div>
         <div className="rounded-lg border bg-background/60 p-3">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Shirt className="size-4" /> Vestimentas
           </div>
-
-          {loading ? (
-            <Skeleton className="mt-1 h-5 w-2/3" />
-          ) : (
-            <p className="mt-1 font-medium">{notInformed(vestimentas)}</p>
-          )}
+          <p className="mt-1 font-medium">{notInformed(vestimentas)}</p>
         </div>
-        {!loading && !isDesaparecido && (
+        {isLocalizado && (
           <>
             <div className="rounded-lg border bg-background/60 p-3">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">

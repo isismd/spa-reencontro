@@ -1,10 +1,8 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Share2, Download, Plus } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
 interface DetalhesHeaderProps {
-  loading: boolean;
   nome?: string;
   id?: number;
   dtDesaparecimento?: string;
@@ -15,7 +13,6 @@ interface DetalhesHeaderProps {
 }
 
 export default function DetalhesHeader({
-  loading,
   nome,
   id,
   dtDesaparecimento,
@@ -28,18 +25,12 @@ export default function DetalhesHeader({
     <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold tracking-tight">
-          {loading ? (
-            <Skeleton className="h-7 w-64" />
-          ) : (
-            (nome ?? "Detalhes da Pessoa")
-          )}
+          {nome ?? "Detalhes da Pessoa"}
         </h1>
-        {!loading && (
-          <p className="text-sm text-muted-foreground">
-            {id ? `Ocorrência #${String(id).padStart(6, "0")}` : "—"} •
-            Registrado em {formatDate(dtDesaparecimento)}
-          </p>
-        )}
+        <p className="text-sm text-muted-foreground">
+          {id ? `Ocorrência #${String(id).padStart(6, "0")}` : "—"} • Registrado
+          em {formatDate(dtDesaparecimento)}
+        </p>
       </div>
       <div className="flex flex-col sm:flex-row items-center gap-2">
         <Button

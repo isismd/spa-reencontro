@@ -13,8 +13,6 @@ type Props = {
   className?: string;
 };
 
-// ...funções utilitárias movidas para utils.ts...
-
 export default function OcorrenciasTimeline({ ocoId, className }: Props) {
   const { informacoes, loading, error, setOcorrenciaId, fetch, reset } =
     useOcorrenciaStore();
@@ -28,7 +26,6 @@ export default function OcorrenciasTimeline({ ocoId, className }: Props) {
     } else {
       reset();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ocoId]);
 
   const itens = useMemo(() => {
