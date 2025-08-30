@@ -1,4 +1,3 @@
-// src/components/pessoa/StatusPessoa.tsx
 import { AlertTriangle, CheckCircle2, Info, Frown } from "lucide-react";
 
 type Props = {

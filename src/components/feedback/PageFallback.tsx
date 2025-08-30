@@ -24,7 +24,7 @@ export default function PageFallback() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton className="mb-3 h-80 w-full rounded-xl" />
+          <Skeleton key={i} className="mb-3 h-80 w-full rounded-xl" />
         ))}
       </div>
 
