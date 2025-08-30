@@ -28,15 +28,11 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 - [🎨 Identidade Visual](#-identidade-visual)
 - [🗂️ Estrutura de Pastas](#️-estrutura-de-pastas)
 
----
-
 <h2 id="dados-de-inscricao">👩‍💼 Dados de Inscrição</h2>
 
 - **Nome:** Isis Milena Daron  
 - **Telefone:** (65) 98119-0823  
 - **E-mail:** contato.isisdaron@gmail.com  
-
----
 
 <h2 id="funcionalidades">✨ Funcionalidades</h2>
 
@@ -48,8 +44,6 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 - 📌 **Envio de informações adicionais** (observações, localização, anexos).
 - 🪄 **UX**: skeleton loaders, toasts, rotas com **lazy loading**.
 - ♿ **Design responsivo e acessível**.
-
----
 
 <h2 id="stack">🧱 Stack</h2>
 
