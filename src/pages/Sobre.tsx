@@ -12,7 +12,7 @@ import {
 
 export default function SobrePage() {
   return (
-    <section className="mx-auto max-w-4xl space-y-8">
+    <section className="space-y-8">
       <div className="rounded-2xl ring-1 ring-border bg-gradient-to-b from-primary/10 to-transparent p-6 sm:p-10">
         <div className="flex items-start gap-4">
           <div className="space-y-3">

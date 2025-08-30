@@ -1,0 +1,77 @@
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Share2, Download, Plus } from "lucide-react";
+import { formatDate } from "@/lib/utils";
+
+interface DetalhesHeaderProps {
+  loading: boolean;
+  nome?: string;
+  id?: number;
+  dtDesaparecimento?: string;
+  isLocalizado?: boolean;
+  onShare: () => void;
+  onBaixarCartaz: () => void;
+  cartazUrl?: string;
+}
+
+export default function DetalhesHeader({
+  loading,
+  nome,
+  id,
+  dtDesaparecimento,
+  isLocalizado,
+  onShare,
+  onBaixarCartaz,
+  cartazUrl,
+}: DetalhesHeaderProps) {
+  return (
+    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+      <div className="space-y-1">
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {loading ? (
+            <Skeleton className="h-7 w-64" />
+          ) : (
+            (nome ?? "Detalhes da Pessoa")
+          )}
+        </h1>
+        {!loading && (
+          <p className="text-sm text-muted-foreground">
+            {id ? `Ocorrência #${String(id).padStart(6, "0")}` : "—"} •
+            Registrado em {formatDate(dtDesaparecimento)}
+          </p>
+        )}
+      </div>
+      <div className="flex flex-col sm:flex-row items-center gap-2">
+        <Button
+          className="w-full sm:w-auto gap-2"
+          size="sm"
+          variant="outline"
+          onClick={onShare}
+        >
+          <Share2 className="size-4" />
+          Compartilhar
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="w-full sm:w-auto gap-2"
+          onClick={onBaixarCartaz}
+          disabled={!cartazUrl}
+        >
+          <Download className="size-4" />
+          Baixar cartaz
+        </Button>
+        {!isLocalizado && (
+          <Button
+            className="w-full sm:w-auto gap-2"
+            size="sm"
+            variant="default"
+          >
+            <Plus className="size-4" />
+            Adicionar Informações
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
