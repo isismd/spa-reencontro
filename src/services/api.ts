@@ -26,10 +26,7 @@ export async function httpPost<T>(
 ): Promise<T> {
   try {
     const res = await axios.post<T>(`${BASE_URL}${path}`, body, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      headers: { Accept: "application/json" },
       ...config,
     });
     return res.data;

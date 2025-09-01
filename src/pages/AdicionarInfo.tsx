@@ -16,10 +16,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { postInformacaoDesaparecido } from "@/services/ocorrenciaService";
 import { ArrowLeft, Send } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picker";
 import { usePessoasStore } from "@/stores/pessoasStore";
+import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import { useEffect } from "react";
 
 export default function AdicionarInfoPage() {
@@ -27,6 +27,8 @@ export default function AdicionarInfoPage() {
   const navigate = useNavigate();
 
   const { pessoaSelecionada: p, fetchById } = usePessoasStore();
+
+  const { postInformacao } = useOcorrenciaStore();
 
   useEffect(() => {
     if (!id) return;
@@ -46,7 +48,7 @@ export default function AdicionarInfoPage() {
 
   async function onSubmit(values: FormData) {
     try {
-      await postInformacaoDesaparecido({
+      await postInformacao({
         ocoId: Number(p?.ultimaOcorrencia?.ocoId),
         informacao: values.informacao.trim(),
         data: values.data,

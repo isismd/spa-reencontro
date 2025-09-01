@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
-import { getInformacoesDesaparecido } from "@/services/ocorrenciaService";
+import {
+  getInformacoesDesaparecido,
+  postInformacaoDesaparecido,
+} from "@/services/ocorrenciaService";
 
 interface State {
   informacoes: InformacaoDesaparecidoDTO[];
@@ -10,9 +13,19 @@ interface State {
   setOcorrenciaId: (id: number) => void;
   fetch: () => Promise<void>;
   reset: () => void;
+  postInformacao: (input: {
+    ocoId: number;
+    informacao: string;
+    data: string;
+    descricao?: string;
+    files?: File[];
+  }) => Promise<InformacaoDesaparecidoDTO>;
 }
 
-const INITIAL_STATE: Omit<State, "setOcorrenciaId" | "fetch" | "reset"> = {
+const INITIAL_STATE: Omit<
+  State,
+  "setOcorrenciaId" | "fetch" | "reset" | "postInformacao"
+> = {
   informacoes: [],
   loading: false,
   error: undefined,
@@ -40,4 +53,23 @@ export const useOcorrenciaStore = create<State>((set, get) => ({
   },
 
   reset: () => set({ ...INITIAL_STATE }),
+
+  postInformacao: async (input: {
+    ocoId: number;
+    informacao: string;
+    data: string;
+    descricao?: string;
+    files?: File[];
+  }): Promise<InformacaoDesaparecidoDTO> => {
+    set({ loading: true, error: undefined });
+    try {
+      const resp: InformacaoDesaparecidoDTO =
+        await postInformacaoDesaparecido(input);
+      set({ loading: false });
+      return resp;
+    } catch (e: any) {
+      set({ loading: false, error: e?.message ?? "Erro ao enviar informação" });
+      throw e;
+    }
+  },
 }));
