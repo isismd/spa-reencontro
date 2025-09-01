@@ -26,5 +26,7 @@ export function notInformed(v?: string | null) {
 
 export function capitalizeWords(str?: string) {
   if (!str) return "";
-  return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  return str
+    .toLocaleLowerCase("pt-BR")
+    .replace(/(^|\s)\S/g, (c) => c.toLocaleUpperCase("pt-BR"));
 }
