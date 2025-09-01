@@ -22,6 +22,7 @@ export default function Home() {
     setFiltros,
     estatistico,
     fetchEstatistico,
+    loadingEstatistico,
   } = usePessoasStore();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Home() {
       <Hero
         desaparecidos={estatistico?.quantPessoasDesaparecidas ?? 0}
         encontrados={estatistico?.quantPessoasEncontradas ?? 0}
-        loading={loading}
+        loading={loadingEstatistico}
       />
 
       <h1 className="text-lg font-semibold my-0">
