@@ -1,4 +1,3 @@
-// routes.tsx
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import RootLayout from "./layout/RootLayout";

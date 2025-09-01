@@ -88,7 +88,6 @@ export default function Detalhes() {
   }
 
   function handleAddInfo() {
-    console.log("caiu");
     navigate(`/detalhes/${p!.id}/informar`);
   }
 

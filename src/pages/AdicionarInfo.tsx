@@ -1,4 +1,3 @@
-// src/pages/AdicionarInfo.tsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
