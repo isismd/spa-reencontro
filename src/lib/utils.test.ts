@@ -5,6 +5,8 @@ import {
   formatTime,
   notInformed,
   capitalizeWords,
+  formatYmdLocal,
+  parseYmdToLocalDate,
 } from "./utils";
 
 describe("utils", () => {
@@ -16,9 +18,7 @@ describe("utils", () => {
   it("formatDate() retorna data formatada ou 'Não informado'", () => {
     expect(formatDate()).toBe("Não informado");
     expect(formatDate("data inválida")).toBe("Não informado");
-    expect(formatDate("2025-08-15")).toBe(
-      new Date("2025-08-15").toLocaleDateString(),
-    );
+    expect(formatDate("2025-08-15")).toBe(formatDate(new Date(2025, 7, 15)));
   });
 
   it("formatTime() retorna hora formatada ou '—'", () => {
@@ -42,5 +42,19 @@ describe("utils", () => {
     expect(capitalizeWords()).toBe("");
     expect(capitalizeWords("joao da silva")).toBe("Joao Da Silva");
     expect(capitalizeWords("MISTO CASE")).toBe("Misto Case");
+  });
+
+  it("formatYmdLocal() retorna data no formato yyyy-mm-dd", () => {
+    const date = new Date(2025, 7, 15);
+    expect(formatYmdLocal(date)).toBe("2025-08-15");
+  });
+
+  it("parseYmdToLocalDate() converte yyyy-mm-dd para Date ou undefined", () => {
+    const d = parseYmdToLocalDate("2025-08-15");
+    expect(d).toBeInstanceOf(Date);
+    expect(d?.getFullYear()).toBe(2025);
+    expect(d?.getMonth()).toBe(7);
+    expect(d?.getDate()).toBe(15);
+    expect(parseYmdToLocalDate("invalido")).toBeUndefined();
   });
 });
