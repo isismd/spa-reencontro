@@ -66,4 +66,33 @@ describe("Mock API /v1", () => {
     expect(res.status).toBe(200);
     expect(Array.isArray(res.data)).toBe(true);
   });
+
+  it("cria e lista usando somente config.params", async () => {
+    const ocoId = 101;
+    const before = await axios.get("/v1/ocorrencias/informacoes-desaparecido", {
+      params: { ocorrenciaId: ocoId },
+    });
+    const prev = before.data.length;
+
+    const fd = new FormData();
+    const res = await axios.post(
+      "/v1/ocorrencias/informacoes-desaparecido",
+      fd,
+      {
+        params: {
+          ocoId,
+          informacao: "Vista na Praça Popular.",
+          descricao: "Foto João da Silva",
+          data: "2025-08-30",
+        },
+      },
+    );
+    expect(res.status).toBe(201);
+
+    const after = await axios.get("/v1/ocorrencias/informacoes-desaparecido", {
+      params: { ocorrenciaId: ocoId },
+    });
+    expect(after.data.length).toBe(prev + 1);
+    expect(after.data.at(-1).informacao).toContain("Praça Popular");
+  });
 });
