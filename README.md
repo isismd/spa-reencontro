@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/isismd/projeto-pratico/blob/main/public/icon.png" alt="Projeto Prático Reencontro" width="120"/>
+  <img src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/icon.png" alt="Projeto Prático Reencontro" width="120"/>
 </p>
 
 <h1 align="center">Reencontro</h1>
@@ -73,8 +73,8 @@ O projeto utiliza as seguintes stacks e principais dependências:
 ### 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/isismd/projeto-pratico.git
-cd projeto-pratico
+git clone https://github.com/isismd/spa-pessoas-desaparecidas.git
+cd spa-pessoas-desaparecidas
 ```
 
 ---
@@ -168,7 +168,7 @@ O projeto está organizado para facilitar o desenvolvimento, manutenção e esca
 Essa estrutura permite separar responsabilidades, tornando o projeto mais organizado e fácil de entender para novos colaboradores.
 
 ```bash
-projeto-pratico/
+spa-pessoas-desaparecidas/
 ├─ public/
 ├─ scripts/
 ├─ src/

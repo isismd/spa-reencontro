@@ -11,7 +11,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/isismd/projeto-pratico"
+            href="https://github.com/isismd/spa-pessoas-desaparecidas"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1 hover:text-foreground transition-colors"
