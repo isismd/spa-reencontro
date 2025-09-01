@@ -1,5 +1,6 @@
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import HeroBanner from "@/assets/hero-banner.jpg";
 
 type HeroProps = {
   desaparecidos?: number;
@@ -18,7 +19,7 @@ export default function Hero({
     <div
       className={`relative w-full h-80 sm:h-96 overflow-hidden rounded-2xl ${className}`}
       style={{
-        backgroundImage: "url('src/assets/hero-banner.jpg')",
+        backgroundImage: `url(${HeroBanner})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
