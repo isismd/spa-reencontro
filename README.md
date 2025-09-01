@@ -15,7 +15,7 @@
   <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Tested%20with-Vitest-6E9F18?logo=vitest&logoColor=fff" /></a>
 </p>
 
-<img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.png" alt="Demonstração do sistema" width="400"/>
+<img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.webp" alt="Demonstração do sistema" width="400"/>
 
 &nbsp;
 
