@@ -46,6 +46,10 @@ export default function Detalhes() {
   } = useOcorrenciaStore();
 
   useEffect(() => {
+    reset();
+  }, [id, reset]);
+
+  useEffect(() => {
     if (!id) return;
     fetchById(Number(id));
   }, [id, fetchById]);
@@ -124,7 +128,7 @@ export default function Detalhes() {
 
       <DetalhesHeader
         nome={p?.nome}
-        id={p?.id}
+        id={p?.ultimaOcorrencia?.ocoId}
         dtDesaparecimento={p?.ultimaOcorrencia?.dtDesaparecimento}
         isLocalizado={isLocalizado}
         onShare={handleShare}

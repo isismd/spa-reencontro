@@ -11,14 +11,13 @@
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=fff" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=fff" /></a>
   <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/State-Zustand-000" /></a>
-  <a href="https://eslint.org/"><img src="https://img.shields.io/badge/Lint-ESLint-4b32c3?logo=eslint&logoColor=fff" /></a>
   <a href="https://prettier.io/"><img src="https://img.shields.io/badge/Code%20Style-Prettier-ff69b4?logo=prettier" /></a>
   <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Tested%20with-Vitest-6E9F18?logo=vitest&logoColor=fff" /></a>
 </p>
 
 <img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.png" alt="Demonstração do sistema" width="400"/>
 
-&nbsp; 
+&nbsp;
 
 Aplicação **SPA** (Single Page Application) moderna e responsiva, desenvolvida para facilitar a busca, acompanhamento e colaboração em casos de pessoas desaparecidas.
 
@@ -29,7 +28,6 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 🔗 API oficial: [Swagger Abitus](https://abitus-api.geia.vip/swagger-ui/index.html)
 
 <br clear="right"/>
-
 
 ## 🧭 Sumário
 
@@ -51,6 +49,7 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas.
 
 ### Funcionalidades Principais
+
 - Visualização de cards com informações principais, foto e status (Desaparecida/Localizada), permitindo identificação rápida dos casos.
 - Busca nome e filtros avançados por sexo, faixa etária e status, tornando fácil encontrar registros específicos.
 - Paginação dinâmica para melhor organização, mesmo com muitos casos.
@@ -63,11 +62,13 @@ O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de 
 - Empacotamento da aplicação em container Docker
 
 ### Diferenciais Implementados
+
 Além dos requisitos previstos, o projeto inclui:
+
 - Design do sistema pensado para acolher famílias que possuem um ente querido desaparecido, transmitindo empatia e esperança.
 - Tema escuro (Dark Mode) com detecção automática da preferência do sistema, mas permitindo que o usuário alterne manualmente entre claro/escuro a qualquer momento.
 - Página "Sobre" explicando o projeto.
-- Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento. 
+- Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento.
 - Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
 - Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
 - Escolha interativa API/Mock: Prompt no terminal com inquirer + suporte a flag de ambiente (VITE_USE_MOCK=true|false).
@@ -98,7 +99,7 @@ O projeto utiliza as seguintes stacks e principais dependências:
 
 <h2 id="rodando-projeto">⚙️ Rodando o Projeto</h2>
 
-Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.  
+Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.
 
 ### 1. Clonar o projeto
 
@@ -132,7 +133,7 @@ npm run dev
 
 ---
 
-#### 2.2. 🐋 Executando com Docker 
+#### 2.2. 🐋 Executando com Docker
 
 1. Certifique-se de ter o Docker instalado.
 2. Execute o comando abaixo para rodar o projeto (por padrão, ele já utiliza a **API oficial**, e não os mocks):
@@ -172,7 +173,6 @@ VITE_USE_MOCK=false
 > Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
 > Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
 
-
 <h2 id="identidade-visual">🎨 Identidade Visual</h2>
 
 O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
@@ -188,10 +188,11 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
 
 - **Design acolhedor**: pensado especialmente para **famílias que possuem um ente querido desaparecido**, com banners e mensagens que reforçam a importância da ajuda nas informações, transmitindo esperança e humanidade.  
   Exemplos de mensagens exibidas:
+
   > Use nossa plataforma para consultar registros de pessoas desaparecidas ou já localizadas. Qualquer informação pode transformar a vida de uma família.
-  
+
   > **Viu essa pessoa?**  
-  > Qualquer detalhe pode ajudar. Adicione uma informação agora mesmo.  
+  > Qualquer detalhe pode ajudar. Adicione uma informação agora mesmo.
 
   > Ainda não localizada, qualquer informação pode ajudar.  
   > **Sua ajuda pode fazer a diferença.**
@@ -258,4 +259,3 @@ spa-pessoas-desaparecidas/
 > [!NOTE]  
 > Este projeto não utiliza variáveis sensíveis (como tokens ou credenciais).  
 > As únicas variáveis de ambiente são públicas (`VITE_API_BASE_URL` e `VITE_USE_MOCK`), mas recomenda-se sempre manter arquivos `.env` fora do versionamento por boas práticas.
-

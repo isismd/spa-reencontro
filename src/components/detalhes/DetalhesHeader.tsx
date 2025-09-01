@@ -30,8 +30,8 @@ export default function DetalhesHeader({
           {nome ?? "Detalhes da Pessoa"}
         </h1>
         <p className="text-sm text-muted-foreground">
-          {id ? `Ocorrência #${String(id).padStart(6, "0")}` : "—"} • Registrado
-          em {formatDate(dtDesaparecimento)}
+          {id ? `Ocorrência #${String(id)}` : "—"} • Registrado em{" "}
+          {formatDate(dtDesaparecimento)}
         </p>
       </div>
       <div className="flex flex-col sm:flex-row items-center gap-2">
