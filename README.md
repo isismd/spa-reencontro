@@ -99,27 +99,9 @@ cd spa-pessoas-desaparecidas
 
 ---
 
-### 2. Configuração de Ambiente
+### 2. Executando o Projeto
 
-O projeto utiliza variáveis de ambiente para controlar o comportamento da aplicação.
-
-```bash
-# URL da API oficial
-VITE_API_BASE_URL=https://abitus-api.geia.vip
-
-# Define se usa mock ou não
-# true  = usar mock de dados fictícios
-# false = usar API oficial
-VITE_USE_MOCK=false
-```
-
-> [!WARNING]
-> Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
-> Essa configuração pode ser feita no arquivo .env.local, .env ou diretamente no comando de execução.
-
-### 3. Executando o Projeto
-
-#### 3.1. 🔧 Executando com npm
+#### 2.1. 🔧 Executando com npm
 
 1. Instale as dependências:
 
@@ -140,7 +122,7 @@ npm run dev
 
 ---
 
-#### 3.2. 🐋 Executando com Docker 
+#### 2.2. 🐋 Executando com Docker 
 
 1. Certifique-se de ter o Docker instalado.
 2. Execute o comando abaixo para rodar o projeto (por padrão, ele já utiliza a **API oficial**, e não os mocks):
@@ -160,6 +142,26 @@ npm run dev
        ```
 
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
+
+### 3. Sobre as Configurações de Ambiente
+
+O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.  
+Não se preocupe: não é necessário criar manualmente um arquivo `.env.local`, pois esse processo já está **automatizado**, mesmo ao rodar o projeto localmente com NPM. 😉
+
+```bash
+# URL da API oficial
+VITE_API_BASE_URL=https://abitus-api.geia.vip
+
+# Define se usa mock ou não
+# true  = usar mock de dados fictícios
+# false = usar API oficial
+VITE_USE_MOCK=false
+```
+
+> [!WARNING]
+> Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
+> Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
+
 
 <h2 id="identidade-visual">🎨 Identidade Visual</h2>
 
