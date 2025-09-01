@@ -1,17 +1,10 @@
 import { useState } from "react";
 import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Check,
-  ImageOff,
-  TriangleAlert,
-  MapPin,
-  Calendar,
-  User2,
-} from "lucide-react";
+import { ImageOff, MapPin, Calendar, User2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { capitalizeWords, formatDate } from "@/lib/utils";
+import { StatusBadge } from "../status/StatusBadge";
 
 interface PessoaCardProps {
   p: PessoaDTO;
@@ -44,15 +37,7 @@ export default function PessoaCard({ p }: PessoaCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
         <div className="absolute top-2 right-2">
-          {p.ultimaOcorrencia?.dataLocalizacao ? (
-            <Badge className="bg-green-500 text-white flex items-center gap-1">
-              <Check className="w-4 h-4" /> Localizado
-            </Badge>
-          ) : (
-            <Badge className="bg-red-500 text-white flex items-center gap-1">
-              <TriangleAlert className="w-4 h-4" /> Desaparecido
-            </Badge>
-          )}
+          <StatusBadge localizado={!!p.ultimaOcorrencia?.dataLocalizacao} />
         </div>
 
         <CardContent className="absolute bottom-0 w-full p-4 text-white">

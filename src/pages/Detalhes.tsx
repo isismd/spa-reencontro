@@ -13,7 +13,7 @@ import OcorrenciasTimeline from "@/components/ocorrencias/OcorrenciasTimeline";
 import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import AdicionarInformacoesCTA from "@/components/ocorrencias/AdicionarInformacoesCTA";
 import { ArrowLeft } from "lucide-react";
-import StatusPessoa from "@/components/pessoa/StatusPessoa";
+import StatusPessoa from "@/components/status/StatusPessoa";
 import EmptyState from "@/components/feedback/EmptyState";
 
 function diffDays(fromIso?: string) {
