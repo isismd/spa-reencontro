@@ -1,15 +1,18 @@
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 type HeroProps = {
   desaparecidos?: number;
   encontrados?: number;
   className?: string;
+  loading?: boolean;
 };
 
 export default function Hero({
-  desaparecidos = 0,
-  encontrados = 0,
+  desaparecidos = undefined,
+  encontrados = undefined,
   className = "",
+  loading = false,
 }: HeroProps) {
   return (
     <div
@@ -43,7 +46,11 @@ export default function Hero({
               <AlertTriangle className="size-5 text-primary" />
               <span className="text-white/90">
                 Desaparecidos:{" "}
-                <strong className="text-primary">{desaparecidos}</strong>
+                {loading ? (
+                  <Skeleton className="w-10 h-4 inline-block" />
+                ) : (
+                  <strong className="text-primary">{desaparecidos}</strong>
+                )}
               </span>
             </div>
 
@@ -51,7 +58,11 @@ export default function Hero({
               <CheckCircle2 className="size-5 text-emerald-400" />
               <span className="text-white/90">
                 Localizados:{" "}
-                <strong className="text-emerald-300">{encontrados}</strong>
+                {loading ? (
+                  <Skeleton className="w-10 h-4 inline-block" />
+                ) : (
+                  <strong className="text-emerald-300">{encontrados}</strong>
+                )}
               </span>
             </div>
           </div>
