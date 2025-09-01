@@ -1,6 +1,6 @@
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
-import HeroBanner from "@/assets/hero-banner.jpg";
+import HeroBanner from "@/assets/hero-banner.webp";
 
 type HeroProps = {
   desaparecidos?: number;
@@ -10,13 +10,13 @@ type HeroProps = {
 };
 
 export default function Hero({
-  desaparecidos = undefined,
-  encontrados = undefined,
+  desaparecidos,
+  encontrados,
   className = "",
   loading = false,
 }: HeroProps) {
   return (
-    <div
+    <section
       className={`relative w-full h-80 sm:h-96 overflow-hidden rounded-2xl ${className}`}
       style={{
         backgroundImage: `url(${HeroBanner})`,
@@ -48,7 +48,7 @@ export default function Hero({
               <span className="text-white/90">
                 Desaparecidos:{" "}
                 {loading ? (
-                  <Skeleton className="w-10 h-4 inline-block" />
+                  <Skeleton className="w-10 h-4 inline-block align-middle" />
                 ) : (
                   <strong className="text-primary">{desaparecidos}</strong>
                 )}
@@ -60,7 +60,7 @@ export default function Hero({
               <span className="text-white/90">
                 Localizados:{" "}
                 {loading ? (
-                  <Skeleton className="w-10 h-4 inline-block" />
+                  <Skeleton className="w-10 h-4 inline-block align-middle" />
                 ) : (
                   <strong className="text-emerald-300">{encontrados}</strong>
                 )}
@@ -69,6 +69,6 @@ export default function Hero({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

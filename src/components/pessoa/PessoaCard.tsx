@@ -22,6 +22,7 @@ export default function PessoaCard({ p }: PessoaCardProps) {
           <img
             src={p.urlFoto!}
             alt={p.nome ?? "Sem Nome"}
+            loading="lazy"
             className="w-full h-full object-cover object-center transition "
             draggable={false}
             onError={() => {

@@ -31,13 +31,13 @@ export default function Header({
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
           <div className="flex w-10 h-10 md:h-12 md:w-12 items-center justify-center">
-            <img src="/icon.png" />
+            <img src="/icon.png" alt="Logo" />
           </div>
           <div className="leading-tight">
             <h1 className="md:text-xl text-base font-semibold">{title}</h1>
-            <h3 className="text-sm text-gray-500 dark:text-gray-400">
+            <h2 className="text-sm text-gray-500 dark:text-gray-400">
               {subtitle}
-            </h3>
+            </h2>
           </div>
         </Link>
 

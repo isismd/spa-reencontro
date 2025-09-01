@@ -12,7 +12,7 @@ export function StatusBadge({ localizado }: StatusBadgeProps) {
       aria-label={localizado ? "Status: Localizado" : "Status: Desaparecido"}
       className={cn(
         "flex items-center gap-2 rounded-full px-3 py-0.5 text-xs font-medium",
-        localizado ? "bg-green-600 text-green-100" : "bg-red-600 text-red-100",
+        localizado ? "bg-green-700 text-green-100" : "bg-red-700 text-red-100",
       )}
     >
       {!localizado && (

@@ -90,7 +90,12 @@ export default function Filters({ value, onChange }: Props) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="default" size="icon" onClick={applySearch}>
+              <Button
+                variant="default"
+                size="icon"
+                onClick={applySearch}
+                title="Pesquisar"
+              >
                 <Search className="h-5 w-5" />
               </Button>
             </TooltipTrigger>
@@ -103,6 +108,7 @@ export default function Filters({ value, onChange }: Props) {
               <Button
                 variant="outline"
                 size="icon"
+                title="Filtros avançados"
                 onClick={() => setOpenAdv((v) => !v)}
               >
                 {openAdv ? (
