@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
+import { ImageOff } from "lucide-react";
+import { useState } from "react";
 
 interface DetalhesFotoProps {
   foto: string;
@@ -14,15 +16,24 @@ export default function DetalhesFoto({
   dias,
   dataLocalizacao,
 }: DetalhesFotoProps) {
+  const [err, setErr] = useState(false);
+  const hasFoto = !!foto && !err;
   return (
     <Card className="overflow-hidden py-0">
       <div className="relative">
-        <img
-          src={foto}
-          alt="Pessoa"
-          className="block aspect-[3/4] w-full object-cover"
-          loading="lazy"
-        />
+        {hasFoto ? (
+          <img
+            src={foto}
+            alt="Pessoa"
+            className="block aspect-[3/4] w-full object-cover"
+            draggable={false}
+            onError={() => setErr(true)}
+          />
+        ) : (
+          <div className="aspect-[3/4] flex items-center justify-center">
+            <ImageOff className="w-16 h-16 opacity-20" />
+          </div>
+        )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
         <div className="absolute inset-x-4 bottom-4">
           <div
