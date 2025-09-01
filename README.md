@@ -1,69 +1,116 @@
-# React + TypeScript + Vite
+<p align="center">
+  <img src="https://github.com/isismd/projeto-pratico/blob/main/public/icon.png" alt="Projeto Prático Reencontro" width="120"/>
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Reencontro</h1>
+<h2 align="center">Projeto Prático - Desenvolve MT</h2>
 
-Currently, two official plugins are available:
+<p align="center">
+  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=000" /></a>
+  <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=fff" /></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=fff" /></a>
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=fff" /></a>
+  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/State-Zustand-000" /></a>
+  <a href="https://eslint.org/"><img src="https://img.shields.io/badge/Lint-ESLint-4b32c3?logo=eslint&logoColor=fff" /></a>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Aplicação **SPA (Single Page Application)** para **consultar registros de pessoas desaparecidas** (ou já localizadas) e **enviar informações adicionais** (observações, localização, fotos).  
+Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
-## Expanding the ESLint configuration
+🔗 API oficial: [Swagger Abitus](https://abitus-api.geia.vip/swagger-ui/index.html)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧭 Sumário
 
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+- [👩‍💼 Dados de Inscrição](#-dados-de-inscrição)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🧱 Stack](#-stack)
+- [⚙️ Como Rodar Localmente](#️-como-rodar-localmente)
+- [🎨 Identidade Visual](#-identidade-visual)
+- [🗂️ Estrutura de Pastas](#️-estrutura-de-pastas)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+<h2 id="dados-de-inscricao">👩‍💼 Dados de Inscrição</h2>
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+- **Nome:** Isis Milena Daron  
+- **Telefone:** (65) 98119-0823  
+- **E-mail:** contato.isisdaron@gmail.com  
+
+<h2 id="funcionalidades">✨ Funcionalidades</h2>
+
+- 📋 **Cards** com foto, dados principais e **status** (Desaparecida / Localizada).
+- 🔎 **Busca e filtros** (nome, sexo, faixa etária, status).
+- 📄 **Paginação** (mínimo de 10 registros por página).
+- 👤 **Página de detalhes** com informações completas.
+- 🏷️ **Destaque visual do status** (“Desaparecida” ou “Localizada”).
+- 📌 **Envio de informações adicionais** (observações, localização, anexos).
+- 🪄 **UX**: skeleton loaders, toasts, rotas com **lazy loading**.
+- ♿ **Design responsivo e acessível**.
+
+<h2 id="stack">🧱 Stack</h2>
+
+- **React 19** + **Vite 7**
+- **TypeScript 5**
+- **Tailwind CSS 4** + [shadcn/ui](https://ui.shadcn.com/)
+- **Zustand** (gerenciamento de estado)
+- **Lucide React** (ícones)
+- **ESLint + Prettier** (padrões de código)
+
+<h2 id="como-rodar-localmente">⚙️ Como Rodar Localmente</h2>
+
+### Pré-requisitos
+- Node.js 20+
+- npm
+
+### Passo a passo
+
+```bash
+git clone https://github.com/seu-usuario/projeto-pratico.git
+cd projeto-pratico
+npm install
+npm run dev
+```
+Acesse em: http://localhost:5173
+
+<h2 id="identidade-visual">🎨 Identidade Visual</h2>
+
+O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
+
+- **Paleta de cores**: tons mais fortes de **vermelho** foram escolhidos para reforçar a identidade do projeto “Reencontro”.  
+  O vermelho funciona como um chamado de atenção, remetendo à urgência da causa (pessoas desaparecidas) e à importância de agir rápido.  
+  Para contraste e legibilidade, foram aplicados tons neutros (cinza, branco e preto) no fundo e na tipografia.
+
+- **Componentes de UI**: a interface utiliza [**shadcn/ui**](https://ui.shadcn.com/), que fornece componentes modernos, acessíveis e reutilizáveis, estilizados diretamente com **Tailwind CSS**.  
+  Isso garante consistência visual, responsividade e rapidez no desenvolvimento.
+
+- **Foco em acessibilidade**: a interface adota textos claros, contraste adequado, responsividade em múltiplos dispositivos e elementos de feedback (skeleton loaders, toasts), favorecendo a inclusão.
+
+Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
+
+<h2 id="estrutura-de-pastas">🗂️ Estrutura de Pastas</h2>
+
+A estrutura foi organizada de forma simples e clara, separando os componentes em pastas específicas (como detalhes, filtros, layout, ocorrências, etc.), deixando as páginas (Home, Detalhes, Sobre, NotFound) em pages/, os serviços de API em services/ e o estado global em stores/; além disso, há pastas auxiliares como hooks/, interfaces/ e lib/ para manter o código bem dividido e fácil de manter.
+
+```bash
+projeto-pratico/
+├─ public/
+├─ src/
+│  ├─ assets/
+│  ├─ components/
+│  ├─ hooks/
+│  ├─ interfaces/
+│  ├─ lib/
+│  ├─ pages/
+│  ├─ services/
+│  ├─ stores/
+│  ├─ apis/
+│  ├─ routes.tsx
+│  ├─ main.tsx
+│  └─ App.tsx
+├─ .env.example
+├─ .eslintrc
+├─ .prettierrc
+├─ index.html
+└─ vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+Este projeto usa apenas a URL pública da API fornecida no desafio.
+Não há dados sensíveis no .env, apenas referência ao endpoint público.
