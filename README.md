@@ -24,10 +24,10 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 ## 🧭 Sumário
 
 - [👩‍💼 Dados de Inscrição](#-dados-de-inscrição)
-- [✨ Funcionalidades](#-funcionalidades)
-- [🧱 Stack](#-stack)
-- [⚙️ Rodando o Projeto](#️-como-rodar-localmente)
-- [🎨 Identidade Visual](#-identidade-visual)
+- [✨ Funcionalidades](#funcionalidades)
+- [🧱 Stack](#stack)
+- [⚙️ Rodando o Projeto](#rodando-projeto)
+- [🎨 Identidade Visual](#identidade-visual)
 - [🗂️ Estrutura de Pastas](#️-estrutura-de-pastas)
 
 <h2 id="dados-de-inscricao">👩‍💼 Dados de Inscrição</h2>
@@ -38,16 +38,34 @@ Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 <h2 id="funcionalidades">✨ Funcionalidades</h2>
 
-O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas. Entre as principais funcionalidades estão:
+O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas.
 
+### Funcionalidades Principais
 - Visualização de cards com informações principais, foto e status (Desaparecida/Localizada), permitindo identificação rápida dos casos.
-- Busca inteligente e filtros avançados por nome, sexo, faixa etária e status, tornando fácil encontrar registros específicos.
-- Paginação dinâmica para melhor organização e performance, mesmo com muitos casos.
+- Busca nome e filtros avançados por sexo, faixa etária e status, tornando fácil encontrar registros específicos.
+- Paginação dinâmica para melhor organização, mesmo com muitos casos.
 - Página de detalhes completa, com histórico, dados pessoais e anexos enviados, útil para análise aprofundada e colaboração.
 - Envio de informações adicionais (observações, localização, anexos) por qualquer usuário, incentivando a participação ativa.
-- Destaque visual do status com cores e ícones, além de feedbacks modernos (skeleton loaders, toasts, lazy loading) para uma experiência fluida.
-- Design responsivo e acessível, adaptado para todos os dispositivos e pessoas com deficiência.
-- Possibilidade de rodar o sistema com dados fictícios (mock) para testes e demonstrações.
+- Validação do formulário da tela adicionar informações com react-hook-form + zod.
+- Destaque visual do status com cores e ícones, além de feedbacks modernos (skeleton loaders, toasts).
+- Rotas com lazy loading.
+- Design responsivo e acessível, adaptado para diferentes dispositivos.
+- Empacotamento da aplicação em container Docker
+
+### Diferenciais Implementados
+Além dos requisitos previstos, o projeto inclui:
+- Design do sistema pensado para acolher famílias que possuem um ente querido desaparecido, transmitindo empatia e esperança.
+- Tema escuro (Dark Mode) com detecção automática da preferência do sistema, mas permitindo que o usuário alterne manualmente entre claro/escuro a qualquer momento.
+- Página "Sobre" explicando o projeto.
+- Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento. 
+- Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
+- Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
+- Escolha interativa API/Mock: Prompt no terminal com inquirer + suporte a flag de ambiente (VITE_USE_MOCK=true|false).
+- Testes de unidade com Vitest, incluindo runner interativo (npm run test:ui).
+- Toasts com sonner (inclui integração com o tema claro ou escuro).
+- Animações sutis com tw-animate-css.
+- Gerenciamento de estado global leve com Zustand, organizado em stores independentes.
+- Qualidade contínua: ESLint + Prettier.
 
 <h2 id="stack">🧱 Stack</h2>
 
@@ -68,7 +86,9 @@ O projeto utiliza as seguintes stacks e principais dependências:
 - **Zod** (validação de dados)
 - **Boxen, Chalk, Figlet, Inquirer** (CLI interativo)
 
-<h2 id="como-rodar-localmente">⚙️ Rodando o Projeto</h2>
+<h2 id="rodando-projeto">⚙️ Rodando o Projeto</h2>
+
+Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.  
 
 ### 1. Clonar o projeto
 
@@ -79,7 +99,27 @@ cd spa-pessoas-desaparecidas
 
 ---
 
-### 2. Executando com npm
+### 2. Configuração de Ambiente
+
+O projeto utiliza variáveis de ambiente para controlar o comportamento da aplicação.
+
+```bash
+# URL da API oficial
+VITE_API_BASE_URL=https://abitus-api.geia.vip
+
+# Define se usa mock ou não
+# true  = usar mock de dados fictícios
+# false = usar API oficial
+VITE_USE_MOCK=false
+```
+
+> [!WARNING]
+> Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
+> Essa configuração pode ser feita no arquivo .env.local, .env ou diretamente no comando de execução.
+
+### 3. Executando o Projeto
+
+#### 3.1. 🔧 Executando com npm
 
 1. Instale as dependências:
 
@@ -100,23 +140,23 @@ npm run dev
 
 ---
 
-### 3. Executando com Docker
+#### 3.2. 🐋 Executando com Docker 
 
 1. Certifique-se de ter o Docker instalado.
-2. Execute o comando abaixo para rodar o projeto (por padrão, ele já utiliza dados fictícios/mock devido à instabilidade da API oficial):
+2. Execute o comando abaixo para rodar o projeto (por padrão, ele já utiliza a **API oficial**, e não os mocks):
 
    ```powershell
    docker compose up --build
    ```
 
-   - Para forçar o uso da API oficial (se estiver estável):
+   - Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
      - **PowerShell (Windows):**
        ```powershell
-       $env:VITE_USE_MOCK="false"; docker compose up --build
+       $env:VITE_USE_MOCK="true"; docker compose up --build
        ```
      - **Bash (Linux/Mac):**
        ```bash
-       VITE_USE_MOCK=false docker compose up --build
+       VITE_USE_MOCK=true docker compose up --build
        ```
 
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
@@ -133,6 +173,16 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
   Isso garante consistência visual, responsividade e rapidez no desenvolvimento.
 
 - **Foco em acessibilidade**: a interface adota textos claros, contraste adequado, responsividade em múltiplos dispositivos e elementos de feedback (skeleton loaders, toasts), favorecendo a inclusão.
+
+- **Design acolhedor**: pensado especialmente para **famílias que possuem um ente querido desaparecido**, com banners e mensagens que reforçam a importância da ajuda nas informações, transmitindo esperança e humanidade.  
+  Exemplos de mensagens exibidas:
+  > Use nossa plataforma para consultar registros de pessoas desaparecidas ou já localizadas. Qualquer informação pode transformar a vida de uma família.
+  
+  > **Viu essa pessoa?**  
+  > Qualquer detalhe pode ajudar. Adicione uma informação agora mesmo.  
+
+  > Ainda não localizada, qualquer informação pode ajudar.  
+  > **Sua ajuda pode fazer a diferença.**
 
 Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
@@ -193,4 +243,7 @@ spa-pessoas-desaparecidas/
 └─ README.md
 ```
 
-> Este projeto usa apenas a URL pública da API fornecida no desafio.
+> [!NOTE]  
+> Este projeto não utiliza variáveis sensíveis (como tokens ou credenciais).  
+> As únicas variáveis de ambiente são públicas (`VITE_API_BASE_URL` e `VITE_USE_MOCK`), mas recomenda-se sempre manter arquivos `.env` fora do versionamento por boas práticas.
+
