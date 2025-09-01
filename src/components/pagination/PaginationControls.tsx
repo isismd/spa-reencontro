@@ -45,7 +45,7 @@ export default function PaginationControls({
   const isNextDisabled = page + 1 >= totalPages;
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-3 items-center sm:flex-row sm:justify-between">
       <div className="flex items-center gap-2">
         <Label htmlFor="per-page" className="whitespace-nowrap text-sm">
           Items por página
