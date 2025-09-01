@@ -33,30 +33,40 @@ export default function Filters({ value, onChange }: Props) {
   const [openAdv, setOpenAdv] = useState(false);
   const [searchText, setSearchText] = useState(value.nome ?? "");
   const [range, setRange] = useState<[number, number]>(DEFAULT_RANGE);
-
-  function update<K extends keyof PessoasFiltro>(
-    key: K,
-    val: PessoasFiltro[K],
-  ) {
-    onChange({ ...value, [key]: val, pagina: 0 });
-  }
+  const [status, setStatus] = useState<PessoasFiltro["status"]>(value.status);
+  const [sexo, setSexo] = useState<Sexo | undefined>(value.sexo);
+  const [vivo, setVivo] = useState<PessoasFiltro["vivo"]>(value.vivo);
 
   function applySearch() {
-    onChange({ ...value, nome: searchText || undefined, pagina: 0 });
+    onChange({
+      ...value,
+      nome: searchText || undefined,
+      status,
+      sexo,
+      vivo,
+      faixaIdadeInicial: range[0] > 0 ? range[0] : undefined,
+      faixaIdadeFinal: range[1] < IDADE_MAX ? range[1] : undefined,
+      pagina: 0,
+    });
   }
 
   function applyAdvanced() {
-    const [min, max] = range;
     onChange({
       ...value,
-      faixaIdadeInicial: min > 0 ? min : undefined,
-      faixaIdadeFinal: max < IDADE_MAX ? max : undefined,
+      status,
+      sexo,
+      vivo,
+      faixaIdadeInicial: range[0] > 0 ? range[0] : undefined,
+      faixaIdadeFinal: range[1] < IDADE_MAX ? range[1] : undefined,
       pagina: 0,
     });
   }
 
   function clearAdvanced() {
     setRange(DEFAULT_RANGE);
+    setStatus(undefined);
+    setSexo(undefined);
+    setVivo(undefined);
     onChange({
       ...value,
       status: undefined,
@@ -113,9 +123,9 @@ export default function Filters({ value, onChange }: Props) {
             <div>
               <Label className="mb-2 block">Status</Label>
               <Select
-                value={value.status ?? ""}
+                value={status ?? ""}
                 onValueChange={(v) =>
-                  update("status", (v || undefined) as PessoasFiltro["status"])
+                  setStatus((v || undefined) as PessoasFiltro["status"])
                 }
               >
                 <SelectTrigger className="w-full">
@@ -131,9 +141,9 @@ export default function Filters({ value, onChange }: Props) {
             <div>
               <Label className="mb-2 block">Sexo</Label>
               <Select
-                value={value.sexo ?? ""}
+                value={sexo ?? ""}
                 onValueChange={(v) =>
-                  update("sexo", (v || undefined) as Sexo | undefined)
+                  setSexo((v || undefined) as Sexo | undefined)
                 }
               >
                 <SelectTrigger className="w-full">
@@ -149,11 +159,9 @@ export default function Filters({ value, onChange }: Props) {
             <div>
               <Label className="mb-2 block">Condição</Label>
               <Select
-                value={
-                  typeof value.vivo === "boolean" ? String(value.vivo) : ""
-                }
+                value={typeof vivo === "boolean" ? String(vivo) : ""}
                 onValueChange={(v) =>
-                  update("vivo", v === "" ? undefined : v === "true")
+                  setVivo(v === "" ? undefined : v === "true")
                 }
               >
                 <SelectTrigger className="w-full">

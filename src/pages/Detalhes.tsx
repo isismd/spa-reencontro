@@ -93,14 +93,10 @@ export default function Detalhes() {
 
   if (loadingById) return <DetalhesSkeleton />;
 
-  const hasFatalError =
-    (!loadingById && (errorPessoa || !p)) ||
-    (!loadingOcorrencias && !!errorOcorrencias);
-
-  if (hasFatalError) {
+  if (!loadingById && (errorPessoa || !p)) {
     return (
       <EmptyState
-        title="Erro ao carregar os dados"
+        title="Erro ao carregar os dados da pessoa"
         subtitle="Não foi possível carregar os detalhes da pessoa. Tente novamente mais tarde."
         action={
           <Button
@@ -116,8 +112,12 @@ export default function Detalhes() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-6xl space-y-6 p-4 sm:p-6">
-      <Button onClick={() => navigate("/")} className="mb-4" variant="link">
+    <section className="mx-auto w-full max-w-6xl space-y-6 px-4 pb-4 sm:pb-6 sm:px-6">
+      <Button
+        onClick={() => navigate("/")}
+        className="mb-4 pt-2"
+        variant="link"
+      >
         <ArrowLeft />
         Voltar para a página inicial
       </Button>
@@ -182,13 +182,19 @@ export default function Detalhes() {
             }
           />
 
-          {!isLocalizado && (
-            <OcorrenciasTimeline
-              informacoes={informacoes}
-              loading={loadingOcorrencias}
-              error={errorOcorrencias}
-            />
-          )}
+          {!isLocalizado &&
+            (errorOcorrencias ? (
+              <EmptyState
+                title="Erro ao carregar as ocorrências"
+                subtitle="Não foi possível carregar as ocorrências. Tente novamente mais tarde."
+              />
+            ) : (
+              <OcorrenciasTimeline
+                informacoes={informacoes}
+                loading={loadingOcorrencias}
+                error={errorOcorrencias}
+              />
+            ))}
         </div>
       </div>
     </section>

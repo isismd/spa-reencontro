@@ -10,10 +10,12 @@ export default function EmptyState({
   action,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 rounded-lg border p-10 text-center">
-      <div className="text-lg font-semibold">{title}</div>
-      <div className="text-sm opacity-70">{subtitle}</div>
-      {action ? <div className="mt-2">{action}</div> : null}
+    <div className="h-full justify-center">
+      <div className="flex flex-col items-center justify-center gap-2 rounded-lg border p-10 text-center">
+        <div className="text-lg font-semibold">{title}</div>
+        <div className="text-sm opacity-70">{subtitle}</div>
+        {action ? <div className="mt-2">{action}</div> : null}
+      </div>
     </div>
   );
 }
