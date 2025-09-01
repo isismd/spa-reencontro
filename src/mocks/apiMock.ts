@@ -3,16 +3,8 @@ import MockAdapter from "axios-mock-adapter";
 import type { PageResponse } from "@/interfaces/IPessoas";
 import { pessoas, informacoes } from "@/mocks/mockData";
 
-const RESPONSE_DELAY = 600;
+const RESPONSE_DELAY = 800;
 const mock = new MockAdapter(axios, { delayResponse: RESPONSE_DELAY });
-
-function getParam(url: string, param: string): string | null {
-  try {
-    return new URL(url, "http://local").searchParams.get(param);
-  } catch {
-    return null;
-  }
-}
 
 function pageResponse<T>(items: T[], page = 0, size = 10): PageResponse<T> {
   const totalElements = items.length;
@@ -64,7 +56,7 @@ mock.onGet(/\/v1\/pessoas\/aberto\/filtro/).reply((config) => {
     );
   }
   if (vivo !== null && vivo !== undefined && vivo !== "") {
-    result = result.filter((p) => String(p.vivo) === vivo);
+    result = result.filter((p) => p.vivo === vivo);
   }
   if (faixaIdadeInicial > 0) {
     result = result.filter((p) => p.idade >= faixaIdadeInicial);
@@ -96,8 +88,8 @@ mock.onGet(/\/v1\/pessoas\/aberto\/estatistico/).reply(200, {
 mock
   .onGet(/\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/)
   .reply((config) => {
-    const url = config.url ?? "";
-    const ocoId = Number(getParam(url, "ocorrenciaId"));
+    const params = config.params || {};
+    const ocoId = Number(params["ocorrenciaId"]);
     const lista = Number.isFinite(ocoId)
       ? informacoes.filter((i) => i.ocoId === ocoId)
       : informacoes;
