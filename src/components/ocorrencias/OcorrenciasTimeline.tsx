@@ -4,8 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, FileDown, Info, Paperclip } from "lucide-react";
-import { formatDate, formatTime } from "@/lib/utils";
+import { Calendar, FileDown, Info, Paperclip } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
 
@@ -76,11 +76,6 @@ export default function OcorrenciasTimeline({
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="size-3" />
                         {formatDate(it.data)}
-                      </span>
-                      <span>•</span>
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="size-3" />
-                        {formatTime(it.data)}
                       </span>
                       <Badge variant="outline" className="ml-1">
                         #{String(it.id).padStart(4, "0")}
