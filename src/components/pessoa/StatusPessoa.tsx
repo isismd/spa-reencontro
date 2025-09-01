@@ -9,7 +9,7 @@ export default function StatusPessoa({ isLocalizado, encontradoVivo }: Props) {
   if (!isLocalizado) {
     return (
       <div
-        className="flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-destructive"
+        className="flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-destructive"
         aria-live="polite"
       >
         <AlertTriangle className="mt-0.5 size-5 shrink-0" />

@@ -1,3 +1,4 @@
+// routes.tsx
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import RootLayout from "./layout/RootLayout";
@@ -6,6 +7,7 @@ const Home = lazy(() => import("@/pages/Home"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const Sobre = lazy(() => import("@/pages/Sobre"));
 const PessoaDetalhePage = lazy(() => import("@/pages/Detalhes"));
+const AdicionarInfoPage = lazy(() => import("@/pages/AdicionarInfo"));
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +16,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/sobre", element: <Sobre /> },
       { path: "/detalhes/:id", element: <PessoaDetalhePage /> },
+      { path: "/detalhes/:id/informar", element: <AdicionarInfoPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },

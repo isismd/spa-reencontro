@@ -88,7 +88,8 @@ export default function Detalhes() {
   }
 
   function handleAddInfo() {
-    toast.info("Funcionalidade de adicionar informações não implementada.");
+    console.log("caiu");
+    navigate(`/detalhes/${p!.id}/informar`);
   }
 
   if (loadingById) return <DetalhesSkeleton />;
@@ -112,7 +113,7 @@ export default function Detalhes() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-6xl space-y-6 px-4 pb-4 sm:pb-6 sm:px-6">
+    <section className="mx-auto w-full max-w-6xl space-y-6 px-4 sm:px-6">
       <Button
         onClick={() => navigate("/")}
         className="mb-4 pt-2"
@@ -130,6 +131,7 @@ export default function Detalhes() {
         onShare={handleShare}
         onBaixarCartaz={handleBaixarCartaz}
         cartazUrl={cartazUrl}
+        onAddInfo={handleAddInfo}
       />
 
       <Separator />

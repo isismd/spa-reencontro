@@ -18,3 +18,24 @@ export async function httpGet<T>(
     throw new Error(`HTTP ${status} - ${text}`);
   }
 }
+
+export async function httpPost<T>(
+  path: string,
+  body?: any,
+  config?: Record<string, any>,
+): Promise<T> {
+  try {
+    const res = await axios.post<T>(`${BASE_URL}${path}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      ...config,
+    });
+    return res.data;
+  } catch (error: any) {
+    const status = error.response?.status;
+    const text = error.response?.data || error.message;
+    throw new Error(`HTTP ${status} - ${text}`);
+  }
+}

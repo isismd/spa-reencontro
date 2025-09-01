@@ -9,6 +9,7 @@ interface DetalhesHeaderProps {
   isLocalizado?: boolean;
   onShare: () => void;
   onBaixarCartaz: () => void;
+  onAddInfo: () => void;
   cartazUrl?: string;
 }
 
@@ -19,6 +20,7 @@ export default function DetalhesHeader({
   isLocalizado,
   onShare,
   onBaixarCartaz,
+  onAddInfo,
   cartazUrl,
 }: DetalhesHeaderProps) {
   return (
@@ -57,6 +59,7 @@ export default function DetalhesHeader({
             className="w-full sm:w-auto gap-2"
             size="sm"
             variant="default"
+            onClick={onAddInfo}
           >
             <Plus className="size-4" />
             Adicionar Informações

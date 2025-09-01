@@ -104,4 +104,41 @@ mock
     return [200, lista];
   });
 
+mock
+  .onPost(/\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/)
+  .reply((config) => {
+    const params = (config.params ?? {}) as Record<string, any>;
+
+    const ocoId = Number(params.ocoId);
+    const informacao = (params.informacao ?? "").trim();
+    const descricao = (params.descricao ?? "").trim();
+    const data =
+      (params.data ?? "").trim() || new Date().toISOString().slice(0, 10);
+
+    if (!Number.isFinite(ocoId) || !informacao || !descricao || !data) {
+      return [
+        400,
+        {
+          message:
+            "Parâmetros inválidos. Envie ocoId (number), informacao (string), descricao (string) e data (yyyy-MM-dd).",
+        },
+      ];
+    }
+
+    const nextId =
+      informacoes.reduce((max, i) => Math.max(max, Number(i.id) || 0), 0) + 1;
+
+    const novo = {
+      id: nextId,
+      ocoId,
+      informacao,
+      data,
+      anexos: [] as string[],
+    };
+
+    informacoes.push(novo as any);
+
+    return [201, novo];
+  });
+
 export default mock;
