@@ -34,8 +34,6 @@ export default function PaginationControls({
   perPageOptions = [12, 24, 36, 48, 60],
   onPerPageChange = () => {},
 }: Props) {
-  if (totalPages <= 1) return null;
-
   const range = usePaginationRange(page, totalPages, 1);
 
   const go = (p: number) => {
