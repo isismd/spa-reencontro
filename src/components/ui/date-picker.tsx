@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { formatDate } from "@/lib/utils";
+import { formatDate, parseYmdToLocalDate } from "@/lib/utils";
 
 export interface DatePickerProps {
   value?: Date;
@@ -29,7 +29,7 @@ export function DatePicker({
 
   React.useEffect(() => {
     if (value) {
-      setInputValue(formatDate(value.toISOString().split("T")[0]));
+      setInputValue(formatDate(value));
       setMonth(value);
     } else {
       setInputValue("");
@@ -37,11 +37,13 @@ export function DatePicker({
   }, [value]);
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value);
-    const d = new Date(e.target.value);
-    if (d instanceof Date && !isNaN(d.getTime())) {
-      onChange?.(d);
-      setMonth(d);
+    const raw = e.target.value;
+    setInputValue(raw);
+
+    const parsed = parseYmdToLocalDate(raw) ?? new Date(raw);
+    if (parsed instanceof Date && !isNaN(parsed.getTime())) {
+      onChange?.(parsed);
+      setMonth(parsed);
     } else {
       onChange?.(undefined);
     }
@@ -49,7 +51,7 @@ export function DatePicker({
 
   function handleCalendarSelect(d?: Date) {
     onChange?.(d);
-    setInputValue(d ? formatDate(d.toISOString().split("T")[0]) : "");
+    setInputValue(d ? formatDate(d) : "");
     setOpen(false);
   }
 

@@ -21,6 +21,7 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { usePessoasStore } from "@/stores/pessoasStore";
 import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import { useEffect } from "react";
+import { formatYmdLocal, parseYmdToLocalDate } from "@/lib/utils";
 
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
@@ -41,7 +42,7 @@ export default function AdicionarInfoPage() {
     defaultValues: {
       informacao: "",
       descricao: "",
-      data: new Date().toISOString().slice(0, 10),
+      data: formatYmdLocal(new Date()),
       files: [] as any,
     },
   });
@@ -110,12 +111,12 @@ export default function AdicionarInfoPage() {
                       <FormControl>
                         <DatePicker
                           value={
-                            field.value ? new Date(field.value) : undefined
+                            field.value
+                              ? parseYmdToLocalDate(field.value)
+                              : undefined
                           }
                           onChange={(date) =>
-                            field.onChange(
-                              date ? date.toISOString().slice(0, 10) : "",
-                            )
+                            field.onChange(date ? formatYmdLocal(date) : "")
                           }
                         />
                       </FormControl>
@@ -195,7 +196,19 @@ const schema = z.object({
   descricao: z
     .string()
     .min(2, "Informe uma descrição curta para o(s) anexo(s)"),
-  data: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd"),
+  data: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
+    .regex(/^[\d]{4}-[\d]{2}-[\d]{2}$/, "Use yyyy-MM-dd")
+    .refine(
+      (d) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const input = new Date(d + "T00:00:00");
+        return input.getTime() <= today.getTime();
+      },
+      { message: "A data não pode ser maior que hoje." },
+    ),
   files: z
     .any()
     .transform((v) =>
