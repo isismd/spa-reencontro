@@ -21,7 +21,12 @@ export const pessoas: PessoaDTO[] = [
         vestimentasDesaparecido:
           "Camisa azul clara, calça jeans, tênis branco e mochila preta.",
       },
-      listaCartaz: [],
+      listaCartaz: [
+        {
+          urlCartaz: "https://dummyimage.com/600x800/cccccc/333&text=CARTAZ",
+          tipoCartaz: "PDF_DESAPARECIDO",
+        },
+      ],
     },
   },
   {
@@ -42,7 +47,12 @@ export const pessoas: PessoaDTO[] = [
         informacao: "Localizado em segurança após contato de familiar.",
         vestimentasDesaparecido: "Camiseta preta, bermuda cinza, chinelo azul.",
       },
-      listaCartaz: [],
+      listaCartaz: [
+        {
+          urlCartaz: "https://dummyimage.com/600x800/cccccc/333&text=CARTAZ",
+          tipoCartaz: "PDF_DESAPARECIDO",
+        },
+      ],
     },
   },
   {
@@ -62,7 +72,12 @@ export const pessoas: PessoaDTO[] = [
         informacao: "Saiu de casa para faculdade e não retornou.",
         vestimentasDesaparecido: "Vestido floral e sandália branca.",
       },
-      listaCartaz: [],
+      listaCartaz: [
+        {
+          urlCartaz: "https://dummyimage.com/600x800/cccccc/333&text=CARTAZ",
+          tipoCartaz: "PDF_DESAPARECIDO",
+        },
+      ],
     },
   },
   {

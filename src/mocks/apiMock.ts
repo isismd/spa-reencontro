@@ -51,8 +51,8 @@ mock.onGet(/\/v1\/pessoas\/aberto\/filtro/).reply((config) => {
   if (status) {
     result = result.filter((p) =>
       status === "DESAPARECIDO"
-        ? p.ultimaOcorrencia?.encontradoVivo === false
-        : p.ultimaOcorrencia?.encontradoVivo === true,
+        ? p.ultimaOcorrencia && !p.ultimaOcorrencia.dataLocalizacao
+        : p.ultimaOcorrencia && p.ultimaOcorrencia.dataLocalizacao,
     );
   }
   if (vivo !== null && vivo !== undefined && vivo !== "") {
