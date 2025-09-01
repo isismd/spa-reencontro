@@ -77,12 +77,20 @@ mock.onGet(/\/v1\/pessoas\/\d+(?:\?.*)?$/).reply((config) => {
   return [200, pessoa];
 });
 
-mock.onGet(/\/v1\/pessoas\/aberto\/estatistico/).reply(200, {
-  desaparecidos: pessoas.filter((p) => !p.ultimaOcorrencia?.dataLocalizacao)
-    .length,
-  localizados: pessoas.filter((p) => p.ultimaOcorrencia?.dataLocalizacao)
-    .length,
-  total: pessoas.length,
+mock.onGet(/\/v1\/pessoas\/aberto\/estatistico/).reply(() => {
+  const quantPessoasDesaparecidas = pessoas.filter(
+    (p) => p.ultimaOcorrencia && !p.ultimaOcorrencia.dataLocalizacao,
+  ).length;
+  const quantPessoasEncontradas = pessoas.filter(
+    (p) => p.ultimaOcorrencia && p.ultimaOcorrencia.dataLocalizacao,
+  ).length;
+  return [
+    200,
+    {
+      quantPessoasDesaparecidas,
+      quantPessoasEncontradas,
+    },
+  ];
 });
 
 mock

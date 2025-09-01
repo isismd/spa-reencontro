@@ -296,7 +296,7 @@ export const informacoes: InformacaoDesaparecidoDTO[] = [
     informacao:
       "Foi vista próximo ao centro (Praça Alencastro) por volta de 18h.",
     data: "2025-08-02T18:30:00",
-    anexos: ["https://dummyimage.com/1200x675/ddd/333&text=CCTV"],
+    anexos: ["https://dummyimage.com/1200x675/ddd/333&text=PESSOA-VISTA"],
   },
   {
     id: 2,
