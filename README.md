@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/icon.png" alt="Projeto Prático Reencontro" width="120"/>
+  <img src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/icon.png" alt="Logo Reencontro" width="100"/>
 </p>
-
 <h1 align="center">Reencontro</h1>
-<h2 align="center">Projeto Prático - Desenvolve MT</h2>
+
+<h2 align="center">SPA Pessoas Desaparecidas</h2>
 
 <p align="center">
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=000" /></a>
@@ -16,10 +16,20 @@
   <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Tested%20with-Vitest-6E9F18?logo=vitest&logoColor=fff" /></a>
 </p>
 
-Aplicação **SPA (Single Page Application)** para **consultar registros de pessoas desaparecidas** (ou já localizadas) e **enviar informações adicionais** (observações, localização, fotos).  
+<img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.png" alt="Demonstração do sistema" width="400"/>
+
+&nbsp; 
+
+Aplicação **SPA** (Single Page Application) moderna e responsiva, desenvolvida para facilitar a busca, acompanhamento e colaboração em casos de pessoas desaparecidas.
+
+O sistema permite consultar registros oficiais (desaparecidos e já localizados), acessar detalhes completos de cada ocorrência e enviar informações adicionais como observações, locais de avistamento e anexos fotográficos, ampliando a rede de apoio e aumentando as chances de reencontro.
+
 Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 🔗 API oficial: [Swagger Abitus](https://abitus-api.geia.vip/swagger-ui/index.html)
+
+<br clear="right"/>
+
 
 ## 🧭 Sumário
 
