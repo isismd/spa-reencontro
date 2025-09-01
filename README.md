@@ -22,9 +22,9 @@
 
 Aplicação **SPA** (Single Page Application) moderna e responsiva, desenvolvida para facilitar a busca, acompanhamento e colaboração em casos de pessoas desaparecidas.
 
-O sistema permite consultar registros oficiais (desaparecidos e já localizados), acessar detalhes completos de cada ocorrência e enviar informações adicionais como observações, locais de avistamento e anexos fotográficos, ampliando a rede de apoio e aumentando as chances de reencontro.
+O sistema permite consultar registros oficiais (desaparecidos e já localizados), acessar detalhes completos e enviar informações adicionais como observações, locais de avistamento e anexos, ampliando a rede de apoio e aumentando as chances de **reencontro**.
 
-Projeto desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
+Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 🔗 API oficial: [Swagger Abitus](https://abitus-api.geia.vip/swagger-ui/index.html)
 
