@@ -1,14 +1,17 @@
 import chalk from "chalk";
-import figlet from "figlet";
 import boxen from "boxen";
 import inquirer from "inquirer";
 import fs from "fs";
+import cfonts from "cfonts";
 
-console.log(
-    chalk.red(
-        figlet.textSync("Reencontro", { font: "Chunky" })
-    )
-);
+cfonts.say("Reencontro", {
+    font: "chrome",
+    align: "center",
+    background: "transparent",
+    env: "node",
+    transitionGradient: true,
+    gradient: ["yellow", "magenta"],
+});
 
 const mensagem = `
 ${chalk.bold("🔎 Sistema de Pessoas Desaparecidas")}
@@ -23,9 +26,10 @@ console.log(
     boxen(mensagem, {
         padding: 1,
         margin: 1,
+        float: "center",
         borderStyle: "round",
         borderColor: "red",
-        align: "left",
+        align: "center",
     })
 );
 
