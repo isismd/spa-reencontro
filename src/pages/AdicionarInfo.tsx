@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,8 +20,12 @@ import { ArrowLeft, Send } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picker";
 import { usePessoasStore } from "@/stores/pessoasStore";
 import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
-import { useEffect } from "react";
 import { formatYmdLocal, parseYmdToLocalDate } from "@/lib/utils";
+import {
+  Dropzone,
+  DropzoneContent,
+  DropzoneEmptyState,
+} from "@/components/ui/shadcn-io/dropzone";
 
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
@@ -42,9 +47,19 @@ export default function AdicionarInfoPage() {
       informacao: "",
       descricao: "",
       data: formatYmdLocal(new Date()),
-      files: [] as any,
+      files: [],
     },
   });
+
+  const isSubmitting = form.formState.isSubmitting;
+  const files = form.watch("files");
+
+  const handleDrop = (accepted: File[]) => {
+    form.setValue("files", accepted, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
 
   async function onSubmit(values: FormData) {
     try {
@@ -53,7 +68,7 @@ export default function AdicionarInfoPage() {
         informacao: values.informacao.trim(),
         data: values.data,
         descricao: values.descricao.trim(),
-        files: values.files as File[] | undefined,
+        files: values.files,
       });
       toast.success("Informação enviada. Obrigado por ajudar!");
       navigate(`/detalhes/${id}`);
@@ -61,8 +76,6 @@ export default function AdicionarInfoPage() {
       toast.error(e?.message ?? "Erro ao enviar informação.");
     }
   }
-
-  const isSubmitting = form.formState.isSubmitting;
 
   return (
     <section className="mx-auto w-full max-w-6xl space-y-6 px-4 sm:px-6">
@@ -100,7 +113,7 @@ export default function AdicionarInfoPage() {
                 )}
               />
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <FormField
                   control={form.control}
                   name="data"
@@ -131,7 +144,7 @@ export default function AdicionarInfoPage() {
                     <FormItem>
                       <FormLabel>Descrição do(s) anexo(s) *</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ex.: Foto da Pessoa" {...field} />
+                        <Input placeholder="Ex.: Foto da pessoa" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -142,23 +155,24 @@ export default function AdicionarInfoPage() {
               <FormField
                 control={form.control}
                 name="files"
-                render={({ field: { onChange, ...rest } }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Anexos (opcional)</FormLabel>
                     <FormControl>
-                      <Input
-                        type="file"
-                        multiple
-                        accept="image/*,application/pdf"
-                        onChange={(e) => onChange(e.target.files)}
-                        name="files"
-                        ref={rest.ref}
-                        disabled={rest.disabled}
-                        onBlur={rest.onBlur}
-                      />
+                      <Dropzone
+                        maxSize={MAX_FILE_SIZE}
+                        disabled={isSubmitting}
+                        onDrop={handleDrop}
+                        onError={console.error}
+                        src={files}
+                        aria-label="Área para soltar ou selecionar arquivos (até 5MB cada)"
+                      >
+                        <DropzoneEmptyState />
+                        <DropzoneContent />
+                      </Dropzone>
                     </FormControl>
                     <p className="text-xs text-muted-foreground">
-                      PNG, JPG ou PDF — até 5MB cada.
+                      Você pode anexar arquivos de até 5MB cada.
                     </p>
                     <FormMessage />
                   </FormItem>
@@ -190,6 +204,8 @@ export default function AdicionarInfoPage() {
   );
 }
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
 const schema = z.object({
   informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
   descricao: z
@@ -198,7 +214,6 @@ const schema = z.object({
   data: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
-    .regex(/^[\d]{4}-[\d]{2}-[\d]{2}$/, "Use yyyy-MM-dd")
     .refine(
       (d) => {
         const today = new Date();
@@ -209,15 +224,12 @@ const schema = z.object({
       { message: "A data não pode ser maior que hoje." },
     ),
   files: z
-    .any()
-    .transform((v) =>
-      v instanceof FileList ? Array.from(v) : (v as File[] | undefined),
-    )
+    .array(z.custom<File>())
     .refine(
-      (files?: File[]) =>
-        !files || files.every((f) => f.size <= 5 * 1024 * 1024),
+      (files) => files.every((f) => f.size <= MAX_FILE_SIZE),
       "Cada arquivo até 5MB",
-    ),
+    )
+    .optional(),
 });
 
 type FormData = z.infer<typeof schema>;
