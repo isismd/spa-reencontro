@@ -1,7 +1,13 @@
 import { useState } from "react";
 import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { ImageOff, MapPin, Calendar, User2 } from "lucide-react";
+import {
+  ImageOff,
+  MapPin,
+  User2,
+  CalendarSearch,
+  CalendarCheck,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { capitalizeWords, formatDate } from "@/lib/utils";
 import { StatusBadge } from "../status/StatusBadge";
@@ -17,13 +23,13 @@ export default function PessoaCard({ p }: PessoaCardProps) {
 
   return (
     <Link to={`/detalhes/${p.id}`}>
-      <Card className="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition h-96 py-0">
+      <Card className="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition h-96 py-0 hover:scale-95">
         {hasFoto ? (
           <img
             src={p.urlFoto!}
             alt={p.nome ?? "Sem Nome"}
             loading="lazy"
-            className="w-full h-full object-cover object-center transition "
+            className="w-full h-full object-cover object-center transition"
             draggable={false}
             onError={() => {
               setErr(true);
@@ -58,10 +64,17 @@ export default function PessoaCard({ p }: PessoaCardProps) {
 
           {p.ultimaOcorrencia?.dtDesaparecimento && (
             <div className="flex items-center gap-2 text-sm opacity-90">
-              <Calendar className="w-4 h-4" />
-              <span>
-                Desde {formatDate(p.ultimaOcorrencia.dtDesaparecimento)}
-              </span>
+              {p.ultimaOcorrencia?.dataLocalizacao ? (
+                <>
+                  <CalendarCheck className="w-4 h-4" />
+                  Localizado em {formatDate(p.ultimaOcorrencia.dataLocalizacao)}
+                </>
+              ) : (
+                <>
+                  <CalendarSearch className="w-4 h-4" />
+                  Desde {formatDate(p.ultimaOcorrencia.dtDesaparecimento)}
+                </>
+              )}
             </div>
           )}
         </CardContent>
