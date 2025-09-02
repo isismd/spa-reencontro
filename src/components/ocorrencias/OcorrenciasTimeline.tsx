@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,8 +22,6 @@ export default function OcorrenciasTimeline({
   error,
   className,
 }: Props) {
-  const [mostrarTodos, setMostrarTodos] = useState(false);
-
   const itens = useMemo(() => {
     return [...(informacoes ?? [])].sort((a, b) => {
       const da = new Date(a.data).getTime();
@@ -31,8 +29,6 @@ export default function OcorrenciasTimeline({
       return db - da;
     });
   }, [informacoes]);
-
-  const itensVisiveis = mostrarTodos ? itens : itens.slice(0, 3);
 
   return (
     <Card className={className}>
@@ -61,14 +57,14 @@ export default function OcorrenciasTimeline({
           </div>
         ) : (
           <div className="relative">
-            <div className="space-y-5">
-              {itensVisiveis.map((it, i) => (
+            <div className="space-y-5 max-h-80 overflow-y-auto pr-2">
+              {itens.map((it, i) => (
                 <div
                   key={it.id}
                   className="grid grid-cols-[auto_1fr] gap-3 relative"
                 >
                   <div className="relative z-10 mt-1 size-3 rounded-full bg-primary ring-2 ring-background" />
-                  {i < itensVisiveis.length - 1 && (
+                  {i < itens.length - 1 && (
                     <div className="absolute left-[6px] top-3 bottom-[-20px] w-0.5 bg-border" />
                   )}
                   <div className="rounded-lg border p-3">
@@ -120,28 +116,6 @@ export default function OcorrenciasTimeline({
                 </div>
               ))}
             </div>
-
-            {itens.length > 3 && (
-              <div className="mt-4 flex justify-center">
-                {mostrarTodos ? (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setMostrarTodos(false)}
-                  >
-                    Ver menos
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setMostrarTodos(true)}
-                  >
-                    Ver todas
-                  </Button>
-                )}
-              </div>
-            )}
           </div>
         )}
       </CardContent>
