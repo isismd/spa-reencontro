@@ -1,5 +1,5 @@
-import type { PessoaDTO } from "@/interfaces/IPessoas";
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
+import type { PessoaDTO } from "@/interfaces/IPessoas";
 
 export const pessoas: PessoaDTO[] = [
   {

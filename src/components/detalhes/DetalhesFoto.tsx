@@ -30,8 +30,8 @@ export default function DetalhesFoto({
             onError={() => setErr(true)}
           />
         ) : (
-          <div className="aspect-[3/4] flex items-center justify-center">
-            <ImageOff className="w-16 h-16 opacity-20" />
+          <div className="flex aspect-[3/4] items-center justify-center">
+            <ImageOff className="h-16 w-16 opacity-20" />
           </div>
         )}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />

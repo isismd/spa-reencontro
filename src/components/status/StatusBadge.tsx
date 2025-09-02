@@ -17,8 +17,8 @@ export function StatusBadge({ localizado }: StatusBadgeProps) {
     >
       {!localizado && (
         <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 animate-ping"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
         </span>
       )}
       {localizado ? "Localizado" : "Desaparecido"}

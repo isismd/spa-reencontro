@@ -1,15 +1,15 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatDate, formatTime, notInformed } from "@/lib/utils";
 import {
   Calendar,
   Clock,
-  MapPin,
+  ExternalLink,
   Info,
+  MapPin,
   Shirt,
   User2,
-  ExternalLink,
 } from "lucide-react";
-import { formatDate, formatTime, notInformed } from "@/lib/utils";
 
 interface DetalhesDesaparecimentoProps {
   ocoId?: number;
@@ -44,20 +44,20 @@ export default function DetalhesDesaparecimento({
             Informações do Desaparecimento
           </CardTitle>
         </div>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-muted-foreground text-xs">
           Detalhes registrados pela ocorrência #{ocoId ?? "—"}
         </p>
       </CardHeader>
       <CardContent className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border bg-background/60 p-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="bg-background/60 rounded-lg border p-3">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <Calendar className="size-4" />
             Data do Desaparecimento
           </div>
           <p className="mt-1 font-medium">{formatDate(dtDesaparecimento)}</p>
         </div>
-        <div className="rounded-lg border bg-background/60 p-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="bg-background/60 rounded-lg border p-3">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <Clock className="size-4" />
             Horário
           </div>
@@ -65,17 +65,17 @@ export default function DetalhesDesaparecimento({
             {formatTime(horarioDesaparecimento)}
           </p>
         </div>
-        <div className="rounded-lg border bg-background/60 p-3 sm:col-span-2">
-          <div className="flex items-center justify-between gap-2 text-sm text-muted-foreground">
+        <div className="bg-background/60 rounded-lg border p-3 sm:col-span-2">
+          <div className="text-muted-foreground flex items-center justify-between gap-2 text-sm">
             <div>
-              <MapPin className="size-4 inline mr-2" />
+              <MapPin className="mr-2 inline size-4" />
               Local
             </div>
             {localDesaparecimento && onAbrirMaps && (
               <Button
                 variant="outline"
                 size="sm"
-                className="h-7 px-2 text-xs ml-2"
+                className="ml-2 h-7 px-2 text-xs"
                 onClick={onAbrirMaps}
                 title="Abrir no Google Maps"
               >
@@ -88,29 +88,29 @@ export default function DetalhesDesaparecimento({
             {notInformed(localDesaparecimento)}
           </p>
         </div>
-        <div className="rounded-lg border bg-background/60 p-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="bg-background/60 rounded-lg border p-3">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <Info className="size-4" /> Observações
           </div>
           <p className="mt-1 font-medium">{notInformed(observacoes)}</p>
         </div>
-        <div className="rounded-lg border bg-background/60 p-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="bg-background/60 rounded-lg border p-3">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <Shirt className="size-4" /> Vestimentas
           </div>
           <p className="mt-1 font-medium">{notInformed(vestimentas)}</p>
         </div>
         {isLocalizado && (
           <>
-            <div className="rounded-lg border bg-background/60 p-3">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="bg-background/60 rounded-lg border p-3">
+              <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <Calendar className="size-4" />
                 Data da Localização
               </div>
               <p className="mt-1 font-medium">{formatDate(dataLocalizacao)}</p>
             </div>
-            <div className="rounded-lg border bg-background/60 p-3">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="bg-background/60 rounded-lg border p-3">
+              <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <User2 className="size-4" />
                 Condição
               </div>

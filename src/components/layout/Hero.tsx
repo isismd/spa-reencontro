@@ -1,6 +1,6 @@
+import HeroBanner from "@/assets/hero-banner.webp";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
-import HeroBanner from "@/assets/hero-banner.webp";
 
 type HeroProps = {
   desaparecidos?: number;
@@ -17,7 +17,7 @@ export default function Hero({
 }: HeroProps) {
   return (
     <section
-      className={`relative w-full h-80 sm:h-96 overflow-hidden rounded-2xl ${className}`}
+      className={`relative h-80 w-full overflow-hidden rounded-2xl sm:h-96 ${className}`}
       style={{
         backgroundImage: `url(${HeroBanner})`,
         backgroundPosition: "center",
@@ -26,16 +26,16 @@ export default function Hero({
       role="img"
       aria-label="Banner ilustrativo da plataforma Reencontro"
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 sm:via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent sm:via-black/30" />
       <div className="absolute inset-0 bg-black/10" />
 
       <div className="relative z-10 flex h-full w-full items-end">
-        <div className="w-full px-6 sm:px-8 pb-6 sm:pb-10 text-white space-y-4">
-          <h1 className="text-3xl md:text-4xl font-bold drop-shadow-sm">
+        <div className="w-full space-y-4 px-6 pb-6 text-white sm:px-8 sm:pb-10">
+          <h1 className="text-3xl font-bold drop-shadow-sm md:text-4xl">
             Sua ajuda pode fazer a diferença.
           </h1>
 
-          <p className="text-base md:text-lg font-light sm:max-w-3xl leading-relaxed text-white/95">
+          <p className="text-base leading-relaxed font-light text-white/95 sm:max-w-3xl md:text-lg">
             Use nossa plataforma para consultar registros de pessoas
             desaparecidas ou já localizadas. Qualquer informação pode{" "}
             <strong className="font-semibold">transformar a vida</strong> de uma
@@ -44,11 +44,11 @@ export default function Hero({
 
           <div className="flex flex-wrap gap-6 pt-1 text-base">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="size-5 text-primary" />
+              <AlertTriangle className="text-primary size-5" />
               <span className="text-white/90">
                 Desaparecidos:{" "}
                 {loading ? (
-                  <Skeleton className="w-10 h-4 inline-block align-middle" />
+                  <Skeleton className="inline-block h-4 w-10 align-middle" />
                 ) : (
                   <strong className="text-primary">{desaparecidos}</strong>
                 )}
@@ -60,7 +60,7 @@ export default function Hero({
               <span className="text-white/90">
                 Localizados:{" "}
                 {loading ? (
-                  <Skeleton className="w-10 h-4 inline-block align-middle" />
+                  <Skeleton className="inline-block h-4 w-10 align-middle" />
                 ) : (
                   <strong className="text-emerald-300">{encontrados}</strong>
                 )}

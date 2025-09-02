@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import PessoaGrid from "@/components/pessoa/PessoaGrid";
-import PessoaCardSkeleton from "@/components/pessoa/PessoaCardSkeleton";
-import PaginationControls from "@/components/pagination/PaginationControls";
-import { usePessoasStore } from "@/stores/pessoasStore";
 import Filters from "@/components/filters/Filter";
-import type { PessoasFiltro } from "@/interfaces/IPessoas";
 import Hero from "@/components/layout/Hero";
+import PaginationControls from "@/components/pagination/PaginationControls";
+import PessoaCardSkeleton from "@/components/pessoa/PessoaCardSkeleton";
+import PessoaGrid from "@/components/pessoa/PessoaGrid";
+import type { PessoasFiltro } from "@/interfaces/IPessoas";
+import { usePessoasStore } from "@/stores/pessoasStore";
+import { useEffect } from "react";
 
 export default function Home() {
   const {
@@ -46,10 +46,10 @@ export default function Home() {
         loading={loadingEstatistico}
       />
 
-      <h1 className="text-lg font-semibold my-0">
+      <h1 className="my-0 text-lg font-semibold">
         Juntos podemos Reencontrar.
       </h1>
-      <h2 className="text-sm md:text-base text-muted-foreground">
+      <h2 className="text-muted-foreground text-sm md:text-base">
         Cada detalhe conta. Utilize os filtros para refinar a pesquisa.
       </h2>
 

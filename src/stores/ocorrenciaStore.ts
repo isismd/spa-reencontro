@@ -1,9 +1,9 @@
-import { create } from "zustand";
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
 import {
   getInformacoesDesaparecido,
   postInformacaoDesaparecido,
 } from "@/services/ocorrenciaService";
+import { create } from "zustand";
 
 interface State {
   informacoes: InformacaoDesaparecidoDTO[];

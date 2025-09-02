@@ -1,6 +1,6 @@
+import EmptyState from "@/components/feedback/EmptyState";
 import PessoaCard from "@/components/pessoa/PessoaCard";
 import PessoaSkeleton from "@/components/pessoa/PessoaSkeleton";
-import EmptyState from "@/components/feedback/EmptyState";
 import { Button } from "../ui/button";
 
 type Props<T> = {
@@ -27,7 +27,7 @@ export default function PessoaGrid<T extends { id: number | string }>({
             <Button
               variant="outline"
               onClick={onRetry}
-              className="rounded-md border px-3 py-1 text-sm hover:bg-muted"
+              className="hover:bg-muted rounded-md border px-3 py-1 text-sm"
             >
               Tentar novamente
             </Button>

@@ -1,20 +1,20 @@
-import { useEffect, useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import { usePessoasStore } from "@/stores/pessoasStore";
-import { Separator } from "@/components/ui/separator";
-import DetalhesHeader from "@/components/detalhes/DetalhesHeader";
-import DetalhesSkeleton from "@/components/detalhes/DetalhesSkeleton";
-import { Button } from "@/components/ui/button";
-import DetalhesFoto from "@/components/detalhes/DetalhesFoto";
-import DetalhesInfoPessoal from "@/components/detalhes/DetalhesInfoPessoal";
 import DetalhesDesaparecimento from "@/components/detalhes/DetalhesDesaparecimento";
-import OcorrenciasTimeline from "@/components/ocorrencias/OcorrenciasTimeline";
-import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
-import AdicionarInformacoesCTA from "@/components/ocorrencias/AdicionarInformacoesCTA";
-import { ArrowLeft } from "lucide-react";
-import StatusPessoa from "@/components/status/StatusPessoa";
+import DetalhesFoto from "@/components/detalhes/DetalhesFoto";
+import DetalhesHeader from "@/components/detalhes/DetalhesHeader";
+import DetalhesInfoPessoal from "@/components/detalhes/DetalhesInfoPessoal";
+import DetalhesSkeleton from "@/components/detalhes/DetalhesSkeleton";
 import EmptyState from "@/components/feedback/EmptyState";
+import AdicionarInformacoesCTA from "@/components/ocorrencias/AdicionarInformacoesCTA";
+import OcorrenciasTimeline from "@/components/ocorrencias/OcorrenciasTimeline";
+import StatusPessoa from "@/components/status/StatusPessoa";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
+import { usePessoasStore } from "@/stores/pessoasStore";
+import { ArrowLeft } from "lucide-react";
+import { useEffect, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 function diffDays(fromIso?: string) {
   if (!fromIso) return null;
@@ -106,7 +106,7 @@ export default function Detalhes() {
           <Button
             variant="outline"
             onClick={() => navigate("/")}
-            className="rounded-md border px-3 py-1 text-sm hover:bg-muted"
+            className="hover:bg-muted rounded-md border px-3 py-1 text-sm"
           >
             Voltar para a página inicial
           </Button>

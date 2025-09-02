@@ -1,11 +1,11 @@
-import { useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, FileDown, Info, Paperclip } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/lib/utils";
+import { Calendar, FileDown, Info, Paperclip } from "lucide-react";
+import { useMemo } from "react";
 
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
 
@@ -40,7 +40,7 @@ export default function OcorrenciasTimeline({
           <div className="space-y-4">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="grid grid-cols-[auto_1fr] gap-3">
-                <div className="mt-1 h-3 w-3 rounded-full bg-muted" />
+                <div className="bg-muted mt-1 h-3 w-3 rounded-full" />
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-40" />
                   <Skeleton className="h-4 w-5/6" />
@@ -49,26 +49,26 @@ export default function OcorrenciasTimeline({
             ))}
           </div>
         ) : error ? (
-          <p className="text-sm text-destructive">Erro: {error}</p>
+          <p className="text-destructive text-sm">Erro: {error}</p>
         ) : itens.length === 0 ? (
-          <div className="flex items-center gap-2 rounded-md border p-3 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 rounded-md border p-3 text-sm">
             <Info className="size-4" />
             Nenhuma ocorrência registrada para este caso.
           </div>
         ) : (
           <div className="relative">
-            <div className="space-y-5 max-h-80 overflow-y-auto pr-2">
+            <div className="max-h-80 space-y-5 overflow-y-auto pr-2">
               {itens.map((it, i) => (
                 <div
                   key={it.id}
-                  className="grid grid-cols-[auto_1fr] gap-3 relative"
+                  className="relative grid grid-cols-[auto_1fr] gap-3"
                 >
-                  <div className="relative z-10 mt-1 size-3 rounded-full bg-primary ring-2 ring-background" />
+                  <div className="bg-primary ring-background relative z-10 mt-1 size-3 rounded-full ring-2" />
                   {i < itens.length - 1 && (
-                    <div className="absolute left-[6px] top-3 bottom-[-20px] w-0.5 bg-border" />
+                    <div className="bg-border absolute top-3 bottom-[-20px] left-[6px] w-0.5" />
                   )}
                   <div className="rounded-lg border p-3">
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs">
                       <span className="inline-flex items-center gap-1">
                         <Calendar className="size-3" />
                         {formatDate(it.data)}
@@ -86,7 +86,7 @@ export default function OcorrenciasTimeline({
                       <>
                         <Separator className="my-3" />
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                          <span className="text-muted-foreground inline-flex items-center gap-1 text-xs">
                             <Paperclip className="size-3" />
                             Anexos:
                           </span>

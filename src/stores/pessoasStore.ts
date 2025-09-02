@@ -1,10 +1,10 @@
-import { create } from "zustand";
 import type { PessoaDTO, PessoasFiltro } from "@/interfaces/IPessoas";
 import {
-  getPessoas,
   getEstatistico,
   getPessoaById,
+  getPessoas,
 } from "@/services/pessoasService";
+import { create } from "zustand";
 
 type State = {
   itens: PessoaDTO[];

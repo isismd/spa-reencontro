@@ -1,13 +1,13 @@
+import { Info, Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Moon, Sun, Info } from "lucide-react";
 import { Button } from "../ui/button";
-import { useTheme } from "./ThemeProvider";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { useTheme } from "./ThemeProvider";
 
 type HeaderProps = {
   title?: string;
@@ -27,14 +27,14 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-primary border-b-2 bg-background backdrop-blur shadow-md">
+    <header className="border-primary bg-background sticky top-0 z-50 w-full border-b-2 shadow-md backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
-          <div className="flex w-10 h-10 md:h-12 md:w-12 items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center md:h-12 md:w-12">
             <img src="/icon.png" alt="Logo" />
           </div>
           <div className="leading-tight">
-            <h1 className="md:text-xl text-base font-semibold">{title}</h1>
+            <h1 className="text-base font-semibold md:text-xl">{title}</h1>
             <h2 className="text-sm text-gray-500 dark:text-gray-400">
               {subtitle}
             </h2>

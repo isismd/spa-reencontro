@@ -1,7 +1,7 @@
+import type { PageResponse } from "@/interfaces/IPessoas";
+import { informacoes, pessoas } from "@/mocks/mockData";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import type { PageResponse } from "@/interfaces/IPessoas";
-import { pessoas, informacoes } from "@/mocks/mockData";
 
 const RESPONSE_DELAY = 800;
 const mock = new MockAdapter(axios, { delayResponse: RESPONSE_DELAY });

@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, useTheme } from "./components/layout/ThemeProvider";
-import { router } from "./routes";
 import { Toaster } from "./components/ui/sonner";
+import { router } from "./routes";
 
 function AppContent() {
   const { theme } = useTheme();

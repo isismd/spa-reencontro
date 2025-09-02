@@ -7,7 +7,7 @@ export default function DetalhesSkeleton() {
         <Skeleton className="h-6 w-6 rounded" />
         <Skeleton className="h-6 w-32" />
       </div>
-      <div className="h-10 w-1/2 mb-4">
+      <div className="mb-4 h-10 w-1/2">
         <Skeleton className="h-full w-full" />
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">

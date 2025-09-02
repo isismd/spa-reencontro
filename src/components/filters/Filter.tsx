@@ -1,7 +1,7 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -9,17 +9,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { FunnelPlus, FunnelX, Search } from "lucide-react";
-import { useState } from "react";
-import type { PessoasFiltro, Sexo } from "@/interfaces/IPessoas";
+import { Slider } from "@/components/ui/slider";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { PessoasFiltro, Sexo } from "@/interfaces/IPessoas";
+import { FunnelPlus, FunnelX, Search } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
   value: PessoasFiltro;

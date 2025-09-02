@@ -1,14 +1,14 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
-import { Suspense } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import PageFallback from "@/components/feedback/PageFallback";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import { Suspense } from "react";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 export default function RootLayout() {
   return (
-    <div className="flex min-h-dvh flex-col bg-background text-foreground">
+    <div className="bg-background text-foreground flex min-h-dvh flex-col">
       <Header />
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-6">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">
         <Suspense fallback={<PageFallback />}>
           <Outlet />
         </Suspense>

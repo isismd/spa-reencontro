@@ -1,11 +1,12 @@
+import { Label } from "@/components/ui/label";
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 import {
   Select,
@@ -14,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { usePaginationRange } from "@/hooks/usePaginationRange";
 
 type Props = {
@@ -45,9 +45,9 @@ export default function PaginationControls({
   const isNextDisabled = page + 1 >= totalPages;
 
   return (
-    <div className="flex flex-col gap-3 items-center sm:flex-row sm:justify-between">
+    <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
       <div className="flex items-center gap-2">
-        <Label htmlFor="per-page" className="whitespace-nowrap text-sm">
+        <Label htmlFor="per-page" className="text-sm whitespace-nowrap">
           Items por página
         </Label>
         <Select

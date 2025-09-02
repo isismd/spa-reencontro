@@ -28,10 +28,10 @@ export default function DetalhesInfoPessoal({
   return (
     <Card className="gap-0 py-2">
       <CardContent className="p-0">
-        <dl className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x">
+        <dl className="grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0">
           {rows.map(({ label, value }, i) => (
             <div key={i} className="p-4">
-              <dt className="flex items-center gap-2 text-sm text-muted-foreground">
+              <dt className="text-muted-foreground flex items-center gap-2 text-sm">
                 {label}
               </dt>
               <dd className="mt-1 font-medium">{value}</dd>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Share2, Download, Plus } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { Download, Plus, Share2 } from "lucide-react";
 
 interface DetalhesHeaderProps {
   nome?: string;
@@ -29,14 +29,14 @@ export default function DetalhesHeader({
         <h1 className="text-2xl font-semibold tracking-tight">
           {nome ?? "Detalhes da Pessoa"}
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           {id ? `Ocorrência #${String(id)}` : "—"} • Registrado em{" "}
           {formatDate(dtDesaparecimento)}
         </p>
       </div>
-      <div className="flex flex-col sm:flex-row items-center gap-2">
+      <div className="flex flex-col items-center gap-2 sm:flex-row">
         <Button
-          className="w-full sm:w-auto gap-2"
+          className="w-full gap-2 sm:w-auto"
           size="sm"
           variant="outline"
           onClick={onShare}
@@ -47,7 +47,7 @@ export default function DetalhesHeader({
         <Button
           size="sm"
           variant="outline"
-          className="w-full sm:w-auto gap-2"
+          className="w-full gap-2 sm:w-auto"
           onClick={onBaixarCartaz}
           disabled={!cartazUrl}
         >
@@ -56,7 +56,7 @@ export default function DetalhesHeader({
         </Button>
         {!isLocalizado && (
           <Button
-            className="w-full sm:w-auto gap-2"
+            className="w-full gap-2 sm:w-auto"
             size="sm"
             variant="default"
             onClick={onAddInfo}

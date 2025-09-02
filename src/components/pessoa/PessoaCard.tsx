@@ -1,15 +1,15 @@
-import { useState } from "react";
-import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import type { PessoaDTO } from "@/interfaces/IPessoas";
+import { capitalizeWords, formatDate } from "@/lib/utils";
 import {
+  CalendarCheck,
+  CalendarSearch,
   ImageOff,
   MapPin,
   User2,
-  CalendarSearch,
-  CalendarCheck,
 } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { capitalizeWords, formatDate } from "@/lib/utils";
 import { StatusBadge } from "../status/StatusBadge";
 
 interface PessoaCardProps {
@@ -23,21 +23,21 @@ export default function PessoaCard({ p }: PessoaCardProps) {
 
   return (
     <Link to={`/detalhes/${p.id}`}>
-      <Card className="relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition h-96 py-0 hover:scale-95">
+      <Card className="relative h-96 overflow-hidden rounded-2xl py-0 shadow-sm transition hover:scale-95 hover:shadow-lg">
         {hasFoto ? (
           <img
             src={p.urlFoto!}
             alt={p.nome ?? "Sem Nome"}
             loading="lazy"
-            className="w-full h-full object-cover object-center transition"
+            className="h-full w-full object-cover object-center transition"
             draggable={false}
             onError={() => {
               setErr(true);
             }}
           />
         ) : (
-          <div className="h-72 flex items-center justify-center">
-            <ImageOff className="w-16 h-16 opacity-20" />
+          <div className="flex h-72 items-center justify-center">
+            <ImageOff className="h-16 w-16 opacity-20" />
           </div>
         )}
 
@@ -53,12 +53,12 @@ export default function PessoaCard({ p }: PessoaCardProps) {
           </CardTitle>
 
           <div className="flex items-center gap-2 text-sm opacity-90">
-            <User2 className="w-4 h-4" />
+            <User2 className="h-4 w-4" />
             <span>{p.idade} anos</span>
           </div>
 
           <div className="flex items-center gap-2 text-sm opacity-90">
-            <MapPin className="w-4 h-4" />
+            <MapPin className="h-4 w-4" />
             <span>{p.ultimaOcorrencia?.localDesaparecimentoConcat ?? "—"}</span>
           </div>
 
@@ -66,12 +66,12 @@ export default function PessoaCard({ p }: PessoaCardProps) {
             <div className="flex items-center gap-2 text-sm opacity-90">
               {p.ultimaOcorrencia?.dataLocalizacao ? (
                 <>
-                  <CalendarCheck className="w-4 h-4" />
+                  <CalendarCheck className="h-4 w-4" />
                   Localizado em {formatDate(p.ultimaOcorrencia.dataLocalizacao)}
                 </>
               ) : (
                 <>
-                  <CalendarSearch className="w-4 h-4" />
+                  <CalendarSearch className="h-4 w-4" />
                   Desde {formatDate(p.ultimaOcorrencia.dtDesaparecimento)}
                 </>
               )}

@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
+import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 
 const Home = lazy(() => import("@/pages/Home"));

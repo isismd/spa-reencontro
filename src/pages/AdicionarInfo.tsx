@@ -1,31 +1,31 @@
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DatePicker } from "@/components/ui/date-picker";
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Send } from "lucide-react";
-import { DatePicker } from "@/components/ui/date-picker";
-import { usePessoasStore } from "@/stores/pessoasStore";
-import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
-import { formatYmdLocal, parseYmdToLocalDate } from "@/lib/utils";
 import {
   Dropzone,
   DropzoneContent,
   DropzoneEmptyState,
 } from "@/components/ui/shadcn-io/dropzone";
+import { Textarea } from "@/components/ui/textarea";
+import { formatYmdLocal, parseYmdToLocalDate } from "@/lib/utils";
+import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
+import { usePessoasStore } from "@/stores/pessoasStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, Send } from "lucide-react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { z } from "zod";
 
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
@@ -171,7 +171,7 @@ export default function AdicionarInfoPage() {
                         <DropzoneContent />
                       </Dropzone>
                     </FormControl>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-muted-foreground text-xs">
                       Você pode anexar arquivos de até 5MB cada.
                     </p>
                     <FormMessage />

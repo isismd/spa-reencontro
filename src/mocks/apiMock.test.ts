@@ -1,7 +1,7 @@
-import axios from "axios";
-import { describe, it, expect } from "vitest";
 import "@/mocks/apiMock";
 import { pessoas } from "@/mocks/mockData";
+import axios from "axios";
+import { describe, expect, it } from "vitest";
 
 describe("Mock API /v1", () => {
   it("GET /v1/pessoas/aberto/filtro retorna pessoas", async () => {
