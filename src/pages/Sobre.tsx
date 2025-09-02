@@ -2,11 +2,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
+  Bell,
   Database,
   ExternalLink,
+  FolderTree,
   HeartHandshake,
+  ImageIcon,
   Info,
+  Layers,
   Lightbulb,
+  ListTree,
+  MapPinned,
+  Moon,
+  Search,
+  ShieldCheck,
+  TestTubes,
 } from "lucide-react";
 
 export default function SobrePage() {
@@ -83,6 +93,84 @@ export default function SobrePage() {
         </CardContent>
       </Card>
 
+      <section aria-labelledby="funcionalidades-title" className="space-y-4">
+        <h2 id="funcionalidades-title" className="text-xl font-semibold">
+          Funcionalidades
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Feature
+            icon={<ImageIcon className="size-5" />}
+            title="Visualização de Cards"
+            desc="Cards com informações principais, foto e status para identificação rápida."
+          />
+          <Feature
+            icon={<Search className="size-5" />}
+            title="Busca Avançada"
+            desc="Busca por nome, filtros por sexo, faixa etária e status."
+          />
+          <Feature
+            icon={<ListTree className="size-5" />}
+            title="Paginação Dinâmica"
+            desc="Organização eficiente para muitos casos, com navegação simples."
+          />
+          <Feature
+            icon={<Layers className="size-5" />}
+            title="Detalhes Completos"
+            desc="Histórico, dados pessoais e anexos para análise aprofundada."
+          />
+          <Feature
+            icon={<MapPinned className="size-5" />}
+            title="Envio de Informações"
+            desc="Observações, local de avistamento e anexos por qualquer usuário."
+          />
+          <Feature
+            icon={<ShieldCheck className="size-5" />}
+            title="Design Responsivo"
+            desc="Acessível em diferentes dispositivos, com boas práticas de UX."
+          />
+        </div>
+      </section>
+
+      <section aria-labelledby="diferenciais-title" className="space-y-4">
+        <h2 id="diferenciais-title" className="text-xl font-semibold">
+          Diferenciais Implementados
+        </h2>
+        <Card>
+          <CardContent className="grid gap-6 p-6 sm:grid-cols-2">
+            <Differential
+              icon={<Moon className="size-4" />}
+              title="Tema Escuro Inteligente"
+              desc="Detecta preferência do sistema e permite alternância manual a qualquer momento."
+            />
+            <Differential
+              icon={<Bell className="size-4" />}
+              title="Toasts e Feedbacks"
+              desc="Notificações (sonner), skeletons e micro-animações elegantes."
+            />
+            <Differential
+              icon={<FolderTree className="size-4" />}
+              title="Arquitetura Modular"
+              desc="Stores (Zustand) isoladas e serviços HTTP tipados.."
+            />
+            <Differential
+              icon={<Database className="size-4" />}
+              title="API Mock Opcional"
+              desc="Fallback com dados fictícios via flag VITE_USE_MOCK=true quando necessário."
+            />
+            <Differential
+              icon={<TestTubes className="size-4" />}
+              title="Qualidade & Testes"
+              desc="Vitest e ESLint + Prettier"
+            />
+            <Differential
+              icon={<ShieldCheck className="size-4" />}
+              title="Acessibilidade"
+              desc="Textos alternativos, tooltips, e navegação consistente."
+            />
+          </CardContent>
+        </Card>
+      </section>
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -138,5 +226,53 @@ export default function SobrePage() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Feature({
+  icon,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <Card className="h-full">
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <span className="bg-primary/10 text-primary grid size-9 place-items-center rounded-lg">
+            {icon}
+          </span>
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground text-sm">{desc}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function Differential({
+  icon,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="bg-muted text-foreground mt-0.5 grid size-8 place-items-center rounded-md">
+        {icon}
+      </span>
+      <div>
+        <p className="leading-none font-medium">{title}</p>
+        <p className="text-muted-foreground mt-1 text-sm">{desc}</p>
+      </div>
+    </div>
   );
 }
