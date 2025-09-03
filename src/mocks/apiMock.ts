@@ -39,7 +39,6 @@ mock.onGet(/\/v1\/pessoas\/aberto\/filtro/).reply((config) => {
   const nome = (params["nome"] ?? "").toLowerCase();
   const sexo = params["sexo"] as "MASCULINO" | "FEMININO" | null;
   const status = params["status"] as "DESAPARECIDO" | "LOCALIZADO" | null;
-  const vivo = params["vivo"];
   const faixaIdadeInicial = Number(params["faixaIdadeInicial"] ?? 0);
   const faixaIdadeFinal = Number(params["faixaIdadeFinal"] ?? 0);
   const page = Number(params["pagina"] ?? 0);
@@ -54,9 +53,6 @@ mock.onGet(/\/v1\/pessoas\/aberto\/filtro/).reply((config) => {
         ? p.ultimaOcorrencia && !p.ultimaOcorrencia.dataLocalizacao
         : p.ultimaOcorrencia && p.ultimaOcorrencia.dataLocalizacao,
     );
-  }
-  if (vivo !== null && vivo !== undefined && vivo !== "") {
-    result = result.filter((p) => p.vivo === vivo);
   }
   if (faixaIdadeInicial > 0) {
     result = result.filter((p) => p.idade >= faixaIdadeInicial);

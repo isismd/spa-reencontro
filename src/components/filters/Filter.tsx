@@ -35,7 +35,6 @@ export default function Filters({ value, onChange }: Props) {
   const [range, setRange] = useState<[number, number]>(DEFAULT_RANGE);
   const [status, setStatus] = useState<PessoasFiltro["status"]>(value.status);
   const [sexo, setSexo] = useState<Sexo | undefined>(value.sexo);
-  const [vivo, setVivo] = useState<PessoasFiltro["vivo"]>(value.vivo);
 
   function applySearch() {
     onChange({
@@ -43,7 +42,6 @@ export default function Filters({ value, onChange }: Props) {
       nome: searchText || undefined,
       status,
       sexo,
-      vivo,
       faixaIdadeInicial: range[0] > 0 ? range[0] : undefined,
       faixaIdadeFinal: range[1] < IDADE_MAX ? range[1] : undefined,
       pagina: 0,
@@ -55,7 +53,6 @@ export default function Filters({ value, onChange }: Props) {
       ...value,
       status,
       sexo,
-      vivo,
       faixaIdadeInicial: range[0] > 0 ? range[0] : undefined,
       faixaIdadeFinal: range[1] < IDADE_MAX ? range[1] : undefined,
       pagina: 0,
@@ -66,12 +63,10 @@ export default function Filters({ value, onChange }: Props) {
     setRange(DEFAULT_RANGE);
     setStatus(undefined);
     setSexo(undefined);
-    setVivo(undefined);
     onChange({
       ...value,
       status: undefined,
       sexo: undefined,
-      vivo: undefined,
       faixaIdadeInicial: undefined,
       faixaIdadeFinal: undefined,
       pagina: 0,
@@ -125,7 +120,7 @@ export default function Filters({ value, onChange }: Props) {
 
       <Collapsible open={openAdv} onOpenChange={setOpenAdv}>
         <CollapsibleContent className="mt-3 space-y-6 rounded-xl border p-4">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div>
               <Label className="mb-2 block">Status</Label>
               <Select
@@ -158,24 +153,6 @@ export default function Filters({ value, onChange }: Props) {
                 <SelectContent>
                   <SelectItem value="MASCULINO">Masculino</SelectItem>
                   <SelectItem value="FEMININO">Feminino</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <Label className="mb-2 block">Condição</Label>
-              <Select
-                value={typeof vivo === "boolean" ? String(vivo) : ""}
-                onValueChange={(v) =>
-                  setVivo(v === "" ? undefined : v === "true")
-                }
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecionar…" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="true">Vivo</SelectItem>
-                  <SelectItem value="false">Óbito</SelectItem>
                 </SelectContent>
               </Select>
             </div>

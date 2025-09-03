@@ -66,7 +66,6 @@ export interface PessoasFiltro {
   pagina?: number;
   porPagina?: number;
   sexo?: Sexo;
-  vivo?: boolean;
   nome?: string;
   status?: "DESAPARECIDO" | "LOCALIZADO";
 }
