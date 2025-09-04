@@ -10,9 +10,10 @@
   <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=fff" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=fff" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=fff" /></a>
-  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/State-Zustand-000" /></a>
   <a href="https://prettier.io/"><img src="https://img.shields.io/badge/Code%20Style-Prettier-ff69b4?logo=prettier" /></a>
   <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Tested%20with-Vitest-6E9F18?logo=vitest&logoColor=fff" /></a>
+  <a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/shadcn/ui-000?logo=radix-ui&logoColor=fff" /></a>
+  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/Zustand-764abc?logo=zustand&logoColor=fff" /></a>
 </p>
 
 <img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.webp" alt="Demonstração do sistema" width="400"/>
@@ -33,11 +34,11 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 - [🗃️ Dados de Inscrição](#%EF%B8%8F-dados-de-inscrição)
 - [🔮 Funcionalidades](#-funcionalidades)
-- [🔍 Stack](#-stack)
 - [💻 Rodando o Projeto](#-rodando-o-projeto)
 - [🏗️ Configurações de Ambiente](#%EF%B8%8F-configura%C3%A7%C3%B5es-de-ambiente)
 - [👩‍🎨 Identidade Visual](#-identidade-visual)
 - [🧪 Testes](#-testes)
+- [🔍 Stack](#-stack)
 
 ## 🗃️ Dados de Inscrição
 
@@ -80,25 +81,6 @@ Além dos requisitos previstos, o projeto inclui:
 - Estado global leve com Zustand, organizado em stores independentes
 - Integração de animações sutis com `tw-animate-css`
 - Garantia de qualidade de código Prettier
-
-## 🔍 Stack
-
-O projeto utiliza as seguintes stacks e principais dependências:
-
-- **React 19**
-- **Vite 7**
-- **TypeScript 5**
-- **Tailwind CSS 4**
-- **shadcn/ui** (componentes de UI)
-- **Zustand** (gerenciamento de estado)
-- **React Hook Form** (formulários)
-- **React Router DOM** (rotas)
-- **Sonner** (notificações/toasts)
-- **Axios** (requisições HTTP)
-- **Vitest** (testes)
-- **ESLint + Prettier** (padrões de código)
-- **Zod** (validação de dados)
-- **Boxen, Chalk, Figlet, Inquirer** (CLI interativo)
 
 ## 💻 Rodando o Projeto
 
@@ -225,6 +207,22 @@ npm run test
 ```
 
 Os resultados dos testes são exibidos no terminal.
+
+## 🔍 Stack
+
+O projeto utiliza as seguintes stacks e principais dependências:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" width="60" alt="React"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg" width="60" alt="Vite"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" width="60" alt="TypeScript"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" width="60" alt="Tailwind"/>
+  <img src="https://raw.githubusercontent.com/shadcn/ui/main/apps/www/public/favicon.ico" width="60" alt="shadcn/ui"/>
+  <img src="https://raw.githubusercontent.com/github/explore/990a9efe0b9529eca38ca9e081bc7a97b18dff45/topics/zustand/zustand.png" width="60" alt="Zustand"/>
+  <img src="https://react-hook-form.com/images/logo/react-hook-form-logo-only.png" width="60" alt="React Hook Form"/>
+  <img src="https://www.svgrepo.com/show/354262/react-router.svg" width="60" alt="React Router"/>
+  <img src="https://vitest.dev/logo.svg" width="60" alt="Vitest"/>
+</p>
 
 ---
 
