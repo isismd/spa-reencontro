@@ -8,6 +8,7 @@ import { Calendar, FileDown, Info, Paperclip } from "lucide-react";
 import { useMemo } from "react";
 
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
+import { ScrollArea } from "../ui/scroll-area";
 
 type Props = {
   informacoes: InformacaoDesaparecidoDTO[];
@@ -57,65 +58,67 @@ export default function OcorrenciasTimeline({
           </div>
         ) : (
           <div className="relative">
-            <div className="max-h-80 space-y-5 overflow-y-auto pr-2">
-              {itens.map((it, i) => (
-                <div
-                  key={it.id}
-                  className="relative grid grid-cols-[auto_1fr] gap-3"
-                >
-                  <div className="bg-primary ring-background relative z-10 mt-1 size-3 rounded-full ring-2" />
-                  {i < itens.length - 1 && (
-                    <div className="bg-border absolute top-3 bottom-[-20px] left-[6px] w-0.5" />
-                  )}
-                  <div className="rounded-lg border p-3">
-                    <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs">
-                      <span className="inline-flex items-center gap-1">
-                        <Calendar className="size-3" />
-                        {formatDate(it.data)}
-                      </span>
-                      <Badge variant="outline" className="ml-1">
-                        #{String(it.id).padStart(4, "0")}
-                      </Badge>
-                    </div>
-
-                    <p className="mt-2 text-sm leading-relaxed">
-                      {it.informacao}
-                    </p>
-
-                    {Array.isArray(it.anexos) && it.anexos.length > 0 && (
-                      <>
-                        <Separator className="my-3" />
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-muted-foreground inline-flex items-center gap-1 text-xs">
-                            <Paperclip className="size-3" />
-                            Anexos:
-                          </span>
-                          {it.anexos.map((url: any, idx: number) => (
-                            <Button
-                              key={idx}
-                              variant="outline"
-                              size="sm"
-                              className="h-7 gap-1"
-                              onClick={() =>
-                                url &&
-                                window.open(
-                                  url,
-                                  "_blank",
-                                  "noopener,noreferrer",
-                                )
-                              }
-                            >
-                              <FileDown className="size-3" />
-                              {`Arquivo ${idx + 1}`}
-                            </Button>
-                          ))}
-                        </div>
-                      </>
+            <ScrollArea>
+              <div className="mr-2 max-h-80 space-y-5 pr-2">
+                {itens.map((it, i) => (
+                  <div
+                    key={it.id}
+                    className="relative grid grid-cols-[auto_1fr] gap-3"
+                  >
+                    <div className="bg-primary ring-background relative z-10 mt-1 size-3 rounded-full ring-2" />
+                    {i < itens.length - 1 && (
+                      <div className="bg-border absolute top-3 bottom-[-20px] left-[6px] w-0.5" />
                     )}
+                    <div className="rounded-lg border p-3">
+                      <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs">
+                        <span className="inline-flex items-center gap-1">
+                          <Calendar className="size-3" />
+                          {formatDate(it.data)}
+                        </span>
+                        <Badge variant="outline" className="ml-1">
+                          #{String(it.id).padStart(4, "0")}
+                        </Badge>
+                      </div>
+
+                      <p className="mt-2 text-sm leading-relaxed">
+                        {it.informacao}
+                      </p>
+
+                      {Array.isArray(it.anexos) && it.anexos.length > 0 && (
+                        <>
+                          <Separator className="my-3" />
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-muted-foreground inline-flex items-center gap-1 text-xs">
+                              <Paperclip className="size-3" />
+                              Anexos:
+                            </span>
+                            {it.anexos.map((url: any, idx: number) => (
+                              <Button
+                                key={idx}
+                                variant="outline"
+                                size="sm"
+                                className="h-7 gap-1"
+                                onClick={() =>
+                                  url &&
+                                  window.open(
+                                    url,
+                                    "_blank",
+                                    "noopener,noreferrer",
+                                  )
+                                }
+                              >
+                                <FileDown className="size-3" />
+                                {`Arquivo ${idx + 1}`}
+                              </Button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </ScrollArea>
           </div>
         )}
       </CardContent>
