@@ -1,5 +1,6 @@
 import { Info, Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../hooks/ThemeProvider";
 import { Button } from "../ui/button";
 import {
   Tooltip,
@@ -7,7 +8,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { useTheme } from "./ThemeProvider";
 
 type HeaderProps = {
   title?: string;
@@ -17,7 +17,7 @@ type HeaderProps = {
 
 export default function Header({
   title = "Reencontro",
-  subtitle = "Sistema de busca de pessoas desaparecidas",
+  subtitle = "Sistema da PJC-MT para busca de pessoas desaparecidas",
 }: HeaderProps) {
   const { setTheme } = useTheme();
 

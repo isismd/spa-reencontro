@@ -12,10 +12,10 @@ export default function AdicionarInformacoesCTA({
 }: Props) {
   return (
     <div
-      className={`border-destructive/30 bg-destructive/5 rounded-2xl border p-5 shadow-sm ring-red-200 ${className ?? ""}`}
+      className={`border-amber/30 rounded-2xl border bg-amber-50 p-5 shadow-sm ring-amber-200 dark:bg-amber-500/10 ${className ?? ""}`}
     >
       <div className="flex items-start gap-4">
-        <div className="grid size-12 place-items-center rounded-xl bg-red-500/10 text-red-600 dark:text-red-300">
+        <div className="grid size-12 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-300">
           <HeartHandshake className="size-6" />
         </div>
         <div className="flex-1 space-y-1">
