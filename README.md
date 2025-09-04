@@ -51,37 +51,35 @@ O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de 
 
 ### Funcionalidades Principais
 
-- Visualização de cards com informações principais, foto e status (Desaparecida/Localizada), permitindo identificação rápida dos casos.
-- Busca nome e filtros avançados por sexo, faixa etária e status, tornando fácil encontrar registros específicos.
-- Paginação dinâmica para melhor organização, mesmo com muitos casos.
-- Página de detalhes completa, com histórico, dados pessoais e anexos enviados, útil para análise aprofundada e colaboração.
-- Envio de informações adicionais (observações, localização, anexos) por qualquer usuário, incentivando a participação ativa.
-- Validação do formulário da tela adicionar informações com react-hook-form + zod.
-- Destaque visual do status com cores e ícones, além de feedbacks modernos (skeleton loaders, toasts).
-- Rotas com lazy loading.
-- Design responsivo e acessível, adaptado para diferentes dispositivos.
-- Empacotamento da aplicação em container Docker
+- Cards informativos com foto, nome e status (Desaparecida/Localizada) para identificação rápida.
+- Busca por nome e filtros combináveis (sexo, faixa etária e status) para localizar casos específicos.
+- Paginação dinâmica com controle de itens por página, mantendo a navegação fluida mesmo com muitos registros.
+- Página de detalhes completa: histórico, dados pessoais e anexos enviados, útil para análise aprofundada e colaboração.
+- Envio de informações adicionais (observações, localização e anexos) aberto a qualquer usuário.
+- Validação no formulário de adicionar informações (React Hook Form + Zod).
+- Feedbacks modernos: skeleton loaders e toasts para estados de carregamento, sucesso e erro.
+- Rotas com lazy loading para otimizar carregamento e experiência.
+- Design responsivo e acessível (labels/ARIA, foco visível, contraste adequado).
+- Distribuição em Docker, facilitando a execução em qualquer ambiente
 
 ### Diferenciais Implementados
 
 Além dos requisitos previstos, o projeto inclui:
 
-- Design do sistema pensado para acolher famílias que possuem um ente querido desaparecido, transmitindo empatia e esperança.
-- Tema escuro (Dark Mode) com detecção automática da preferência do sistema, mas permitindo que o usuário alterne manualmente entre claro/escuro a qualquer momento.
-- Página "Sobre" explicando o projeto.
-- Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento.
-- Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
-- Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
-- Validação com reCAPTCHA v2 no formulário de adicionar informações.
-- Botão para download do Cartaz e botão para compartilhamento do link da página de detalhes.
-- Botão para abrir o Local de Desaparecimento no Google Maps.
-- Usuário pode escolher quantos itens deseja por página, evitando ter que clicar várias vezes no botão de paginação.
-- Escolha interativa no terminal para API ou MOCK e uso do reCAPTCHA.
-- Testes de unidade com Vitest, incluindo runner interativo (npm run test:ui).
-- Toasts com sonner (inclui integração com o tema claro ou escuro).
-- Animações sutis com tw-animate-css.
-- Gerenciamento de estado global leve com Zustand, organizado em stores independentes.
-- ESLint + Prettier.
+- Escolha de stack moderna: React 19 + Vite 7 + TypeScript 5 + Tailwind 4 + shadcn/ui
+- Design pensado para transmitir empatia e esperança às famílias de desaparecidos
+- Tema escuro inteligente que detecta a preferência do sistema e permite alternância manual
+- Página “Sobre” explicando o projeto e seus objetivos
+- Tooltips em botões de ícone para garantir entendimento rápido
+- Terminal customizado no `npm run dev` com mensagens estilizadas (chalk e boxen)
+- Possibilidade de ativar API Mock em caso de instabilidade da API oficial
+- Mock completo da API, incluindo filtros, paginação e estatísticas
+- Validação com reCAPTCHA v2 no formulário de envio de informações (com chave de teste em desenvolvimento)
+- Ações rápidas na página de detalhes, incluindo abrir local do desaparecimento no Google Maps, baixar cartaz e compartilhar o link da página
+- Testes de unidade com Vitest, incluindo runner visual (`npm run test:ui`)
+- Estado global leve com Zustand, organizado em stores independentes
+- Integração de animações sutis com `tw-animate-css`
+- Garantia de qualidade de código Prettier
 
 ## 🔍 Stack
 
