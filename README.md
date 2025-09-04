@@ -32,12 +32,12 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 ## Sumário
 
 - [🗃️ Dados de Inscrição](#%EF%B8%8F-dados-de-inscrição)
-- [🔮 Funcionalidades](#%EF%B8%8F-dados-de-inscrição)
-- [🔍 Stack](#%EF%B8%8F-dados-de-inscrição)
-- [💻 Rodando o Projeto](#%EF%B8%8F-dados-de-inscrição)
+- [🔮 Funcionalidades](#-funcionalidades)
+- [🔍 Stack](#-stack)
+- [💻 Rodando o Projeto](#-rodando-o-projeto)
 - [🏗️ Configurações de Ambiente](#%EF%B8%8F-configura%C3%A7%C3%B5es-de-ambiente)
-- [👩‍🎨 Identidade Visual](#%EF%B8%8F-dados-de-inscrição)
-- [🧪 Testes](#%EF%B8%8F-dados-de-inscrição)
+- [👩‍🎨 Identidade Visual](#-identidade-visual)
+- [🧪 Testes](#-testes)
 
 ## 🗃️ Dados de Inscrição
 
