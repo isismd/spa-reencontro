@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { ThemeProvider, useTheme } from "./components/layout/ThemeProvider";
+import { ThemeProvider, useTheme } from "./hooks/ThemeProvider";
 import { Toaster } from "./components/ui/sonner";
 import { router } from "./routes";
 
