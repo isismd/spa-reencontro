@@ -22,11 +22,11 @@ import { usePessoasStore } from "@/stores/pessoasStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Send } from "lucide-react";
 import { useEffect, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
-import ReCAPTCHA from "react-google-recaptcha";
 
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
