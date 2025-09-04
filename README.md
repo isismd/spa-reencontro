@@ -29,22 +29,22 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 <br clear="right"/>
 
-## 🧭 Sumário
+## Sumário
 
-- [👩‍💼 Dados de Inscrição](#-dados-de-inscrição)
-- [✨ Funcionalidades](#funcionalidades)
-- [🧱 Stack](#stack)
-- [⚙️ Rodando o Projeto](#rodando-projeto)
-- [🎨 Identidade Visual](#identidade-visual)
-- [🗂️ Estrutura de Pastas](#️-estrutura-de-pastas)
+- [Dados de Inscrição](#-dados-de-inscrição)
+- [Funcionalidades](#funcionalidades)
+- [Stack](#stack)
+- [Rodando o Projeto](#rodando-projeto)
+- [Identidade Visual](#identidade-visual)
+- [Estrutura de Pastas](#️-estrutura-de-pastas)
 
-<h2 id="dados-de-inscricao">👩‍💼 Dados de Inscrição</h2>
+<h2 id="dados-de-inscricao">Dados de Inscrição</h2>
 
 - **Nome:** Isis Milena Daron
 - **Telefone:** (65) 98119-0823
 - **E-mail:** contato.isisdaron@gmail.com
 
-<h2 id="funcionalidades">✨ Funcionalidades</h2>
+<h2 id="funcionalidades">Funcionalidades</h2>
 
 O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas.
 
@@ -78,7 +78,7 @@ Além dos requisitos previstos, o projeto inclui:
 - Gerenciamento de estado global leve com Zustand, organizado em stores independentes.
 - Qualidade contínua: ESLint + Prettier.
 
-<h2 id="stack">🧱 Stack</h2>
+<h2 id="stack">Stack</h2>
 
 O projeto utiliza as seguintes stacks e principais dependências:
 
@@ -97,7 +97,7 @@ O projeto utiliza as seguintes stacks e principais dependências:
 - **Zod** (validação de dados)
 - **Boxen, Chalk, Figlet, Inquirer** (CLI interativo)
 
-<h2 id="rodando-projeto">⚙️ Rodando o Projeto</h2>
+<h2 id="rodando-projeto">Rodando o Projeto</h2>
 
 Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.
 
@@ -173,7 +173,7 @@ VITE_USE_MOCK=false
 > Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
 > Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
 
-<h2 id="identidade-visual">🎨 Identidade Visual</h2>
+<h2 id="identidade-visual">Identidade Visual</h2>
 
 O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
 
@@ -199,7 +199,7 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
 
 Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
-<h2 id="testes">🧪 Testes</h2>
+<h2 id="testes">Testes</h2>
 
 Os testes automatizados utilizam **Vitest** e cobrem:
 
@@ -217,7 +217,7 @@ npm run test
 
 Os resultados dos testes são exibidos no terminal e também geram relatórios de cobertura em `/coverage`.
 
-<h2 id="estrutura-de-pastas">🗂️ Estrutura de Pastas</h2>
+<h2 id="estrutura-de-pastas">Estrutura de Pastas</h2>
 
 O projeto está organizado para facilitar o desenvolvimento, manutenção e escalabilidade. Os principais diretórios e arquivos têm funções bem definidas:
 
