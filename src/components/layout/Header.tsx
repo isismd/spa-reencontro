@@ -1,5 +1,6 @@
 import { Info, Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../../hooks/ThemeProvider";
 import { Button } from "../ui/button";
 import {
   Tooltip,
@@ -7,7 +8,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import { useTheme } from "../../hooks/ThemeProvider";
 
 type HeaderProps = {
   title?: string;
@@ -17,7 +17,7 @@ type HeaderProps = {
 
 export default function Header({
   title = "Reencontro",
-  subtitle = "Sistema de busca de pessoas desaparecidas",
+  subtitle = "Sistema da PJC-MT para busca de pessoas desaparecidas",
 }: HeaderProps) {
   const { setTheme } = useTheme();
 
@@ -28,23 +28,20 @@ export default function Header({
 
   return (
     <header className="border-primary bg-background sticky top-0 z-50 w-full border-b-2 shadow-md backdrop-blur">
-      <div className="relative mx-auto grid max-w-7xl grid-cols-[auto_auto] items-center gap-3 px-4 py-2 md:grid-cols-[auto_1fr_auto]">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
-          <div className="flex items-center justify-center">
-            <img
-              src="/logo-dark.png"
-              alt="Logo"
-              className="block w-52 md:w-72 dark:hidden"
-            />
-            <img
-              src="/logo-light.png"
-              alt="Logo"
-              className="hidden w-52 md:w-72 dark:block"
-            />
+          <div className="flex h-10 w-10 items-center justify-center md:h-12 md:w-12">
+            <img src="/icon.png" alt="Logo" />
+          </div>
+          <div className="leading-tight">
+            <h1 className="text-base font-semibold md:text-xl">{title}</h1>
+            <h2 className="text-sm text-gray-500 dark:text-gray-400">
+              {subtitle}
+            </h2>
           </div>
         </Link>
 
-        <div className="flex items-center gap-2 justify-self-end md:z-10">
+        <div className="flex items-center gap-2">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -85,13 +82,6 @@ export default function Header({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        </div>
-
-        <div className="col-span-2 row-start-2 text-center leading-tight md:pointer-events-none md:absolute md:top-1/2 md:left-1/2 md:col-auto md:row-auto md:w-max md:-translate-x-1/2 md:-translate-y-1/2 md:px-3">
-          <h1 className="text-lg font-semibold md:text-2xl">{title}</h1>
-          <h2 className="text-sm text-gray-500 dark:text-gray-400">
-            {subtitle}
-          </h2>
         </div>
       </div>
     </header>

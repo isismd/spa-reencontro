@@ -44,13 +44,13 @@ export default function Hero({
 
           <div className="flex flex-wrap gap-6 pt-1 text-base">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="text-primary size-5" />
+              <AlertTriangle className="text-destructive size-5" />
               <span className="text-white/90">
                 Desaparecidos:{" "}
                 {loading ? (
                   <Skeleton className="inline-block h-4 w-10 align-middle" />
                 ) : (
-                  <strong className="text-primary">{desaparecidos}</strong>
+                  <strong className="text-destructive">{desaparecidos}</strong>
                 )}
               </span>
             </div>
