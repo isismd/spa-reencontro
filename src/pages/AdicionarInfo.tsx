@@ -21,19 +21,23 @@ import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import { usePessoasStore } from "@/stores/pessoasStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Send } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const { pessoaSelecionada: p, fetchById } = usePessoasStore();
-
   const { postInformacao } = useOcorrenciaStore();
+
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined;
+  const enabled = (import.meta.env.VITE_RECAPTCHA_ENABLED ?? "true") === "true";
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -48,6 +52,7 @@ export default function AdicionarInfoPage() {
       descricao: "",
       data: formatYmdLocal(new Date()),
       files: [],
+      recaptchaToken: "",
     },
   });
 
@@ -70,10 +75,16 @@ export default function AdicionarInfoPage() {
         descricao: values.descricao.trim(),
         files: values.files,
       });
+
       toast.success("Informação enviada. Obrigado por ajudar!");
+      recaptchaRef.current?.reset();
+      form.setValue("recaptchaToken", "");
+
       navigate(`/detalhes/${id}`);
     } catch (e: any) {
       toast.error(e?.message ?? "Erro ao enviar informação.");
+      recaptchaRef.current?.reset();
+      form.setValue("recaptchaToken", "");
     }
   }
 
@@ -179,6 +190,28 @@ export default function AdicionarInfoPage() {
                 )}
               />
 
+              {enabled && siteKey ? (
+                <FormField
+                  control={form.control}
+                  name="recaptchaToken"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex justify-end">
+                          <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={siteKey}
+                            onChange={(token) => field.onChange(token ?? "")}
+                            onExpired={() => field.onChange("")}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ) : null}
+
               <div className="flex justify-end gap-2">
                 <Button
                   type="button"
@@ -230,6 +263,7 @@ const schema = z.object({
       "Cada arquivo até 5MB",
     )
     .optional(),
+  recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
 });
 
 type FormData = z.infer<typeof schema>;

@@ -71,6 +71,7 @@ Além dos requisitos previstos, o projeto inclui:
 - Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento.
 - Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
 - Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
+- reCAPTCHA no formulário de adicionar informações.
 - Escolha interativa API/Mock: Prompt no terminal com inquirer + suporte a flag de ambiente (VITE_USE_MOCK=true|false).
 - Testes de unidade com Vitest, incluindo runner interativo (npm run test:ui).
 - Toasts com sonner (inclui integração com o tema claro ou escuro).
@@ -127,7 +128,8 @@ npm run dev
 ```
 
 - Ao rodar `npm run dev`, será perguntado se deseja usar a API oficial ou dados fictícios (mock).
-- Sua escolha será salva no arquivo `.env.local`.
+- Também será perguntado se você deseja ativar o reCAPTCHA no formulário.
+- Suas escolhas serão salvas no arquivo `.env.local`.
 
 3. Acesse a aplicação em [http://localhost:5173](http://localhost:5173).
 
@@ -142,7 +144,7 @@ npm run dev
    docker compose up --build
    ```
 
-   - Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
+   - ⚠️ Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
      - **PowerShell (Windows):**
        ```powershell
        $env:VITE_USE_MOCK="true"; docker compose up --build
@@ -156,8 +158,9 @@ npm run dev
 
 ### 3. Sobre as Configurações de Ambiente
 
-O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.  
-Não se preocupe: não é necessário criar manualmente um arquivo `.env.local`, pois esse processo já está **automatizado**, mesmo ao rodar o projeto localmente com NPM. 😉
+O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.
+
+Essas variáveis podem ser definidas em um arquivo `.env.local` (gerado automaticamente pelo script interativo ao rodar `npm run dev`) ou passadas via docker-compose.yml durante o build.
 
 ```bash
 # URL da API oficial
@@ -167,6 +170,13 @@ VITE_API_BASE_URL=https://abitus-api.geia.vip
 # true  = usar mock de dados fictícios
 # false = usar API oficial
 VITE_USE_MOCK=false
+
+# reCAPTCHA (usado na tela de envio de informações)
+# Em desenvolvimento é utilizado a test key oficial do Google
+VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+
+# Ativa ou desativa o reCAPTCHA (útil para rodar localmente sem precisar do widget)
+VITE_RECAPTCHA_ENABLED=true
 ```
 
 > [!WARNING]

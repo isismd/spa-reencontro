@@ -34,20 +34,33 @@ console.log(
 );
 
 async function setupEnv() {
-    const { choice } = await inquirer.prompt([
+    const { choice, recaptcha } = await inquirer.prompt([
         {
             type: "list",
             name: "choice",
             message: "Deseja usar a API oficial ou os dados fictícios (mock)?",
             choices: ["API Oficial", "Mock (dados fictícios)"],
         },
+        {
+            type: "confirm",
+            name: "recaptcha",
+            message: "Ativar reCAPTCHA no ambiente local?",
+            default: true,
+        },
     ]);
 
     const envContent =
         choice === "API Oficial"
-            ? `VITE_API_BASE_URL=https://abitus-api.geia.vip\nVITE_USE_MOCK=false\n`
-            : `VITE_API_BASE_URL=https://abitus-api.geia.vip\nVITE_USE_MOCK=true\n`;
-
+            ? `VITE_API_BASE_URL=https://abitus-api.geia.vip
+        VITE_USE_MOCK=false
+        VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+        VITE_RECAPTCHA_ENABLED=${recaptcha ? "true" : "false"}
+        `
+            : `VITE_API_BASE_URL=https://abitus-api.geia.vip
+        VITE_USE_MOCK=true
+        VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+        VITE_RECAPTCHA_ENABLED=${recaptcha ? "true" : "false"}
+`;
     fs.writeFileSync(".env.local", envContent + "\n");
     console.log(`Configuração salva em .env.local: ${choice}`);
 }
