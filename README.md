@@ -31,20 +31,21 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 ## Sumário
 
-- [Dados de Inscrição](#-dados-de-inscrição)
-- [Funcionalidades](#funcionalidades)
-- [Stack](#stack)
-- [Rodando o Projeto](#rodando-projeto)
-- [Identidade Visual](#identidade-visual)
-- [Estrutura de Pastas](#️-estrutura-de-pastas)
+- [🗃️ Dados de Inscrição](#%EF%B8%8F-dados-de-inscrição)
+- [🔮 Funcionalidades](#%EF%B8%8F-dados-de-inscrição)
+- [🔍 Stack](#%EF%B8%8F-dados-de-inscrição)
+- [💻 Rodando o Projeto](#%EF%B8%8F-dados-de-inscrição)
+- [🏗️ Configurações de Ambiente](#%EF%B8%8F-configura%C3%A7%C3%B5es-de-ambiente)
+- [👩‍🎨 Identidade Visual](#%EF%B8%8F-dados-de-inscrição)
+- [🧪 Testes](#%EF%B8%8F-dados-de-inscrição)
 
-<h2 id="dados-de-inscricao">Dados de Inscrição</h2>
+## 🗃️ Dados de Inscrição
 
 - **Nome:** Isis Milena Daron
 - **Telefone:** (65) 98119-0823
 - **E-mail:** contato.isisdaron@gmail.com
 
-<h2 id="funcionalidades">Funcionalidades</h2>
+## 🔮 Funcionalidades
 
 O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas.
 
@@ -71,15 +72,18 @@ Além dos requisitos previstos, o projeto inclui:
 - Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento.
 - Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
 - Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
-- reCAPTCHA no formulário de adicionar informações.
-- Escolha interativa API/Mock: Prompt no terminal com inquirer + suporte a flag de ambiente (VITE_USE_MOCK=true|false).
+- Validação com reCAPTCHA v2 no formulário de adicionar informações.
+- Botão para download do Cartaz e botão para compartilhamento do link da página de detalhes.
+- Botão para abrir o Local de Desaparecimento no Google Maps.
+- Usuário pode escolher quantos itens deseja por página, evitando ter que clicar várias vezes no botão de paginação.
+- Escolha interativa no terminal para API ou MOCK e uso do reCAPTCHA.
 - Testes de unidade com Vitest, incluindo runner interativo (npm run test:ui).
 - Toasts com sonner (inclui integração com o tema claro ou escuro).
 - Animações sutis com tw-animate-css.
 - Gerenciamento de estado global leve com Zustand, organizado em stores independentes.
-- Qualidade contínua: ESLint + Prettier.
+- ESLint + Prettier.
 
-<h2 id="stack">Stack</h2>
+## 🔍 Stack
 
 O projeto utiliza as seguintes stacks e principais dependências:
 
@@ -98,7 +102,7 @@ O projeto utiliza as seguintes stacks e principais dependências:
 - **Zod** (validação de dados)
 - **Boxen, Chalk, Figlet, Inquirer** (CLI interativo)
 
-<h2 id="rodando-projeto">Rodando o Projeto</h2>
+## 💻 Rodando o Projeto
 
 Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.
 
@@ -143,20 +147,17 @@ npm run dev
    ```powershell
    docker compose up --build
    ```
-
-   - ⚠️ Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
-     - **PowerShell (Windows):**
-       ```powershell
-       $env:VITE_USE_MOCK="true"; docker compose up --build
-       ```
-     - **Bash (Linux/Mac):**
-       ```bash
-       VITE_USE_MOCK=true docker compose up --build
-       ```
+   
+> [!IMPORTANT]
+>  Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
+> - **PowerShell (Windows):**
+       `$env:VITE_USE_MOCK="true"; docker compose up --build`
+> - **Bash (Linux/Mac):**
+       `VITE_USE_MOCK=true docker compose up --build`
 
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
-### 3. Sobre as Configurações de Ambiente
+## 🏗️ Configurações de Ambiente
 
 O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.
 
@@ -183,7 +184,7 @@ VITE_RECAPTCHA_ENABLED=true
 > Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
 > Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
 
-<h2 id="identidade-visual">Identidade Visual</h2>
+## 👩‍🎨 Identidade Visual
 
 O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
 
@@ -209,7 +210,7 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
 
 Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
-<h2 id="testes">Testes</h2>
+## 🧪 Testes
 
 Os testes automatizados utilizam **Vitest** e cobrem:
 
@@ -225,46 +226,9 @@ npm test
 npm run test
 ```
 
-Os resultados dos testes são exibidos no terminal e também geram relatórios de cobertura em `/coverage`.
+Os resultados dos testes são exibidos no terminal.
 
-<h2 id="estrutura-de-pastas">Estrutura de Pastas</h2>
-
-O projeto está organizado para facilitar o desenvolvimento, manutenção e escalabilidade. Os principais diretórios e arquivos têm funções bem definidas:
-
-- **src/**: Código-fonte principal da aplicação, dividido em módulos como componentes, páginas, serviços, estado global, mocks, interfaces e utilitários.
-- **public/**: Arquivos públicos e estáticos, como imagens e ícones.
-- **scripts/**: Scripts auxiliares para configuração e automação.
-- **docker-compose.yml / Dockerfile**: Arquivos para configuração e execução do ambiente Docker.
-- **package.json / vite.config.ts / tsconfig.json**: Configurações de dependências, build e TypeScript.
-- **README.md**: Documentação do projeto.
-
-Essa estrutura permite separar responsabilidades, tornando o projeto mais organizado e fácil de entender para novos colaboradores.
-
-```bash
-spa-pessoas-desaparecidas/
-├─ public/
-├─ scripts/
-├─ src/
-│  ├─ assets/
-│  ├─ components/
-│  ├─ hooks/
-│  ├─ interfaces/
-│  ├─ layout/
-│  ├─ lib/
-│  ├─ mocks/
-│  ├─ pages/
-│  ├─ services/
-│  ├─ stores/
-│  ├─ main.tsx
-│  ├─ routes.tsx
-│  └─ App.tsx
-├─ docker-compose.yml
-├─ Dockerfile
-├─ package.json
-├─ vite.config.ts
-├─ tsconfig.json
-└─ README.md
-```
+---
 
 > [!NOTE]  
 > Este projeto não utiliza variáveis sensíveis (como tokens ou credenciais privadas).  
