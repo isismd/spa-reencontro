@@ -70,7 +70,7 @@ export default function Detalhes() {
   );
 
   const isLocalizado = !!p?.ultimaOcorrencia?.dataLocalizacao;
-  const foto = p?.urlFoto || "https://placehold.co/600x800?text=Sem+Foto";
+  const foto = p?.urlFoto;
   const cartazUrl = p?.ultimaOcorrencia?.listaCartaz?.[0]?.urlCartaz;
 
   async function handleShare() {

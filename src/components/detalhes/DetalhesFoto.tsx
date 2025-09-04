@@ -4,7 +4,7 @@ import { ImageOff } from "lucide-react";
 import { useState } from "react";
 
 interface DetalhesFotoProps {
-  foto: string;
+  foto: string | undefined;
   isLocalizado: boolean;
   dias: number | null;
   dataLocalizacao?: string;
@@ -25,7 +25,7 @@ export default function DetalhesFoto({
           <img
             src={foto}
             alt="Pessoa"
-            className="block aspect-[3/4] w-full object-cover"
+            className="block aspect-[3/4] w-full object-cover transition"
             draggable={false}
             onError={() => setErr(true)}
           />
