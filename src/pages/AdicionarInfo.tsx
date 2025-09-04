@@ -16,6 +16,7 @@ import {
   DropzoneEmptyState,
 } from "@/components/ui/shadcn-io/dropzone";
 import { Textarea } from "@/components/ui/textarea";
+import { useTheme } from "@/hooks/ThemeProvider";
 import { formatYmdLocal, parseYmdToLocalDate } from "@/lib/utils";
 import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import { usePessoasStore } from "@/stores/pessoasStore";
@@ -31,6 +32,7 @@ import { z } from "zod";
 export default function AdicionarInfoPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const { pessoaSelecionada: p, fetchById } = usePessoasStore();
   const { postInformacao } = useOcorrenciaStore();
@@ -199,6 +201,8 @@ export default function AdicionarInfoPage() {
                       <FormControl>
                         <div className="flex justify-end">
                           <ReCAPTCHA
+                            key={theme}
+                            theme={theme === "dark" ? "dark" : "light"}
                             ref={recaptchaRef}
                             sitekey={siteKey}
                             onChange={(token) => field.onChange(token ?? "")}
