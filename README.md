@@ -10,9 +10,10 @@
   <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-7-646cff?logo=vite&logoColor=fff" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=fff" /></a>
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss&logoColor=fff" /></a>
-  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/State-Zustand-000" /></a>
   <a href="https://prettier.io/"><img src="https://img.shields.io/badge/Code%20Style-Prettier-ff69b4?logo=prettier" /></a>
   <a href="https://vitest.dev/"><img src="https://img.shields.io/badge/Tested%20with-Vitest-6E9F18?logo=vitest&logoColor=fff" /></a>
+  <a href="https://ui.shadcn.com/"><img src="https://img.shields.io/badge/shadcn/ui-000?logo=radix-ui&logoColor=fff" /></a>
+  <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/Zustand-764abc?logo=zustand&logoColor=fff" /></a>
 </p>
 
 <img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.webp" alt="Demonstração do sistema" width="400"/>
@@ -31,74 +32,57 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 
 ## Sumário
 
-- [Dados de Inscrição](#-dados-de-inscrição)
-- [Funcionalidades](#funcionalidades)
-- [Stack](#stack)
-- [Rodando o Projeto](#rodando-projeto)
-- [Identidade Visual](#identidade-visual)
-- [Estrutura de Pastas](#️-estrutura-de-pastas)
+- [🗃️ Dados de Inscrição](#%EF%B8%8F-dados-de-inscrição)
+- [🔮 Funcionalidades](#-funcionalidades)
+- [💻 Rodando o Projeto](#-rodando-o-projeto)
+- [🏗️ Configurações de Ambiente](#%EF%B8%8F-configura%C3%A7%C3%B5es-de-ambiente)
+- [👩‍🎨 Identidade Visual](#-identidade-visual)
+- [🧪 Testes](#-testes)
+- [🔍 Stack](#-stack)
 
-<h2 id="dados-de-inscricao">Dados de Inscrição</h2>
+## 🗃️ Dados de Inscrição
 
 - **Nome:** Isis Milena Daron
 - **Telefone:** (65) 98119-0823
 - **E-mail:** contato.isisdaron@gmail.com
 
-<h2 id="funcionalidades">Funcionalidades</h2>
+## 🔮 Funcionalidades
 
 O sistema foi pensado para facilitar a busca, colaboração e acompanhamento de casos de pessoas desaparecidas.
 
 ### Funcionalidades Principais
 
-- Visualização de cards com informações principais, foto e status (Desaparecida/Localizada), permitindo identificação rápida dos casos.
-- Busca nome e filtros avançados por sexo, faixa etária e status, tornando fácil encontrar registros específicos.
-- Paginação dinâmica para melhor organização, mesmo com muitos casos.
-- Página de detalhes completa, com histórico, dados pessoais e anexos enviados, útil para análise aprofundada e colaboração.
-- Envio de informações adicionais (observações, localização, anexos) por qualquer usuário, incentivando a participação ativa.
-- Validação do formulário da tela adicionar informações com react-hook-form + zod.
-- Destaque visual do status com cores e ícones, além de feedbacks modernos (skeleton loaders, toasts).
-- Rotas com lazy loading.
-- Design responsivo e acessível, adaptado para diferentes dispositivos.
-- Empacotamento da aplicação em container Docker
+- Cards informativos com foto, nome e status (Desaparecida/Localizada) para identificação rápida.
+- Busca por nome e filtros combináveis (sexo, faixa etária e status) para localizar casos específicos.
+- Paginação dinâmica com controle de itens por página, mantendo a navegação fluida mesmo com muitos registros.
+- Página de detalhes completa: histórico, dados pessoais e anexos enviados, útil para análise aprofundada e colaboração.
+- Envio de informações adicionais (observações, localização e anexos) aberto a qualquer usuário.
+- Validação no formulário de adicionar informações (React Hook Form + Zod).
+- Feedbacks modernos: skeleton loaders e toasts para estados de carregamento, sucesso e erro.
+- Rotas com lazy loading para otimizar carregamento e experiência.
+- Design responsivo e acessível (labels/ARIA, foco visível, contraste adequado).
+- Distribuição em Docker, facilitando a execução em qualquer ambiente
 
 ### Diferenciais Implementados
 
 Além dos requisitos previstos, o projeto inclui:
 
-- Design do sistema pensado para acolher famílias que possuem um ente querido desaparecido, transmitindo empatia e esperança.
-- Tema escuro (Dark Mode) com detecção automática da preferência do sistema, mas permitindo que o usuário alterne manualmente entre claro/escuro a qualquer momento.
-- Página "Sobre" explicando o projeto.
-- Tooltips em todos os botões que possuem somente ícone, garantindo fácil entendimento.
-- Customização do terminal ao rodar npm run dev, com mensagens estilizadas e cores (via chalk e boxen), tornando a experiência de desenvolvimento mais imersiva.
-- Possibilidade de usar API Mock em caso de instabilidade com a API Oficial.
-- reCAPTCHA no formulário de adicionar informações.
-- Escolha interativa API/Mock: Prompt no terminal com inquirer + suporte a flag de ambiente (VITE_USE_MOCK=true|false).
-- Testes de unidade com Vitest, incluindo runner interativo (npm run test:ui).
-- Toasts com sonner (inclui integração com o tema claro ou escuro).
-- Animações sutis com tw-animate-css.
-- Gerenciamento de estado global leve com Zustand, organizado em stores independentes.
-- Qualidade contínua: ESLint + Prettier.
+- Escolha de stack moderna: React 19 + Vite 7 + TypeScript 5 + Tailwind 4 + shadcn/ui
+- Design pensado para transmitir empatia e esperança às famílias de desaparecidos
+- Tema escuro inteligente que detecta a preferência do sistema e permite alternância manual
+- Página “Sobre” explicando o projeto e seus objetivos
+- Tooltips em botões de ícone para garantir entendimento rápido
+- Terminal customizado no `npm run dev` com mensagens estilizadas (chalk e boxen)
+- Possibilidade de ativar API Mock em caso de instabilidade da API oficial
+- Mock completo da API, incluindo filtros, paginação e estatísticas
+- Validação com reCAPTCHA v2 no formulário de envio de informações (com chave de teste em desenvolvimento)
+- Ações rápidas na página de detalhes, incluindo abrir local do desaparecimento no Google Maps, baixar cartaz e compartilhar o link da página
+- Testes de unidade com Vitest, incluindo runner visual (`npm run test:ui`)
+- Estado global leve com Zustand, organizado em stores independentes
+- Integração de animações sutis com `tw-animate-css`
+- Garantia de qualidade de código Prettier
 
-<h2 id="stack">Stack</h2>
-
-O projeto utiliza as seguintes stacks e principais dependências:
-
-- **React 19**
-- **Vite 7**
-- **TypeScript 5**
-- **Tailwind CSS 4**
-- **shadcn/ui** (componentes de UI)
-- **Zustand** (gerenciamento de estado)
-- **React Hook Form** (formulários)
-- **React Router DOM** (rotas)
-- **Sonner** (notificações/toasts)
-- **Axios** (requisições HTTP)
-- **Vitest** (testes)
-- **ESLint + Prettier** (padrões de código)
-- **Zod** (validação de dados)
-- **Boxen, Chalk, Figlet, Inquirer** (CLI interativo)
-
-<h2 id="rodando-projeto">Rodando o Projeto</h2>
+## 💻 Rodando o Projeto
 
 Abaixo estão as instruções para rodar o projeto localmente, seja utilizando os comandos do **NPM** ou via **Docker**.
 
@@ -143,20 +127,17 @@ npm run dev
    ```powershell
    docker compose up --build
    ```
-
-   - ⚠️ Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
-     - **PowerShell (Windows):**
-       ```powershell
-       $env:VITE_USE_MOCK="true"; docker compose up --build
-       ```
-     - **Bash (Linux/Mac):**
-       ```bash
-       VITE_USE_MOCK=true docker compose up --build
-       ```
+   
+> [!IMPORTANT]
+>  Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
+> - **PowerShell (Windows):**
+       `$env:VITE_USE_MOCK="true"; docker compose up --build`
+> - **Bash (Linux/Mac):**
+       `VITE_USE_MOCK=true docker compose up --build`
 
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
-### 3. Sobre as Configurações de Ambiente
+## 🏗️ Configurações de Ambiente
 
 O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.
 
@@ -183,7 +164,7 @@ VITE_RECAPTCHA_ENABLED=true
 > Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
 > Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
 
-<h2 id="identidade-visual">Identidade Visual</h2>
+## 👩‍🎨 Identidade Visual
 
 O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urgência**:
 
@@ -209,7 +190,7 @@ O design do **Reencontro** foi pensado para transmitir **clareza, empatia e urg�
 
 Cada detalhe visual busca não apenas atender aos requisitos técnicos, mas também **transmitir a mensagem de ajuda e solidariedade** que o projeto representa.
 
-<h2 id="testes">Testes</h2>
+## 🧪 Testes
 
 Os testes automatizados utilizam **Vitest** e cobrem:
 
@@ -225,46 +206,25 @@ npm test
 npm run test
 ```
 
-Os resultados dos testes são exibidos no terminal e também geram relatórios de cobertura em `/coverage`.
+Os resultados dos testes são exibidos no terminal.
 
-<h2 id="estrutura-de-pastas">Estrutura de Pastas</h2>
+## 🔍 Stack
 
-O projeto está organizado para facilitar o desenvolvimento, manutenção e escalabilidade. Os principais diretórios e arquivos têm funções bem definidas:
+O projeto utiliza as seguintes stacks e principais dependências:
 
-- **src/**: Código-fonte principal da aplicação, dividido em módulos como componentes, páginas, serviços, estado global, mocks, interfaces e utilitários.
-- **public/**: Arquivos públicos e estáticos, como imagens e ícones.
-- **scripts/**: Scripts auxiliares para configuração e automação.
-- **docker-compose.yml / Dockerfile**: Arquivos para configuração e execução do ambiente Docker.
-- **package.json / vite.config.ts / tsconfig.json**: Configurações de dependências, build e TypeScript.
-- **README.md**: Documentação do projeto.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" width="60" alt="React"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg" width="60" alt="Vite"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" width="60" alt="TypeScript"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg" width="60" alt="Tailwind"/>
+  <img src="https://raw.githubusercontent.com/shadcn/ui/main/apps/www/public/favicon.ico" width="60" alt="shadcn/ui"/>
+  <img src="https://raw.githubusercontent.com/github/explore/990a9efe0b9529eca38ca9e081bc7a97b18dff45/topics/zustand/zustand.png" width="60" alt="Zustand"/>
+  <img src="https://react-hook-form.com/images/logo/react-hook-form-logo-only.png" width="60" alt="React Hook Form"/>
+  <img src="https://www.svgrepo.com/show/354262/react-router.svg" width="60" alt="React Router"/>
+  <img src="https://vitest.dev/logo.svg" width="60" alt="Vitest"/>
+</p>
 
-Essa estrutura permite separar responsabilidades, tornando o projeto mais organizado e fácil de entender para novos colaboradores.
-
-```bash
-spa-pessoas-desaparecidas/
-├─ public/
-├─ scripts/
-├─ src/
-│  ├─ assets/
-│  ├─ components/
-│  ├─ hooks/
-│  ├─ interfaces/
-│  ├─ layout/
-│  ├─ lib/
-│  ├─ mocks/
-│  ├─ pages/
-│  ├─ services/
-│  ├─ stores/
-│  ├─ main.tsx
-│  ├─ routes.tsx
-│  └─ App.tsx
-├─ docker-compose.yml
-├─ Dockerfile
-├─ package.json
-├─ vite.config.ts
-├─ tsconfig.json
-└─ README.md
-```
+---
 
 > [!NOTE]  
 > Este projeto não utiliza variáveis sensíveis (como tokens ou credenciais privadas).  
