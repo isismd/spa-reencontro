@@ -76,7 +76,7 @@ Além dos requisitos previstos, o projeto inclui:
 - Terminal customizado no `npm run dev` com mensagens estilizadas (chalk e boxen)
 - Possibilidade de ativar API Mock em caso de instabilidade da API oficial
 - Mock completo da API, incluindo filtros, paginação e estatísticas
-- reCAPTCHA v2 no formulário de envio de informações (com chave de teste para modo desenvolvimento)
+- reCAPTCHA v2 no formulário de envio de informações (com chave de teste para modo desenvolvimento, apenas simulação do funcionamento real)
 - Ações rápidas na página de detalhes, incluindo abrir local do desaparecimento no Google Maps, baixar cartaz e compartilhar o link da página
 - Testes de unidade com Vitest, incluindo runner visual (`npm run test:ui`)
 - Estado global leve com Zustand, organizado em stores independentes
@@ -111,8 +111,9 @@ npm install
 ```powershell
 npm run dev
 ```
+
 > Ao rodar esse comando de inicialização do projeto, será perguntado se deseja ativar o reCAPTCHA no formulário.
-> 
+>
 > <img height="350" alt="image" src="https://github.com/user-attachments/assets/4d130df4-e2ce-43d3-aa17-286aab961b94" />
 >
 > Sua escolha será salva no arquivo `.env.local`.
@@ -129,19 +130,24 @@ npm run dev
    ```powershell
    docker compose up --build
    ```
+
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
 ## 🤖 Modo de Demonstração
-Quando a API oficial estiver instável, ou quando você preferir navegar sem depender dela, o sistema pode operar em modo demonstração (mocks). Nesse modo, as chamadas são respondidas localmente e o envio de informações continua funcionando (inclusive com anexos), sem sincronizar nada com a API.
 
-Como funciona:
-- Interceptação de rotas com `axios-mock-adapter`
-- Envio de informações com anexos onde os arquivos chegam via FormData e são serializados e salvos no dispositivo (IndexedDB) junto com os metadados (informação, descrição, data).
-- Ao listar informações, o sistema mescla dados de mock em memória com os registros locais do IndexedDB e já retorna object URLs para os anexos, permitindo visualização imediata.
-- Sem sincronização posterior: tudo que for criado no modo demonstração fica apenas no seu navegador (não sobe para a API depois).
+Quando a API oficial estiver indisponível ou se você preferir testar o sistema sem depender dela, é possível ativar o modo demonstração (mocks).
 
-É possível ativar esse modo na home page quando a API retornar um erro 500 ou no cabeçalho, clicando no botão <img width="30" alt="image" src="https://github.com/user-attachments/assets/def04283-389e-4209-9f9e-f993154d586d" />  que ativa os dados fictícios no sistema.
-  
+Nesse modo, todas as chamadas são respondidas localmente e você pode simular o fluxo completo, inclusive envio de informações com anexos, sem que nada seja enviado para a API real.
+
+O que acontece nos bastidores:
+
+- Interceptação de requisições: feita com `axios-mock-adapter`, que retorna respostas pré-configuradas.
+- Envio de informações: os dados da página de enviar informações chegam via FormData, são serializados e salvos no IndexedDB junto com os metadados.
+- Listagem de informações: o sistema combina os dados mockados em memória com os registros locais armazenados no navegador, já gerando object URLs para visualizar anexos imediatamente.
+- Sem sincronização posterior: tudo que você criar no modo demonstração fica apenas no seu navegador. Esses dados não são enviados para a API oficial depois.
+
+É possível ativar esse modo na home page quando a API retornar um erro 500 ou no cabeçalho, clicando no botão <img width="30" alt="image" src="https://github.com/user-attachments/assets/def04283-389e-4209-9f9e-f993154d586d" /> que ativa os dados fictícios no sistema.
+
 ## 🏗️ Configurações de Ambiente
 
 O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.

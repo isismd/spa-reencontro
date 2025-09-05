@@ -1,5 +1,5 @@
+import type { PageResponse } from "@/interfaces/ICommon";
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
-import type { PageResponse } from "@/interfaces/IPessoas";
 import axios, { type AxiosInstance } from "axios";
 import { openDB } from "idb";
 import {

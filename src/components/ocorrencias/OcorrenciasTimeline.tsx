@@ -38,7 +38,7 @@ export default function OcorrenciasTimeline({
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="text-base">Ocorrências / Avistamentos</CardTitle>
+        <CardTitle className="text-base">Informações Recentes</CardTitle>
       </CardHeader>
       <CardContent>
         {loading ? (

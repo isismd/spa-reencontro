@@ -1,10 +1,7 @@
 import { httpGet } from "./api";
 
-import type {
-  PageResponse,
-  PessoaDTO,
-  PessoasFiltro,
-} from "@/interfaces/IPessoas";
+import type { PageResponse } from "@/interfaces/ICommon";
+import type { PessoaDTO, PessoasFiltro } from "@/interfaces/IPessoas";
 
 const BASE_PATH = "/v1/pessoas/aberto";
 

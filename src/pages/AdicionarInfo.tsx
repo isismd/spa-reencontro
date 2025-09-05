@@ -74,7 +74,7 @@ export default function AdicionarInfoPage() {
         ocoId: Number(p?.ultimaOcorrencia?.ocoId),
         informacao: values.informacao.trim(),
         data: values.data,
-        descricao: values.descricao.trim(),
+        descricao: values.descricao?.trim() || "",
         files: values.files,
       });
 
@@ -155,7 +155,10 @@ export default function AdicionarInfoPage() {
                   name="descricao"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Descrição do(s) anexo(s) *</FormLabel>
+                      <FormLabel>
+                        Descrição do(s) anexo(s){" "}
+                        {files && files.length > 0 ? "*" : ""}
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="Ex.: Foto da pessoa" {...field} />
                       </FormControl>
@@ -252,31 +255,42 @@ export default function AdicionarInfoPage() {
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-const schema = z.object({
-  informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
-  descricao: z
-    .string()
-    .min(2, "Informe uma descrição curta para o(s) anexo(s)"),
-  data: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
-    .refine(
-      (d) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const input = new Date(d + "T00:00:00");
-        return input.getTime() <= today.getTime();
-      },
-      { message: "A data não pode ser maior que hoje." },
-    ),
-  files: z
-    .array(z.custom<File>())
-    .refine(
-      (files) => files.every((f) => f.size <= MAX_FILE_SIZE),
-      "Cada arquivo até 5MB",
-    )
-    .optional(),
-  recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
-});
+const schema = z
+  .object({
+    informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
+    descricao: z.string().optional(),
+    data: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
+      .refine(
+        (d) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const input = new Date(d + "T00:00:00");
+          return input.getTime() <= today.getTime();
+        },
+        { message: "A data não pode ser maior que hoje." },
+      ),
+    files: z
+      .array(z.custom<File>())
+      .refine(
+        (files) => files.every((f) => f.size <= MAX_FILE_SIZE),
+        "Cada arquivo até 5MB",
+      )
+      .optional(),
+    recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
+  })
+  .refine(
+    (data) => {
+      if (data.files && data.files.length > 0) {
+        return data.descricao && data.descricao.trim().length >= 2;
+      }
+      return true;
+    },
+    {
+      message: "Informe uma descrição curta para o(s) anexo(s)",
+      path: ["descricao"],
+    },
+  );
 
 type FormData = z.infer<typeof schema>;

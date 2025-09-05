@@ -12,7 +12,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 101,
       dtDesaparecimento: "2025-08-01",
-      localDesaparecimentoConcat: "Cuiabá - MT",
+      localDesaparecimentoConcat: "Centro (Praça Alencastro) - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao:
@@ -38,7 +38,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 102,
       dtDesaparecimento: "2025-07-20",
-      localDesaparecimentoConcat: "Várzea Grande - MT",
+      localDesaparecimentoConcat: "Jardim Cuiabá - Cuiabá/MT",
       encontradoVivo: true,
       dataLocalizacao: "2025-08-15",
       ocorrenciaEntrevDesapDTO: {
@@ -63,7 +63,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 103,
       dtDesaparecimento: "2025-06-12",
-      localDesaparecimentoConcat: "Rondonópolis - MT",
+      localDesaparecimentoConcat: "Jardim Paula II - Várzea Grande/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Saiu de casa para faculdade e não retornou.",
@@ -87,7 +87,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 104,
       dtDesaparecimento: "2025-05-02",
-      localDesaparecimentoConcat: "Tangará da Serra - MT",
+      localDesaparecimentoConcat: "Jardim Cuiabá - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Último contato por telefone com a família.",
@@ -106,7 +106,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 105,
       dtDesaparecimento: "2025-04-18",
-      localDesaparecimentoConcat: "Cáceres - MT",
+      localDesaparecimentoConcat: "Porto - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Desapareceu após sair para caminhada no fim da tarde.",
@@ -125,7 +125,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 106,
       dtDesaparecimento: "2025-03-25",
-      localDesaparecimentoConcat: "Lucas do Rio Verde - MT",
+      localDesaparecimentoConcat: "Parque Mãe Bonifácia - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Foi visto por amigos em uma festa no centro.",
@@ -144,7 +144,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 107,
       dtDesaparecimento: "2025-07-10",
-      localDesaparecimentoConcat: "Barra do Garças - MT",
+      localDesaparecimentoConcat: "Bosque da Saúde - Cuiabá/MT",
       encontradoVivo: true,
       dataLocalizacao: "2025-07-25",
       ocorrenciaEntrevDesapDTO: {
@@ -164,7 +164,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 108,
       dtDesaparecimento: "2025-02-15",
-      localDesaparecimentoConcat: "Sinop - MT",
+      localDesaparecimentoConcat: "CPA I - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Desapareceu após viagem a trabalho.",
@@ -183,7 +183,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 109,
       dtDesaparecimento: "2025-01-28",
-      localDesaparecimentoConcat: "Alta Floresta - MT",
+      localDesaparecimentoConcat: "Coxipó (próx. UFMT) - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Foi vista pela última vez em um supermercado.",
@@ -202,7 +202,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 110,
       dtDesaparecimento: "2025-08-10",
-      localDesaparecimentoConcat: "Nova Mutum - MT",
+      localDesaparecimentoConcat: "Jardim das Américas - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Colegas relataram que não compareceu ao trabalho.",
@@ -259,7 +259,7 @@ export const pessoas: PessoaDTO[] = [
     ultimaOcorrencia: {
       ocoId: 113,
       dtDesaparecimento: "2025-03-11",
-      localDesaparecimentoConcat: "Pontes e Lacerda - MT",
+      localDesaparecimentoConcat: "Araés - Cuiabá/MT",
       encontradoVivo: false,
       ocorrenciaEntrevDesapDTO: {
         informacao: "Foi vista em uma feira municipal.",
