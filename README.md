@@ -35,6 +35,7 @@ Desenvolvido no contexto do **Projeto Prático / Desenvolve MT**.
 - [🗃️ Dados de Inscrição](#%EF%B8%8F-dados-de-inscrição)
 - [🔮 Funcionalidades](#-funcionalidades)
 - [💻 Rodando o Projeto](#-rodando-o-projeto)
+- [🤖 Modo de Demonstração](#-modo-de-demonstração)
 - [🏗️ Configurações de Ambiente](#%EF%B8%8F-configura%C3%A7%C3%B5es-de-ambiente)
 - [👩‍🎨 Identidade Visual](#-identidade-visual)
 - [🧪 Testes](#-testes)
@@ -75,7 +76,7 @@ Além dos requisitos previstos, o projeto inclui:
 - Terminal customizado no `npm run dev` com mensagens estilizadas (chalk e boxen)
 - Possibilidade de ativar API Mock em caso de instabilidade da API oficial
 - Mock completo da API, incluindo filtros, paginação e estatísticas
-- Validação com reCAPTCHA v2 no formulário de envio de informações (com chave de teste em desenvolvimento)
+- reCAPTCHA v2 no formulário de envio de informações (com chave de teste para modo desenvolvimento)
 - Ações rápidas na página de detalhes, incluindo abrir local do desaparecimento no Google Maps, baixar cartaz e compartilhar o link da página
 - Testes de unidade com Vitest, incluindo runner visual (`npm run test:ui`)
 - Estado global leve com Zustand, organizado em stores independentes
@@ -110,10 +111,11 @@ npm install
 ```powershell
 npm run dev
 ```
-
-- Ao rodar `npm run dev`, será perguntado se deseja usar a API oficial ou dados fictícios (mock).
-- Também será perguntado se você deseja ativar o reCAPTCHA no formulário.
-- Suas escolhas serão salvas no arquivo `.env.local`.
+> Ao rodar esse comando de inicialização do projeto, será perguntado se deseja ativar o reCAPTCHA no formulário.
+> 
+> <img height="350" alt="image" src="https://github.com/user-attachments/assets/4d130df4-e2ce-43d3-aa17-286aab961b94" />
+>
+> Sua escolha será salva no arquivo `.env.local`.
 
 3. Acesse a aplicação em [http://localhost:5173](http://localhost:5173).
 
@@ -127,16 +129,19 @@ npm run dev
    ```powershell
    docker compose up --build
    ```
-   
-> [!IMPORTANT]
->  Caso a API esteja instável, utilize o seguinte comando para rodar o projeto com os Mocks (dados fictícios):
-> - **PowerShell (Windows):**
-       `$env:VITE_USE_MOCK="true"; docker compose up --build`
-> - **Bash (Linux/Mac):**
-       `VITE_USE_MOCK=true docker compose up --build`
-
 3. Acesse a aplicação em [http://localhost:3000](http://localhost:3000).
 
+## 🤖 Modo de Demonstração
+Quando a API oficial estiver instável, ou quando você preferir navegar sem depender dela, o sistema pode operar em modo demonstração (mocks). Nesse modo, as chamadas são respondidas localmente e o envio de informações continua funcionando (inclusive com anexos), sem sincronizar nada com a API.
+
+Como funciona:
+- Interceptação de rotas com `axios-mock-adapter`
+- Envio de informações com anexos onde os arquivos chegam via FormData e são serializados e salvos no dispositivo (IndexedDB) junto com os metadados (informação, descrição, data).
+- Ao listar informações, o sistema mescla dados de mock em memória com os registros locais do IndexedDB e já retorna object URLs para os anexos, permitindo visualização imediata.
+- Sem sincronização posterior: tudo que for criado no modo demonstração fica apenas no seu navegador (não sobe para a API depois).
+
+É possível ativar esse modo na home page quando a API retornar um erro 500 ou no cabeçalho, clicando no botão <img width="30" alt="image" src="https://github.com/user-attachments/assets/def04283-389e-4209-9f9e-f993154d586d" />  que ativa os dados fictícios no sistema.
+  
 ## 🏗️ Configurações de Ambiente
 
 O projeto utiliza **variáveis de ambiente** para controlar o comportamento da aplicação.
@@ -147,22 +152,13 @@ Essas variáveis podem ser definidas em um arquivo `.env.local` (gerado automati
 # URL da API oficial
 VITE_API_BASE_URL=https://abitus-api.geia.vip
 
-# Define se usa mock ou não
-# true  = usar mock de dados fictícios
-# false = usar API oficial
-VITE_USE_MOCK=false
-
 # reCAPTCHA (usado na tela de envio de informações)
-# Em desenvolvimento é utilizado a test key oficial do Google
+# Em desenvolvimento é utilizada a test key oficial do Google
 VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 
 # Ativa ou desativa o reCAPTCHA (útil para rodar localmente sem precisar do widget)
 VITE_RECAPTCHA_ENABLED=true
 ```
-
-> [!WARNING]
-> Se a API oficial estiver instável, você pode ativar os dados fictícios (mocks) alterando o valor da variável VITE_USE_MOCK para true.
-> Essa configuração pode ser feita no arquivo .env.local ou diretamente no comando de execução.
 
 ## 👩‍🎨 Identidade Visual
 
