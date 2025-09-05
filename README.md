@@ -226,3 +226,7 @@ O projeto utiliza as seguintes stacks e principais dependências:
 > Este projeto não utiliza variáveis sensíveis (como tokens ou credenciais privadas).  
 > Mesmo o `VITE_RECAPTCHA_SITE_KEY` é apenas a **test key oficial do Google**, própria para desenvolvimento, sem risco de exposição.  
 > Ainda assim, recomenda-se manter arquivos `.env` fora do versionamento por boas práticas.
+
+> [!NOTE]  
+> A **API Oficial** não retorna o status da pessoa quando a listagem é feita sem filtro por status.  
+> Para exibir no card se está localizada ou não, foi utilizada a propriedade `dataLocalizacao`, que pode em alguns casos apresentar **inconsistências**.
