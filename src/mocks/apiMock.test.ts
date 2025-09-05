@@ -1,3 +1,4 @@
+import type { PessoaDTO } from "@/interfaces/IPessoas";
 import "@/mocks/apiMock";
 import { pessoas } from "@/mocks/mockData";
 import axios from "axios";
@@ -17,9 +18,9 @@ describe("Mock API /v1", () => {
       params: { nome: termo },
     });
     expect(res.status).toBe(200);
-    expect(res.data.content.every((p: any) => p.nome.includes(termo))).toBe(
-      true,
-    );
+    expect(
+      res.data.content.every((p: PessoaDTO) => p.nome.includes(termo)),
+    ).toBe(true);
   });
 
   it("GET /v1/pessoas/:id retorna pessoa existente", async () => {
@@ -34,7 +35,7 @@ describe("Mock API /v1", () => {
       await axios.get("/v1/pessoas/999999");
       expect(false).toBe(true);
     } catch (err: any) {
-      expect(err.response.status).toBe(404);
+      expect(err.status).toBe(404);
     }
   });
 

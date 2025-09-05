@@ -5,9 +5,9 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/lib/utils";
 import { Calendar, FileDown, Info, Paperclip } from "lucide-react";
-import { useMemo } from "react";
 
 import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
+import { useMemo } from "react";
 import { ScrollArea } from "../ui/scroll-area";
 
 type Props = {
@@ -23,13 +23,10 @@ export default function OcorrenciasTimeline({
   error,
   className,
 }: Props) {
-  const itens = useMemo(() => {
-    return [...(informacoes ?? [])].sort((a, b) => {
-      const da = new Date(a.data).getTime();
-      const db = new Date(b.data).getTime();
-      return db - da;
-    });
-  }, [informacoes]);
+  const informacoesOrdenadas = useMemo(
+    () => [...informacoes].sort((a, b) => b.id - a.id),
+    [informacoes],
+  );
 
   return (
     <Card className={className}>
@@ -51,7 +48,7 @@ export default function OcorrenciasTimeline({
           </div>
         ) : error ? (
           <p className="text-destructive text-sm">Erro: {error}</p>
-        ) : itens.length === 0 ? (
+        ) : informacoesOrdenadas.length === 0 ? (
           <div className="text-muted-foreground flex items-center gap-2 rounded-md border p-3 text-sm">
             <Info className="size-4" />
             Nenhuma ocorrência registrada para este caso.
@@ -60,13 +57,13 @@ export default function OcorrenciasTimeline({
           <div className="relative">
             <ScrollArea>
               <div className="mr-2 max-h-80 space-y-5 pr-2">
-                {itens.map((it, i) => (
+                {informacoesOrdenadas.map((it, i) => (
                   <div
                     key={it.id}
                     className="relative grid grid-cols-[auto_1fr] gap-3"
                   >
                     <div className="bg-primary ring-background relative z-10 mt-1 size-3 rounded-full ring-2" />
-                    {i < itens.length - 1 && (
+                    {i < informacoesOrdenadas.length - 1 && (
                       <div className="bg-border absolute top-3 bottom-[-20px] left-[6px] w-0.5" />
                     )}
                     <div className="rounded-lg border p-3">
@@ -92,7 +89,7 @@ export default function OcorrenciasTimeline({
                               <Paperclip className="size-3" />
                               Anexos:
                             </span>
-                            {it.anexos.map((url: any, idx: number) => (
+                            {it.anexos.map((url: string, idx: number) => (
                               <Button
                                 key={idx}
                                 variant="outline"

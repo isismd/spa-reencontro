@@ -10,7 +10,7 @@ cfonts.say("Reencontro", {
   background: "transparent",
   env: "node",
   transitionGradient: true,
-  gradient: ["yellow", "magenta"],
+  gradient: ["yellow", "#ff5500"],
 });
 
 const mensagem = `
@@ -28,19 +28,13 @@ console.log(
     margin: 1,
     float: "center",
     borderStyle: "round",
-    borderColor: "red",
+    borderColor: "yellow",
     align: "center",
   }),
 );
 
 async function setupEnv() {
-  const { choice, recaptcha } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "choice",
-      message: "Deseja usar a API oficial ou os dados fictícios (mock)?",
-      choices: ["API Oficial", "Mock (dados fictícios)"],
-    },
+  const { recaptcha } = await inquirer.prompt([
     {
       type: "confirm",
       name: "recaptcha",
@@ -49,20 +43,12 @@ async function setupEnv() {
     },
   ]);
 
-  const envContent =
-    choice === "API Oficial"
-      ? `VITE_API_BASE_URL=https://abitus-api.geia.vip
-VITE_USE_MOCK=false
-VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
-VITE_RECAPTCHA_ENABLED=${recaptcha ? "true" : "false"}
-        `
-      : `VITE_API_BASE_URL=https://abitus-api.geia.vip
-VITE_USE_MOCK=true
+  const envContent = `VITE_API_BASE_URL=https://abitus-api.geia.vip
 VITE_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 VITE_RECAPTCHA_ENABLED=${recaptcha ? "true" : "false"}
 `;
   fs.writeFileSync(".env.local", envContent + "\n");
-  console.log(`Configuração salva em .env.local: ${choice}`);
+  console.log("Configuração salva em .env.local");
 }
 
 setupEnv();

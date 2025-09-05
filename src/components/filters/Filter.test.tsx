@@ -4,7 +4,15 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import Filters from "./Filter";
 
 vi.mock("@/components/ui/select", () => {
-  const Select = ({ value, onValueChange, children }: any) => (
+  const Select = ({
+    value,
+    onValueChange,
+    children,
+  }: {
+    value: string | undefined;
+    onValueChange?: (value: string) => void;
+    children: React.ReactNode;
+  }) => (
     <select
       aria-label="select"
       data-testid="select"
@@ -14,16 +22,25 @@ vi.mock("@/components/ui/select", () => {
       {children}
     </select>
   );
-  const SelectTrigger = ({ children, ...p }: any) => (
+  const SelectTrigger = ({
+    children,
+    ...p
+  }: { children: React.ReactNode } & React.HTMLAttributes<HTMLDivElement>) => (
     <div {...p}>{children}</div>
   );
-  const SelectValue = ({ placeholder }: any) => (
+  const SelectValue = ({ placeholder }: { placeholder: string }) => (
     <option value="">{placeholder}</option>
   );
-  const SelectContent = ({ children }: any) => <>{children}</>;
-  const SelectItem = ({ value, children }: any) => (
-    <option value={value}>{children}</option>
+  const SelectContent = ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
   );
+  const SelectItem = ({
+    value,
+    children,
+  }: {
+    value: string;
+    children: React.ReactNode;
+  }) => <option value={value}>{children}</option>;
   return { Select, SelectTrigger, SelectValue, SelectContent, SelectItem };
 });
 
@@ -33,7 +50,12 @@ vi.mock("@/components/ui/slider", () => {
     min = 0,
     max = 130,
     onValueChange,
-  }: any) => (
+  }: {
+    value?: [number, number];
+    min?: number;
+    max?: number;
+    onValueChange?: ([min, max]: [number, number]) => void;
+  }) => (
     <div>
       <input
         aria-label="min-idade"
@@ -57,7 +79,15 @@ vi.mock("@/components/ui/slider", () => {
 });
 
 vi.mock("@/components/ui/collapsible", () => {
-  const Collapsible = ({ open, onOpenChange, children }: any) => (
+  const Collapsible = ({
+    open,
+    onOpenChange,
+    children,
+  }: {
+    open: boolean;
+    onOpenChange?: (open: boolean) => void;
+    children: React.ReactNode;
+  }) => (
     <div data-open={open}>
       <button
         aria-label="toggle-collapsible"
@@ -67,15 +97,25 @@ vi.mock("@/components/ui/collapsible", () => {
       {children}
     </div>
   );
-  const CollapsibleContent = ({ children }: any) => <div>{children}</div>;
+  const CollapsibleContent = ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  );
   return { Collapsible, CollapsibleContent };
 });
 
 vi.mock("@/components/ui/tooltip", () => {
-  const TooltipProvider = ({ children }: any) => <>{children}</>;
-  const Tooltip = ({ children }: any) => <>{children}</>;
-  const TooltipTrigger = ({ children }: any) => <>{children}</>;
-  const TooltipContent = ({ children }: any) => <>{children}</>;
+  const TooltipProvider = ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  );
+  const Tooltip = ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  );
+  const TooltipTrigger = ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  );
+  const TooltipContent = ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  );
   return { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent };
 });
 

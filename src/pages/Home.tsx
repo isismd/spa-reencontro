@@ -31,7 +31,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchEstatistico();
-  }, []);
+  }, [fetchEstatistico]);
 
   function handleChangeFilters(next: PessoasFiltro) {
     setPage(1);

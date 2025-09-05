@@ -1,6 +1,9 @@
 import EmptyState from "@/components/feedback/EmptyState";
 import PessoaCard from "@/components/pessoa/PessoaCard";
 import PessoaSkeleton from "@/components/pessoa/PessoaSkeleton";
+import type { PessoaDTO } from "@/interfaces/IPessoas";
+import { enableMocks } from "@/mocks/mockController";
+import { Archive, RotateCcw } from "lucide-react";
 import { Button } from "../ui/button";
 
 type Props<T> = {
@@ -11,27 +14,42 @@ type Props<T> = {
   renderItem?: (item: T) => React.ReactNode;
 };
 
-export default function PessoaGrid<T extends { id: number | string }>({
+export default function PessoaGrid<T extends PessoaDTO>({
   items,
   loading,
   error,
   onRetry,
   renderItem,
 }: Props<T>) {
+  const handleUseMock = async () => {
+    await enableMocks();
+    onRetry?.();
+  };
+
   if (error) {
     return (
       <EmptyState
         title="Erro ao carregar os dados"
         action={
-          onRetry ? (
+          <>
+            {onRetry && (
+              <Button
+                variant="outline"
+                onClick={onRetry}
+                className="hover:bg-muted rounded-md border px-3 py-1 text-sm"
+              >
+                <RotateCcw className="inline" />
+                Tentar novamente
+              </Button>
+            )}
             <Button
-              variant="outline"
-              onClick={onRetry}
-              className="hover:bg-muted rounded-md border px-3 py-1 text-sm"
+              onClick={handleUseMock}
+              className="rounded-md px-3 py-1 text-sm"
             >
-              Tentar novamente
+              <Archive className="inline" />
+              Usar dados de demonstração
             </Button>
-          ) : null
+          </>
         }
       />
     );
@@ -58,7 +76,7 @@ export default function PessoaGrid<T extends { id: number | string }>({
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {items.map((p: any) =>
+      {items.map((p: T) =>
         renderItem ? renderItem(p) : <PessoaCard key={p.id} p={p} />,
       )}
     </div>
