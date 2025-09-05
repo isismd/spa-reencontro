@@ -9,9 +9,12 @@ export async function enableMocks() {
   apiMock();
   enabled = true;
   localStorage.setItem("use_mocks", "true");
+  window.dispatchEvent(new CustomEvent("mock:changed", { detail: true }));
 }
 
 export function disableMocks() {
   enabled = false;
   localStorage.removeItem("use_mocks");
+  window.dispatchEvent(new CustomEvent("mock:changed", { detail: false }));
+  window.location.reload();
 }

@@ -84,7 +84,7 @@ export default function Detalhes() {
         toast.success("Link copiado para a área de transferência.");
       }
     } catch (error) {
-      console.error("Erro ao compartilhar");
+      toast.error("Erro ao compartilhar");
     }
   }
 

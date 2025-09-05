@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -72,9 +71,6 @@ export default function OcorrenciasTimeline({
                           <Calendar className="size-3" />
                           {formatDate(it.data)}
                         </span>
-                        <Badge variant="outline" className="ml-1">
-                          #{String(it.id).padStart(4, "0")}
-                        </Badge>
                       </div>
 
                       <p className="mt-2 text-sm leading-relaxed">

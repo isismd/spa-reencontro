@@ -1,43 +1,165 @@
+import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
 import type { PageResponse } from "@/interfaces/IPessoas";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-import { informacoes, pessoas } from "./mockData";
+import axios, { type AxiosInstance } from "axios";
+import { openDB } from "idb";
+import {
+  informacoes as baseInformacoes,
+  pessoas as basePessoas,
+} from "./mockData";
+const { default: MockAdapter } = await import("axios-mock-adapter");
 
-const RESPONSE_DELAY = 500;
+// =======================
+// Config / Regex
+// =======================
+const DEFAULT_DELAY = 600;
+const RX = {
+  PESSOAS_FILTRO: /\/v1\/pessoas\/aberto\/filtro/,
+  PESSOA_BY_ID: /\/v1\/pessoas\/\d+(?:\?.*)?$/,
+  PESSOAS_ESTATS: /\/v1\/pessoas\/aberto\/estatistico/,
+  INFO_LIST: /\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/,
+  INFO_CREATE: /\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/,
+};
 
-export function apiMock() {
-  const mock = new MockAdapter(axios, { delayResponse: RESPONSE_DELAY });
+// =======================
+// Tipos
+// =======================
+type StoredFile = {
+  name: string;
+  type: string;
+  size: number;
+  data: ArrayBuffer;
+};
+type LocalInfoRecord = {
+  id?: number;
+  ocoId: number;
+  informacao: string;
+  descricao: string;
+  data: string;
+  anexos: StoredFile[];
+  createdAt: number;
+};
 
-  function pageResponse<T>(items: T[], page = 0, size = 10): PageResponse<T> {
-    const totalElements = items.length;
-    const start = page * size;
-    const end = Math.min(start + size, totalElements);
-    const content = items.slice(start, end);
-    return {
-      totalElements,
-      totalPages: Math.max(1, Math.ceil(totalElements / size)),
-      numberOfElements: content.length,
-      first: page === 0,
-      last: end >= totalElements,
-      size,
-      content,
-      number: page,
+type StorageAdapter = {
+  addInfo(
+    input: Omit<LocalInfoRecord, "id" | "createdAt">,
+  ): Promise<LocalInfoRecord>;
+  listInfosByOcoId(ocoId: number): Promise<LocalInfoRecord[]>;
+};
+
+type FileAdapter = {
+  serialize(files?: File[]): Promise<StoredFile[]>;
+  toObjectURLs(stored: StoredFile[]): string[];
+};
+
+type ApiMockOptions = {
+  axiosInstance?: AxiosInstance;
+  delay?: number;
+  storage?: StorageAdapter;
+  files?: FileAdapter;
+  data?: {
+    pessoas?: typeof basePessoas;
+    informacoes?: InformacaoDesaparecidoDTO[];
+  };
+};
+
+// =======================
+// Helpers
+// =======================
+function pageResponse<T>(items: T[], page = 0, size = 10): PageResponse<T> {
+  const totalElements = items.length;
+  const start = page * size;
+  const end = Math.min(start + size, totalElements);
+  const content = items.slice(start, end);
+  return {
+    totalElements,
+    totalPages: Math.max(1, Math.ceil(totalElements / size)),
+    numberOfElements: content.length,
+    first: page === 0,
+    last: end >= totalElements,
+    size,
+    content,
+    number: page,
+    sort: { sorted: false, unsorted: true, empty: true },
+    pageable: {
+      unpaged: false,
+      paged: true,
+      pageNumber: page,
+      pageSize: size,
+      offset: start,
       sort: { sorted: false, unsorted: true, empty: true },
-      pageable: {
-        unpaged: false,
-        paged: true,
-        pageNumber: page,
-        pageSize: size,
-        offset: start,
-        sort: { sorted: false, unsorted: true, empty: true },
-      },
-      empty: content.length === 0,
-    };
-  }
+    },
+    empty: content.length === 0,
+  };
+}
 
-  mock.onGet(/\/v1\/pessoas\/aberto\/filtro/).reply((config) => {
+// =======================
+// Adapters
+// =======================
+async function createIndexedDbStorage(): Promise<StorageAdapter> {
+  const db = await openDB("reencontro-db", 1, {
+    upgrade(db) {
+      if (!db.objectStoreNames.contains("infos")) {
+        const store = db.createObjectStore("infos", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+        store.createIndex("by_ocoId", "ocoId", { unique: false });
+      }
+    },
+  });
+
+  return {
+    async addInfo(input) {
+      const createdAt = Date.now();
+      const id = await db.add("infos", {
+        ...input,
+        createdAt,
+      } as LocalInfoRecord);
+      return { ...input, id, createdAt } as LocalInfoRecord;
+    },
+    async listInfosByOcoId(ocoId) {
+      const idx = db.transaction("infos").store.index("by_ocoId");
+      const all = await idx.getAll(ocoId);
+      return all.sort(
+        (a, b) => b.data.localeCompare(a.data) || b.createdAt - a.createdAt,
+      );
+    },
+  };
+}
+
+const defaultFileAdapter: FileAdapter = {
+  async serialize(files: File[] = []) {
+    const out: StoredFile[] = [];
+    for (const f of files) {
+      const buf = await f.arrayBuffer();
+      out.push({ name: f.name, type: f.type, size: f.size, data: buf });
+    }
+    return out;
+  },
+  toObjectURLs(stored) {
+    return stored.map((s) =>
+      URL.createObjectURL(new Blob([s.data], { type: s.type })),
+    );
+  },
+};
+
+// =======================
+// Mock
+// =======================
+export async function apiMock(opts: ApiMockOptions = {}) {
+  const { axiosInstance = axios, delay = DEFAULT_DELAY, data } = opts;
+
+  const storage = opts.storage ?? (await createIndexedDbStorage());
+  const files = opts.files ?? defaultFileAdapter;
+  const pessoas = data?.pessoas ?? basePessoas;
+  const informacoes = data?.informacoes ?? baseInformacoes;
+
+  const mock = new MockAdapter(axiosInstance, { delayResponse: delay });
+
+  // 1) GET /v1/pessoas/aberto/filtro
+  mock.onGet(RX.PESSOAS_FILTRO).reply((config) => {
     const params = config.params || {};
-    const nome = (params["nome"] ?? "").toLowerCase();
+    const nome = String(params["nome"] ?? "").toLowerCase();
     const sexo = params["sexo"] as "MASCULINO" | "FEMININO" | null;
     const status = params["status"] as "DESAPARECIDO" | "LOCALIZADO" | null;
     const faixaIdadeInicial = Number(params["faixaIdadeInicial"] ?? 0);
@@ -61,10 +183,16 @@ export function apiMock() {
     if (faixaIdadeFinal > 0)
       result = result.filter((p) => p.idade <= faixaIdadeFinal);
 
-    return [200, pageResponse(result, page, size)];
+    return [
+      200,
+      pageResponse(result, page, size) as PageResponse<
+        (typeof pessoas)[number]
+      >,
+    ];
   });
 
-  mock.onGet(/\/v1\/pessoas\/\d+(?:\?.*)?$/).reply((config) => {
+  // 2) GET /v1/pessoas/:id
+  mock.onGet(RX.PESSOA_BY_ID).reply((config) => {
     const url = config.url ?? "";
     const idMatch = url.match(/\/v1\/pessoas\/(\d+)/);
     const id = idMatch ? Number(idMatch[1]) : NaN;
@@ -73,7 +201,8 @@ export function apiMock() {
     return [200, pessoa];
   });
 
-  mock.onGet(/\/v1\/pessoas\/aberto\/estatistico/).reply(() => {
+  // 3) GET /v1/pessoas/aberto/estatistico
+  mock.onGet(RX.PESSOAS_ESTATS).reply(() => {
     const quantPessoasDesaparecidas = pessoas.filter(
       (p) => p.ultimaOcorrencia && !p.ultimaOcorrencia.dataLocalizacao,
     ).length;
@@ -83,54 +212,79 @@ export function apiMock() {
     return [200, { quantPessoasDesaparecidas, quantPessoasEncontradas }];
   });
 
-  mock
-    .onGet(/\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/)
-    .reply((config) => {
-      const params = config.params || {};
-      const ocoId = Number(params["ocorrenciaId"]);
-      const lista = Number.isFinite(ocoId)
-        ? informacoes.filter((i) => i.ocoId === ocoId)
-        : informacoes;
-      return [200, lista];
+  // 4) GET /v1/ocorrencias/informacoes-desaparecido
+  mock.onGet(RX.INFO_LIST).reply(async (config) => {
+    const params = config.params || {};
+    const ocoId = Number(params["ocorrenciaId"]);
+
+    const base: InformacaoDesaparecidoDTO[] = Number.isFinite(ocoId)
+      ? informacoes.filter((i) => i.ocoId === ocoId)
+      : informacoes;
+
+    const locais = Number.isFinite(ocoId)
+      ? await storage.listInfosByOcoId(ocoId)
+      : [];
+    const locaisDTO: InformacaoDesaparecidoDTO[] = locais.map((l) => ({
+      id: l.id as number,
+      ocoId: l.ocoId,
+      informacao: l.informacao,
+      data: l.data,
+      anexos: files.toObjectURLs(l.anexos),
+    }));
+
+    const merged = [...base, ...locaisDTO].sort((a, b) =>
+      (b.data || "").localeCompare(a.data || ""),
+    );
+
+    return [200, merged];
+  });
+
+  // 5) POST /v1/ocorrencias/informacoes-desaparecido
+  mock.onPost(RX.INFO_CREATE).reply(async (config) => {
+    const params = config.params ?? {};
+    const ocoId = Number(params.ocoId);
+    const informacao = String(params.informacao ?? "").trim();
+    const descricao = String(params.descricao ?? "").trim();
+    const data =
+      String(params.data ?? "").trim() || new Date().toISOString().slice(0, 10);
+
+    let filesFromForm: File[] = [];
+    const isFormData =
+      typeof FormData !== "undefined" && config.data instanceof FormData;
+    if (isFormData) {
+      const fd = config.data as FormData;
+      const raw = fd.getAll("files");
+      filesFromForm = raw.filter((v): v is File => v instanceof File);
+    }
+
+    if (!Number.isFinite(ocoId) || !informacao || !descricao || !data) {
+      return [
+        400,
+        {
+          message: "Parâmetros inválidos (ocoId, informacao, descricao, data).",
+        },
+      ];
+    }
+
+    const storedFiles = await files.serialize(filesFromForm);
+    const created = await storage.addInfo({
+      ocoId,
+      informacao,
+      descricao,
+      data,
+      anexos: storedFiles,
     });
 
-  mock
-    .onPost(/\/v1\/ocorrencias\/informacoes-desaparecido(?:\?.*)?$/)
-    .reply((config) => {
-      const params = (config.params ?? {}) as {
-        ocoId: number;
-        informacao: string;
-        descricao: string;
-        data?: string;
-      };
+    const dto: InformacaoDesaparecidoDTO = {
+      id: created.id as number,
+      ocoId: created.ocoId,
+      informacao: created.informacao,
+      data: created.data,
+      anexos: files.toObjectURLs(created.anexos),
+    };
 
-      const ocoId = Number(params.ocoId);
-      const informacao = (params.informacao ?? "").trim();
-      const descricao = (params.descricao ?? "").trim();
-      const data =
-        (params.data ?? "").trim() || new Date().toISOString().slice(0, 10);
+    return [201, dto];
+  });
 
-      if (!Number.isFinite(ocoId) || !informacao || !descricao || !data) {
-        return [
-          400,
-          {
-            message:
-              "Parâmetros inválidos. Envie ocoId (number), informacao (string), descricao (string) e data (yyyy-MM-dd).",
-          },
-        ];
-      }
-
-      const nextId =
-        informacoes.reduce((max, i) => Math.max(max, Number(i.id) || 0), 0) + 1;
-      const novo: (typeof informacoes)[number] = {
-        id: nextId,
-        ocoId,
-        informacao,
-        data,
-        anexos: [],
-      };
-      informacoes.push(novo);
-
-      return [201, novo];
-    });
+  return mock;
 }

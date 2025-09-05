@@ -3,7 +3,7 @@ import PessoaCard from "@/components/pessoa/PessoaCard";
 import PessoaSkeleton from "@/components/pessoa/PessoaSkeleton";
 import type { PessoaDTO } from "@/interfaces/IPessoas";
 import { enableMocks } from "@/mocks/mockController";
-import { Archive, RotateCcw } from "lucide-react";
+import { FlaskConical, RotateCcw } from "lucide-react";
 import { Button } from "../ui/button";
 
 type Props<T> = {
@@ -46,7 +46,7 @@ export default function PessoaGrid<T extends PessoaDTO>({
               onClick={handleUseMock}
               className="rounded-md px-3 py-1 text-sm"
             >
-              <Archive className="inline" />
+              <FlaskConical className="inline" />
               Usar dados de demonstração
             </Button>
           </>

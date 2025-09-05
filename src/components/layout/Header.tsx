@@ -1,5 +1,7 @@
-import { Info, Moon, Sun } from "lucide-react";
-import { Link } from "react-router-dom";
+import { enableMocks, isMockEnabled } from "@/mocks/mockController";
+import { usePessoasStore } from "@/stores/pessoasStore";
+import { FlaskConical, Info, Moon, Sun } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/ThemeProvider";
 import { Button } from "../ui/button";
 import {
@@ -20,10 +22,17 @@ export default function Header({
   subtitle = "Sistema da PJC-MT para busca de pessoas desaparecidas",
 }: HeaderProps) {
   const { setTheme } = useTheme();
+  const { fetch } = usePessoasStore();
+  const navigate = useNavigate();
 
   const toggle = () => {
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "light" : "dark");
+  };
+
+  const handleUseMock = async () => {
+    await enableMocks().then(() => setTimeout(() => fetch(), 200));
+    navigate("/");
   };
 
   return (
@@ -62,7 +71,6 @@ export default function Header({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -82,6 +90,25 @@ export default function Header({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+          {!isMockEnabled() && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    onClick={handleUseMock}
+                    size="icon"
+                    className="relative"
+                  >
+                    <FlaskConical className="inline" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Ativa dados fictícios para demonstração do sistema</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
       </div>
     </header>

@@ -1,3 +1,4 @@
+import type { InformacaoDesaparecidoDTO } from "@/interfaces/IOcorrencia";
 import type { PessoaDTO } from "@/interfaces/IPessoas";
 import "@/mocks/apiMock";
 import { pessoas } from "@/mocks/mockData";
@@ -35,7 +36,7 @@ describe("Mock API /v1", () => {
       await axios.get("/v1/pessoas/999999");
       expect(false).toBe(true);
     } catch (err: any) {
-      expect(err.status).toBe(404);
+      expect(err?.response?.status).toBe(404);
     }
   });
 
@@ -94,6 +95,10 @@ describe("Mock API /v1", () => {
       params: { ocorrenciaId: ocoId },
     });
     expect(after.data.length).toBe(prev + 1);
-    expect(after.data.at(-1).informacao).toContain("Praça Popular");
+    expect(
+      after.data.some((i: InformacaoDesaparecidoDTO) =>
+        i.informacao.includes("Praça Popular"),
+      ),
+    ).toBe(true);
   });
 });

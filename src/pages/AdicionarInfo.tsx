@@ -175,8 +175,17 @@ export default function AdicionarInfoPage() {
                       <Dropzone
                         maxSize={MAX_FILE_SIZE}
                         disabled={isSubmitting}
+                        accept={{
+                          "application/pdf": [],
+                          "image/*": [],
+                          "video/*": [],
+                        }}
                         onDrop={handleDrop}
-                        onError={console.error}
+                        onError={() =>
+                          toast.error(
+                            "Erro ao adicionar arquivo. Tente outro arquivo até 5MB.",
+                          )
+                        }
                         src={files}
                         aria-label="Área para soltar ou selecionar arquivos (até 5MB cada)"
                       >
