@@ -1,6 +1,14 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { enableMocks, isMockEnabled } from "@/mocks/mockController";
 import { usePessoasStore } from "@/stores/pessoasStore";
-import { FlaskConical, Info, Moon, Sun } from "lucide-react";
+import { FlaskConical, Info, Menu, Moon, Sun } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/ThemeProvider";
 import { Button } from "../ui/button";
@@ -39,7 +47,7 @@ export default function Header({
     <header className="border-primary bg-background sticky top-0 z-50 w-full border-b-2 shadow-md backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6">
         <Link to="/" className="group flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center md:h-12 md:w-12">
+          <div className="flex h-14 w-14 items-center justify-center md:h-12 md:w-12">
             <img src="/icon.png" alt="Logo" />
           </div>
           <div className="leading-tight">
@@ -50,7 +58,7 @@ export default function Header({
           </div>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -71,6 +79,7 @@ export default function Header({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -90,6 +99,7 @@ export default function Header({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
           {!isMockEnabled() && (
             <TooltipProvider>
               <Tooltip>
@@ -99,6 +109,7 @@ export default function Header({
                     onClick={handleUseMock}
                     size="icon"
                     className="relative"
+                    aria-label="Ativar dados fictícios"
                   >
                     <FlaskConical className="inline" />
                   </Button>
@@ -109,6 +120,52 @@ export default function Header({
               </Tooltip>
             </TooltipProvider>
           )}
+        </div>
+
+        <div className="md:hidden">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" aria-label="Abrir menu">
+                <Menu className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="end" sideOffset={8} className="w-56">
+              <DropdownMenuLabel>Menu</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem asChild>
+                <Link to="/sobre" className="flex items-center">
+                  <Info className="mr-2 h-4 w-4" />
+                  Sobre
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem onClick={toggle} className="cursor-pointer">
+                <Sun className="mr-2 h-4 w-4 dark:hidden" />
+                <Moon className="mr-2 hidden h-4 w-4 dark:block" />
+                Alternar tema
+              </DropdownMenuItem>
+
+              {!isMockEnabled() && (
+                <DropdownMenuItem
+                  onClick={handleUseMock}
+                  className="cursor-pointer"
+                >
+                  <FlaskConical className="mr-2 h-4 w-4" />
+                  Ativar dados fictícios
+                </DropdownMenuItem>
+              )}
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem asChild>
+                <Link to="/" className="w-full">
+                  Ir para a página inicial
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

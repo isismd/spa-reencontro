@@ -23,7 +23,15 @@ export default function OcorrenciasTimeline({
   className,
 }: Props) {
   const informacoesOrdenadas = useMemo(
-    () => [...informacoes].sort((a, b) => b.id - a.id),
+    () =>
+      [...informacoes].sort((a, b) => {
+        const dateA = new Date(a.data).getTime();
+        const dateB = new Date(b.data).getTime();
+        if (dateB !== dateA) {
+          return dateB - dateA;
+        }
+        return b.id - a.id;
+      }),
     [informacoes],
   );
 

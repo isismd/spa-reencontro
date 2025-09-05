@@ -154,8 +154,8 @@ export default function SobrePage() {
             />
             <Differential
               icon={<Database className="size-4" />}
-              title="API Mock Opcional"
-              desc="Fallback com dados fictícios via flag VITE_USE_MOCK=true quando necessário."
+              title="Modo Dados Fictícios"
+              desc="Fallback com dados fictícios quando a API oficial está indisponível. É possível ativar/desativar a qualquer momento."
             />
             <Differential
               icon={<TestTubes className="size-4" />}
@@ -266,7 +266,7 @@ function Differential({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="bg-muted text-foreground mt-0.5 grid size-8 place-items-center rounded-md">
+      <span className="bg-muted text-foreground mt-0.5 grid place-items-center rounded-md p-2 px-2">
         {icon}
       </span>
       <div>
