@@ -62,7 +62,7 @@ export default function AdicionarInfoPage() {
   const files = form.watch("files");
 
   const handleDrop = (accepted: File[]) => {
-    form.setValue("files", accepted, {
+    form.setValue("files", [...(form.getValues("files") ?? []), ...accepted], {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -176,7 +176,6 @@ export default function AdicionarInfoPage() {
                     <FormLabel>Anexos (opcional)</FormLabel>
                     <FormControl>
                       <Dropzone
-                        maxSize={MAX_FILE_SIZE}
                         disabled={isSubmitting}
                         accept={{
                           "application/pdf": [],
@@ -184,13 +183,9 @@ export default function AdicionarInfoPage() {
                           "video/*": [],
                         }}
                         onDrop={handleDrop}
-                        onError={() =>
-                          toast.error(
-                            "Erro ao adicionar arquivo. Tente outro arquivo até 5MB.",
-                          )
-                        }
+                        onError={(error) => console.log(error)}
                         src={files}
-                        aria-label="Área para soltar ou selecionar arquivos (até 5MB cada)"
+                        multiple={true}
                       >
                         <DropzoneEmptyState />
                         <DropzoneContent />
@@ -253,8 +248,6 @@ export default function AdicionarInfoPage() {
   );
 }
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
-
 const schema = z
   .object({
     informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
@@ -271,13 +264,7 @@ const schema = z
         },
         { message: "A data não pode ser maior que hoje." },
       ),
-    files: z
-      .array(z.custom<File>())
-      .refine(
-        (files) => files.every((f) => f.size <= MAX_FILE_SIZE),
-        "Cada arquivo até 5MB",
-      )
-      .optional(),
+    files: z.array(z.custom<File>()).optional(),
     recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
   })
   .refine(

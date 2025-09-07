@@ -72,6 +72,8 @@ Além dos requisitos previstos, o projeto inclui:
 - Design pensado para transmitir empatia e esperança às famílias de desaparecidos
 - Tema escuro inteligente que detecta a preferência do sistema e permite alternância manual
 - Página “Sobre” explicando o projeto e seus objetivos
+- Página "Estatísticas" com gráficos e indicadores sobre os dados disponíveis.
+- Página "Como Ajudar" contendo um guia sobre a adição de informações de avistamento de pessoas desaparecidas.
 - Tooltips em botões de ícone para garantir entendimento rápido
 - Terminal customizado no `npm run dev` com mensagens estilizadas (chalk e boxen)
 - Possibilidade de ativar API Mock em caso de instabilidade da API oficial
