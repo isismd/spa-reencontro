@@ -33,58 +33,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formatBytes = (bytes: number) => {
-  const units = ["B", "KB", "MB", "GB", "TB"];
-  let size = bytes,
-    i = 0;
-  while (size >= 1024 && i < units.length - 1) {
-    size /= 1024;
-    i++;
-  }
-  return `${size.toFixed(2)} ${units[i]}`;
-};
-
-const iconByType = (type?: string) => {
-  if (!type) return <FileText className="size-4" />;
-  if (type.startsWith("image/")) return <FileImage className="size-4" />;
-  if (type.startsWith("video/")) return <FilePlay className="size-4" />;
-  return <FileText className="size-4" />;
-};
-
-const schema = z
-  .object({
-    informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
-    descricao: z.string().optional(),
-    data: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
-      .refine(
-        (d) => {
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          const input = new Date(d + "T00:00:00");
-          return input.getTime() <= today.getTime();
-        },
-        { message: "A data não pode ser maior que hoje." },
-      ),
-    files: z.array(z.custom<File>()).optional(),
-    recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
-  })
-  .refine(
-    (data) => {
-      if (data.files && data.files.length > 0) {
-        return data.descricao && data.descricao.trim().length >= 2;
-      }
-      return true;
-    },
-    {
-      message: "Informe uma descrição curta para o(s) anexo(s)",
-      path: ["descricao"],
-    },
-  );
-
-type FormData = z.infer<typeof schema>;
-
 interface AdicionarInformacoesFormProps {
   onSubmit: (data: FormData) => Promise<void>;
   onCancel: () => void;
@@ -131,6 +79,7 @@ export default function AdicionarInformacoesForm({
   const clearAll = () => {
     form.setValue("files", [], { shouldDirty: true, shouldValidate: true });
   };
+
   const handleSubmit = async (values: FormData) => {
     try {
       await onSubmit(values);
@@ -243,9 +192,10 @@ export default function AdicionarInformacoesForm({
                       size="sm"
                       onClick={clearAll}
                       disabled={isSubmitting}
+                      className="self-start sm:self-auto"
                     >
                       <X className="mr-1 size-4" />
-                      Limpar tudo
+                      Limpar
                     </Button>
                   </div>
 
@@ -253,13 +203,13 @@ export default function AdicionarInformacoesForm({
                     {files.map((file, idx) => (
                       <li
                         key={`${file.name}-${file.lastModified}-${idx}`}
-                        className="flex items-center justify-between gap-3 px-3 py-2"
+                        className="flex items-start justify-between gap-3 px-3 py-2"
                       >
-                        <div className="flex min-w-0 items-center gap-2">
-                          <div className="text-muted-foreground shrink-0">
+                        <div className="flex min-w-0 items-start gap-2">
+                          <div className="text-muted-foreground mt-0.5 shrink-0">
                             {iconByType(file.type)}
                           </div>
-                          <div className="min-w-0">
+                          <div className="max-w-[180px] min-w-0 sm:max-w-none">
                             <p className="truncate text-sm font-medium">
                               {file.name}
                             </p>
@@ -275,8 +225,10 @@ export default function AdicionarInformacoesForm({
                           size="icon"
                           onClick={() => removeFileAt(idx)}
                           disabled={isSubmitting}
+                          className="shrink-0"
+                          aria-label={`Remover ${file.name}`}
                         >
-                          <Trash2 className="mr-1 size-4" />
+                          <Trash2 className="size-4" />
                         </Button>
                       </li>
                     ))}
@@ -312,21 +264,23 @@ export default function AdicionarInformacoesForm({
           />
         ) : null}
 
-        <div className="flex justify-end gap-2">
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button
             type="button"
             variant="ghost"
             onClick={onCancel}
             disabled={isSubmitting}
+            className="w-full sm:w-auto"
           >
             Cancelar
           </Button>
           <Button
             type="submit"
             disabled={!form.formState.isValid || isSubmitting}
+            className="w-full sm:w-auto"
           >
             {isSubmitting ? "Enviando..." : "Enviar informação"}
-            <Send />
+            <Send className="ml-2 size-4" />
           </Button>
         </div>
       </form>
@@ -335,3 +289,55 @@ export default function AdicionarInformacoesForm({
 }
 
 export type { FormData };
+
+const formatBytes = (bytes: number) => {
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let size = bytes,
+    i = 0;
+  while (size >= 1024 && i < units.length - 1) {
+    size /= 1024;
+    i++;
+  }
+  return `${size.toFixed(2)} ${units[i]}`;
+};
+
+const iconByType = (type?: string) => {
+  if (!type) return <FileText className="size-4" />;
+  if (type.startsWith("image/")) return <FileImage className="size-4" />;
+  if (type.startsWith("video/")) return <FilePlay className="size-4" />;
+  return <FileText className="size-4" />;
+};
+
+const schema = z
+  .object({
+    informacao: z.string().min(10, "Descreva melhor (mín. 10 caracteres)"),
+    descricao: z.string().optional(),
+    data: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Use yyyy-MM-dd")
+      .refine(
+        (d) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const input = new Date(d + "T00:00:00");
+          return input.getTime() <= today.getTime();
+        },
+        { message: "A data não pode ser maior que hoje." },
+      ),
+    files: z.array(z.custom<File>()).optional(),
+    recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
+  })
+  .refine(
+    (data) => {
+      if (data.files && data.files.length > 0) {
+        return data.descricao && data.descricao.trim().length >= 2;
+      }
+      return true;
+    },
+    {
+      message: "Informe uma descrição curta para o(s) anexo(s)",
+      path: ["descricao"],
+    },
+  );
+
+type FormData = z.infer<typeof schema>;
