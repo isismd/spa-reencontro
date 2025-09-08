@@ -112,7 +112,7 @@ export default function ComoAjudar() {
             </li>
             <li>
               Abra o cartão da pessoa e clique em{" "}
-              <Badge variant="secondary">Enviar informação</Badge>.
+              <Badge variant="secondary">Adicionar Informações</Badge>.
             </li>
             <li>
               Preencha <strong>o que foi visto</strong>, <strong>onde</strong> e{" "}

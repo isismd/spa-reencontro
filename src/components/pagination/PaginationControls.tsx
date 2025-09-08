@@ -48,7 +48,7 @@ export default function PaginationControls({
     <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
       <div className="flex items-center gap-2">
         <Label htmlFor="per-page" className="text-sm whitespace-nowrap">
-          Items por página
+          Itens por página
         </Label>
         <Select
           value={String(perPage)}

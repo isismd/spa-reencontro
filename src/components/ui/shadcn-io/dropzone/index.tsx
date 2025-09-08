@@ -137,7 +137,7 @@ export const DropzoneContent = ({
         {src.length > maxLabelItems
           ? `${new Intl.ListFormat("en").format(
               src.slice(0, maxLabelItems).map((file) => file.name),
-            )} and ${src.length - maxLabelItems} more`
+            )} e ${src.length - maxLabelItems} more`
           : new Intl.ListFormat("en").format(src.map((file) => file.name))}
       </p>
       <p className="text-muted-foreground w-full text-xs text-wrap">
@@ -156,7 +156,7 @@ export const DropzoneEmptyState = ({
   children,
   className,
 }: DropzoneEmptyStateProps) => {
-  const { src, accept, maxSize, minSize, maxFiles } = useDropzoneContext();
+  const { src, maxSize, minSize, maxFiles } = useDropzoneContext();
 
   if (src) {
     return null;
@@ -168,10 +168,10 @@ export const DropzoneEmptyState = ({
 
   let caption = "";
 
-  if (accept) {
-    caption += "Accepts ";
-    caption += new Intl.ListFormat("en").format(Object.keys(accept));
-  }
+  // if (accept) {
+  //   caption += "Accepts ";
+  //   caption += new Intl.ListFormat("pt-br").format(Object.keys(accept));
+  // }
 
   if (minSize && maxSize) {
     caption += ` between ${renderBytes(minSize)} and ${renderBytes(maxSize)}`;
@@ -187,10 +187,10 @@ export const DropzoneEmptyState = ({
         <UploadIcon size={16} />
       </div>
       <p className="my-2 w-full truncate text-sm font-medium text-wrap">
-        Upload {maxFiles === 1 ? "a file" : "files"}
+        Envie {maxFiles === 1 ? "um arquivo" : "arquivos"}
       </p>
       <p className="text-muted-foreground w-full truncate text-xs text-wrap">
-        Drag and drop or click to upload
+        Clique ou arraste para selecionar arquivos e fazer upload
       </p>
       {caption && (
         <p className="text-muted-foreground text-xs text-wrap">{caption}.</p>

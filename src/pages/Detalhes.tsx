@@ -4,6 +4,7 @@ import DetalhesHeader from "@/components/detalhes/DetalhesHeader";
 import DetalhesInfoPessoal from "@/components/detalhes/DetalhesInfoPessoal";
 import DetalhesSkeleton from "@/components/detalhes/DetalhesSkeleton";
 import EmptyState from "@/components/feedback/EmptyState";
+import BackLinkButton from "@/components/layout/BackLinkButton";
 import AdicionarInformacoesCTA from "@/components/ocorrencias/AdicionarInformacoesCTA";
 import OcorrenciasTimeline from "@/components/ocorrencias/OcorrenciasTimeline";
 import StatusPessoa from "@/components/status/StatusPessoa";
@@ -11,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useOcorrenciaStore } from "@/stores/ocorrenciaStore";
 import { usePessoasStore } from "@/stores/pessoasStore";
-import { ArrowLeft } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -119,14 +119,7 @@ export default function Detalhes() {
 
   return (
     <section className="mx-auto w-full max-w-6xl space-y-6 px-4 sm:px-6">
-      <Button
-        onClick={() => navigate("/")}
-        className="mb-4 pt-2"
-        variant="link"
-      >
-        <ArrowLeft />
-        Voltar para a página inicial
-      </Button>
+      <BackLinkButton to={`/`}>Voltar para a página inicial</BackLinkButton>
 
       <DetalhesHeader
         nome={p?.nome}
