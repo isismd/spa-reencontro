@@ -33,6 +33,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined;
+const enabled = (import.meta.env.VITE_RECAPTCHA_ENABLED ?? "true") === "true";
+
 interface AdicionarInformacoesFormProps {
   onSubmit: (data: FormData) => Promise<void>;
   onCancel: () => void;
@@ -43,9 +46,6 @@ export default function AdicionarInformacoesForm({
   onCancel,
 }: AdicionarInformacoesFormProps) {
   const { theme } = useTheme();
-
-  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined;
-  const enabled = (import.meta.env.VITE_RECAPTCHA_ENABLED ?? "true") === "true";
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const form = useForm<FormData>({
@@ -325,7 +325,7 @@ const schema = z
         { message: "A data não pode ser maior que hoje." },
       ),
     files: z.array(z.custom<File>()).optional(),
-    recaptchaToken: z.string().min(1, "Confirme que você não é um robô"),
+    recaptchaToken: z.string().optional(),
   })
   .refine(
     (data) => {
@@ -337,6 +337,18 @@ const schema = z
     {
       message: "Informe uma descrição curta para o(s) anexo(s)",
       path: ["descricao"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (enabled && siteKey) {
+        return data.recaptchaToken && data.recaptchaToken.length > 0;
+      }
+      return true;
+    },
+    {
+      message: "Confirme que você não é um robô",
+      path: ["recaptchaToken"],
     },
   );
 
