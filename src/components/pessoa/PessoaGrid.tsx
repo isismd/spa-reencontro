@@ -23,7 +23,7 @@ export default function PessoaGrid<T extends PessoaDTO>({
 }: Props<T>) {
   const handleUseMock = async () => {
     await enableMocks();
-    onRetry?.();
+    window.location.reload();
   };
 
   if (error) {
