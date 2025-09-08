@@ -93,7 +93,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 md:items-end">
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/isismd/spa-pessoas-desaparecidas"
+              href="https://github.com/isismd/spa-reencontro"
               target="_blank"
               rel="noreferrer"
               className="hover:text-primary flex items-center gap-1 underline-offset-4 transition-colors hover:underline"

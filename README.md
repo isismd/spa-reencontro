@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/icon.png" alt="Logo Reencontro" width="100"/>
+  <img src="https://github.com/isismd/spa-reencontro/blob/main/public/icon.png" alt="Logo Reencontro" width="100"/>
 </p>
 <h1 align="center">Reencontro</h1>
 
@@ -16,7 +16,7 @@
   <a href="https://zustand-demo.pmnd.rs/"><img src="https://img.shields.io/badge/Zustand-764abc?logo=zustand&logoColor=fff" /></a>
 </p>
 
-<img align="right" src="https://github.com/isismd/spa-pessoas-desaparecidas/blob/main/public/sample-dark.webp" alt="Demonstração do sistema" width="400"/>
+<img align="right" src="https://github.com/isismd/spa-reencontro/blob/main/public/sample-dark.webp" alt="Demonstração do sistema" width="400"/>
 
 &nbsp;
 
@@ -92,8 +92,8 @@ Abaixo estão as instruções para rodar o projeto localmente, seja utilizando o
 ### 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/isismd/spa-pessoas-desaparecidas.git
-cd spa-pessoas-desaparecidas
+git clone https://github.com/isismd/spa-reencontro.git
+cd spa-reencontro
 ```
 
 ---

@@ -16,7 +16,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Estatisticas() {
-  const { fetch, estatistico, fetchEstatistico, loading, loadingEstatistico } =
+  const { fetch, estatistico, fetchEstatistico, loadingEstatistico } =
     usePessoasStore();
 
   const INITIAL_SEXO_DATA: { name: "Feminino" | "Masculino"; value: number }[] =
